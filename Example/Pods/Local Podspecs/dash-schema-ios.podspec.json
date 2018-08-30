@@ -1,0 +1,32 @@
+{
+  "name": "dash-schema-ios",
+  "version": "0.1.0",
+  "summary": "A short description of dash-schema-ios.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/dashevo/dash-schema-ios",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Andrew Podkovyrin": "podkovyrin@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/dashevo/dash-schema-ios.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "dash-schema-ios/Classes/**/*",
+  "resource_bundles": {
+    "dash-schema-ios": [
+      "dash-schema-ios/Assets/*.json"
+    ]
+  },
+  "dependencies": {
+    "DSJSONSchemaValidation": [
+      "~> 2.0"
+    ]
+  }
+}

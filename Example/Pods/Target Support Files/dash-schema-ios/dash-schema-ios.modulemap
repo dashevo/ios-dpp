@@ -1,0 +1,6 @@
+framework module dash_schema_ios {
+  umbrella header "dash-schema-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}

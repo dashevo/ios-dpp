@@ -21,22 +21,22 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/Andrew Podkovyrin/dash-schema-ios'
+  s.homepage         = 'https://github.com/dashevo/dash-schema-ios'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Andrew Podkovyrin' => 'podkovyrin@gmail.com' }
-  s.source           = { :git => 'https://github.com/Andrew Podkovyrin/dash-schema-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/dashevo/dash-schema-ios.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'dash-schema-ios/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'dash-schema-ios' => ['dash-schema-ios/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'dash-schema-ios' => ['dash-schema-ios/Assets/*.json']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'DSJSONSchemaValidation', '~> 2.0'
 end
