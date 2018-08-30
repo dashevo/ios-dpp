@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'dash-schema-ios_Example' do
+  pod 'dash-schema-ios', :path => '../'
+
+  target 'dash-schema-ios_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
