@@ -11,6 +11,7 @@
 #endif
 
 #import "DSSchemaLoader.h"
+#import "DSValidationResult.h"
 #import "NSBundle+DSDashSchema.h"
 
 FOUNDATION_EXPORT double dash_schema_iosVersionNumber;
