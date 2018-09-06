@@ -17,28 +17,20 @@
 
 #import <XCTest/XCTest.h>
 
-#import <dash_schema_ios/DSJSONSchema+DashSchema.h>
+#import <dash_schema_ios/DSSchemaStorage.h>
 
-@interface DSSchemaLoaderTests : XCTestCase
+@interface DSSchemaStorageTests : XCTestCase
 
 @end
 
-@implementation DSSchemaLoaderTests
+@implementation DSSchemaStorageTests
 
-- (void)testLoadingSchemas {
-    DSJSONSchema *jsonSchema = [DSJSONSchema jsonSchema];
-    XCTAssertNotNil(jsonSchema);
+- (void)testLoadingSchemaObjects {
+    NSDictionary *json = [DSSchemaStorage json];
+    XCTAssertNotNil(json);
     
-    DSJSONSchema *systemSchema = [DSJSONSchema systemSchema];
-    XCTAssertNotNil(systemSchema);
-}
-
-- (void)testLoadingSchemasWithRemoveAdditional {
-    DSJSONSchema *jsonSchema = [DSJSONSchema jsonSchemaRemoveAdditional:YES];
-    XCTAssertNotNil(jsonSchema);
-    
-    DSJSONSchema *systemSchema = [DSJSONSchema systemSchemaRemoveAdditional:YES];
-    XCTAssertNotNil(systemSchema);
+    NSDictionary *system = [DSSchemaStorage system];
+    XCTAssertNotNil(system);
 }
 
 @end

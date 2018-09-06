@@ -19,12 +19,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class DSJSONSchema;
+@interface DSSchemaStorage : NSObject
 
-@interface DSSchemaLoader : NSObject
-
-@property (readonly, strong, nonatomic) DSJSONSchema *systemSchema;
-@property (readonly, strong, nonatomic) DSJSONSchema *jsonSchema;
+@property (class, readonly, copy, nonatomic) NSDictionary *system;
+@property (class, readonly, copy, nonatomic) NSDictionary *json;
 
 @end
 

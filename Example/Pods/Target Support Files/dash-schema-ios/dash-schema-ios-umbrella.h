@@ -10,7 +10,8 @@
 #endif
 #endif
 
-#import "DSSchemaLoader.h"
+#import "DSJSONSchema+DashSchema.h"
+#import "DSSchemaStorage.h"
 #import "DSValidationResult.h"
 #import "NSBundle+DSDashSchema.h"
 
