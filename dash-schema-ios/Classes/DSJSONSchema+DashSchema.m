@@ -18,10 +18,61 @@
 #import "DSJSONSchema+DashSchema.h"
 
 #import "DSSchemaStorage.h"
+#import "DSJSONSchemaPVerValidator.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+#pragma mark - Storage
+
+@interface DSDashSchemaStorage: NSObject
+
+@property (strong, nonatomic) VVMutableJSONSchemaStorage *storage;
+
+@end
+
+@implementation DSDashSchemaStorage
+
++ (instancetype)sharedInstance {
+    static DSDashSchemaStorage *_sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedInstance = [[self alloc] init];
+    });
+    return _sharedInstance;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _storage = [VVMutableJSONSchemaStorage storage];
+        
+        [self addSchema:[DSJSONSchema jsonSchema]
+           withScopeURI:[NSURL URLWithString:@"http://json-schema.org/draft-07/schema#"]];
+    }
+    return self;
+}
+
+- (void)addSchema:(DSJSONSchema *)schema withScopeURI:(NSURL *)scopeURI {
+    BOOL success = [self.storage addSchema:schema];
+    if (success == NO) {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Failed to add reference schema with scope URI %@ into the storage.", scopeURI];
+    }
+}
+
+@end
+
+#pragma mark - Schema
+
 @implementation DSJSONSchema (DashSchema)
+
++ (void)load {
+    BOOL success = [DSJSONSchema registerValidatorClass:DSJSONSchemaPVerValidator.class forMetaschemaURI:nil specification:[DSJSONSchemaSpecification draft7] withError:nil];
+    
+    if (success == NO) {
+        [NSException raise:NSInternalInconsistencyException format:@"Failed to register Dash Schema validator."];
+    }
+}
 
 + (instancetype)systemSchema {
     return [self systemSchemaRemoveAdditional:NO];
@@ -32,32 +83,31 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (instancetype)systemSchemaRemoveAdditional:(BOOL)removeAdditional {
-    DSJSONSchemaValidationOptions *options = [[DSJSONSchemaValidationOptions alloc] init];
-    if (removeAdditional) {
-        options.removeAdditional = DSJSONSchemaValidationOptionsRemoveAdditionalYes;
-    }
-    
-    NSError *error = nil;
-    DSJSONSchema *schema = [DSJSONSchema schemaWithObject:[DSSchemaStorage system]
-                                                  baseURI:nil
-                                         referenceStorage:nil
-                                            specification:[DSJSONSchemaSpecification draft7]
-                                                  options:options
-                                                    error:&error];
-    NSParameterAssert(!error);
-    return schema;
+    return [self dashCustomSchemaWithObject:[DSSchemaStorage system] removeAdditional:removeAdditional];
 }
 
 + (instancetype)jsonSchemaRemoveAdditional:(BOOL)removeAdditional {
+    return [self customSchemaWithObject:[DSSchemaStorage json] referenceStorage:nil removeAdditional:removeAdditional];
+}
+
++ (instancetype)dashCustomSchemaWithObject:(NSDictionary *)schemaObject removeAdditional:(BOOL)removeAdditional {
+    VVMutableJSONSchemaStorage *storage = [DSDashSchemaStorage sharedInstance].storage;
+    DSJSONSchema *schema = [self customSchemaWithObject:schemaObject referenceStorage:storage removeAdditional:removeAdditional];
+    return schema;
+}
+
++ (instancetype)customSchemaWithObject:(NSDictionary *)schemaObject
+                      referenceStorage:(nullable DSJSONSchemaStorage *)referenceStorage
+                      removeAdditional:(BOOL)removeAdditional {
     DSJSONSchemaValidationOptions *options = [[DSJSONSchemaValidationOptions alloc] init];
     if (removeAdditional) {
         options.removeAdditional = DSJSONSchemaValidationOptionsRemoveAdditionalYes;
     }
     
     NSError *error = nil;
-    DSJSONSchema *schema = [DSJSONSchema schemaWithObject:[DSSchemaStorage json]
+    DSJSONSchema *schema = [DSJSONSchema schemaWithObject:schemaObject
                                                   baseURI:nil
-                                         referenceStorage:nil
+                                         referenceStorage:referenceStorage
                                             specification:[DSJSONSchemaSpecification draft7]
                                                   options:options
                                                     error:&error];

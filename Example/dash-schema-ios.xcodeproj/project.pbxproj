@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0303206795782B5DEE459D0A /* Pods_dash_schema_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A54B463D7CE05580C4895C /* Pods_dash_schema_ios_Tests.framework */; };
+		2A03A86E21428D6B00788BE3 /* DSSubTxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03A86D21428D6A00788BE3 /* DSSubTxTests.m */; };
 		2A6AABFE21412BB600D1E018 /* DSSchemaStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6AABFD21412BB600D1E018 /* DSSchemaStorageTests.m */; };
+		2A73B337214678B900DF62A9 /* DSBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A73B3352146787500DF62A9 /* DSBaseTest.m */; };
+		2A73B338214679FD00DF62A9 /* contactsdap-test-data.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A03A8712142A14800788BE3 /* contactsdap-test-data.json */; };
 		2AE5E66A2137FF4D007BFCB8 /* DSSchemaLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE5E6692137FF4D007BFCB8 /* DSSchemaLoaderTests.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -39,7 +42,11 @@
 
 /* Begin PBXFileReference section */
 		0560A52C5E8585B8712893DC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		2A03A86D21428D6A00788BE3 /* DSSubTxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSubTxTests.m; sourceTree = "<group>"; };
+		2A03A8712142A14800788BE3 /* contactsdap-test-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "contactsdap-test-data.json"; sourceTree = "<group>"; };
 		2A6AABFD21412BB600D1E018 /* DSSchemaStorageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSchemaStorageTests.m; sourceTree = "<group>"; };
+		2A73B3342146787500DF62A9 /* DSBaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBaseTest.h; sourceTree = "<group>"; };
+		2A73B3352146787500DF62A9 /* DSBaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBaseTest.m; sourceTree = "<group>"; };
 		2AE5E6692137FF4D007BFCB8 /* DSSchemaLoaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSchemaLoaderTests.m; sourceTree = "<group>"; };
 		36A54B463D7CE05580C4895C /* Pods_dash_schema_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dash_schema_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* dash-schema-ios_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dash-schema-ios_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A03A8702142A14800788BE3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2A03A8712142A14800788BE3 /* contactsdap-test-data.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -161,9 +176,13 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				2A03A8702142A14800788BE3 /* Resources */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				2AE5E6692137FF4D007BFCB8 /* DSSchemaLoaderTests.m */,
 				2A6AABFD21412BB600D1E018 /* DSSchemaStorageTests.m */,
+				2A03A86D21428D6A00788BE3 /* DSSubTxTests.m */,
+				2A73B3342146787500DF62A9 /* DSBaseTest.h */,
+				2A73B3352146787500DF62A9 /* DSBaseTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -290,6 +309,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A73B338214679FD00DF62A9 /* contactsdap-test-data.json in Resources */,
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,12 +343,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-dash-schema-ios_Example/Pods-dash-schema-ios_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DSJSONSchemaValidation/DSJSONSchemaValidation.framework",
+				"${BUILT_PRODUCTS_DIR}/TinyCborObjc/TinyCborObjc.framework",
 				"${BUILT_PRODUCTS_DIR}/dash-schema-ios/dash_schema_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/tinycbor/tinycbor.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DSJSONSchemaValidation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinyCborObjc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/dash_schema_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/tinycbor.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -371,6 +395,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AE5E66A2137FF4D007BFCB8 /* DSSchemaLoaderTests.m in Sources */,
+				2A73B337214678B900DF62A9 /* DSBaseTest.m in Sources */,
+				2A03A86E21428D6B00788BE3 /* DSSubTxTests.m in Sources */,
 				2A6AABFE21412BB600D1E018 /* DSSchemaStorageTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

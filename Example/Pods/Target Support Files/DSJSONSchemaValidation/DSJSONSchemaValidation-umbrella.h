@@ -12,6 +12,7 @@
 
 #import "NSArray+DSJSONComparison.h"
 #import "NSDictionary+DSJSONComparison.h"
+#import "NSDictionary+DSJSONDeepMutableCopy.h"
 #import "NSNumber+DSJSONNumberTypes.h"
 #import "NSObject+DSJSONComparison.h"
 #import "NSString+DSJSONPointer.h"

@@ -1,7 +1,11 @@
 PODS:
   - dash-schema-ios (0.1.0):
-    - DSJSONSchemaValidation (~> 2.0)
-  - DSJSONSchemaValidation (2.0.0)
+    - DSJSONSchemaValidation (= 2.0.2)
+    - TinyCborObjc (= 0.2.0)
+  - DSJSONSchemaValidation (2.0.2)
+  - tinycbor (0.5.2)
+  - TinyCborObjc (0.2.0):
+    - tinycbor (= 0.5.2)
 
 DEPENDENCIES:
   - dash-schema-ios (from `../`)
@@ -9,14 +13,18 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - DSJSONSchemaValidation
+    - tinycbor
+    - TinyCborObjc
 
 EXTERNAL SOURCES:
   dash-schema-ios:
     :path: "../"
 
 SPEC CHECKSUMS:
-  dash-schema-ios: 6df845be03d3015831790913624be85a5084a427
-  DSJSONSchemaValidation: f6d0da49c2dd898c6005c1798a78ccd6815f2614
+  dash-schema-ios: c257b9ab1504bbe3993ac093ccf97d57f98669d1
+  DSJSONSchemaValidation: 9cf3ca18d4e93ab30c73aae40474ed7688999e9d
+  tinycbor: f85efe0276ea8d90a3367c010630105853ca2d20
+  TinyCborObjc: 2a6147cd9e499717bf49ff0e53a590b47e295bd7
 
 PODFILE CHECKSUM: fcefe2a6f4cde11b27eb4f6860be1ef46612332f
 

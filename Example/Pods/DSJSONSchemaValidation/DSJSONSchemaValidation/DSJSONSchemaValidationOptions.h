@@ -17,12 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, DSJSONSchemaValidationOptionsRemoveAdditional) {
     /** Default behavior. */
     DSJSONSchemaValidationOptionsRemoveAdditionalNone,
-    /** Disallowed property will be valid if "additionalProperties" is boolean schema */
+    /** Disallowed property will be removed if "additionalProperties" is boolean schema */
     DSJSONSchemaValidationOptionsRemoveAdditionalYes,
-    /** All properties that disallowed by "additionalProperties" is valid. */
-    DSJSONSchemaValidationOptionsRemoveAdditionalAll,
-    /** Disallowed property will be valid regardless of its value or if its value is failing the schema in the inner "additionalProperties". */
-    DSJSONSchemaValidationOptionsRemoveAdditionalFailing,
+    
+    // TODO: implement other removeAdditional options
+//    /** All properties that disallowed by "additionalProperties" will be removed. */
+//    DSJSONSchemaValidationOptionsRemoveAdditionalAll,
+//    /** Disallowed property will be removed regardless of its value or if its value is failing the schema in the inner "additionalProperties". */
+//    DSJSONSchemaValidationOptionsRemoveAdditionalFailing,
 };
 
 /** Different options that allows to change default behaviour of the validator classes. */

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)description
 {
-    return [[super description] stringByAppendingFormat:@"{ removeAdditional: %@ }", self.removeAdditional ? @"YES" : @"NO"];
+    return [[super description] stringByAppendingFormat:@"{ removeAdditional: %@ }", @(self.removeAdditional)];
 }
 
 @end

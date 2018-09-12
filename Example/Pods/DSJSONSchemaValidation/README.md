@@ -10,6 +10,8 @@ The main feature of the library is an ability to "compile" the schema into a net
 
 `DSJSONSchemaValidation` supports all validation keywords of JSON Schema draft 4, 6 and 7. It is also possible to extend the functionality of the library by defining custom keywords to be used with specific metaschema URIs and custom formats for the `format` validation keyword. Note that JSON Schema draft 3 is not supported at the moment. There are also a few important limitations, including usage of external schema references, listed under [Caveats and limitations](#caveats-and-limitations).
 
+Based on https://github.com/vlas-voloshin/JSONSchemaValidation
+
 ## Requirements
 
 `DSJSONSchemaValidation` currently supports building in Xcode 7.0 or later with ARC enabled. Minimum supported target platform versions are iOS 7.0, tvOS 9.0 and OS X 10.9. Library can be linked to Objective-C and Swift targets.
@@ -21,7 +23,7 @@ The main feature of the library is an ability to "compile" the schema into a net
 1. Add the following line to your `Cartfile`:
 
     ```
-    github "vlas-voloshin/JSONSchemaValidation"
+    github "dashevo/JSONSchemaValidation"
     ```
     
 2. Follow the instructions outlined in [Carthage documentation](https://github.com/Carthage/Carthage/blob/master/README.md) to build and integrate the library into your app.

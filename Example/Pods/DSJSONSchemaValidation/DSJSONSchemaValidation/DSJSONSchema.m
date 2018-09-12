@@ -217,6 +217,19 @@
 
 - (BOOL)validateObject:(id)object withError:(NSError *__autoreleasing *)error
 {
+    if (self.options.removeAdditional != DSJSONSchemaValidationOptionsRemoveAdditionalNone) {
+        BOOL isMutable = [object isKindOfClass:NSMutableDictionary.class];
+        NSAssert(isMutable, @"Using `removeAdditional` option is only allowed with mutable objects because this option could change object in place. Use `NSDictionary:ds_deepMutableCopy` helper");
+        if (!isMutable) {
+            if (error != NULL) {
+                *error = [NSError errorWithDomain:DSJSONSchemaErrorDomain
+                                             code:-1
+                                         userInfo:@{ NSLocalizedDescriptionKey: @"Internal error: Invalid usage of `removeAdditional` option" }];
+            }
+            return NO;
+        }
+    }
+    
     return [self validateObject:object inContext:nil error:error];
 }
 

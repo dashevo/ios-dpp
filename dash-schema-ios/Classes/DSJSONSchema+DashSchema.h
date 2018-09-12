@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)systemSchemaRemoveAdditional:(BOOL)removeAdditional;
 + (instancetype)jsonSchemaRemoveAdditional:(BOOL)removeAdditional;
 
++ (instancetype)dashCustomSchemaWithObject:(NSDictionary *)schemaObject removeAdditional:(BOOL)removeAdditional;
+
 @end
 
 NS_ASSUME_NONNULL_END

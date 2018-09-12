@@ -223,33 +223,40 @@ static NSString * const kSchemaKeywordPatternProperties = @"patternProperties";
     // validate each item with the corresponding schema
     __block BOOL success = YES;
     __block NSError *internalError = nil;
-    [instance enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+    [instance enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, __unused BOOL *stop) {
         // enumerate and validate all schemas applicable to the property
         BOOL enumerationSuccess = [self enumerateSchemasForProperty:key withBlock:^(DSJSONSchema *schema, BOOL *innerStop) {
             [context pushValidationPathComponent:key];
-            BOOL result = YES;
-            if (self.options.removeAdditional == DSJSONSchemaValidationOptionsRemoveAdditionalNone) {
-                result = [schema validateObject:obj inContext:context error:&internalError];
-            }
+            NSError *innerError = nil;
+            BOOL result = [schema validateObject:obj inContext:context error:&innerError];
             [context popValidationPathComponent];
             
             if (result == NO) {
-                success = NO;
+                if (!internalError) {
+                    internalError = innerError;
+                }
                 *innerStop = YES;
-                *stop = YES;
             }
         }];
         
         // stop if enumeration failed (property is not acceptable)
         if (enumerationSuccess == NO) {
-            NSString *failureReason = [NSString stringWithFormat:@"Additional property '%@' is not allowed.", key];
-            internalError = [NSError vv_JSONSchemaValidationErrorWithFailingValidator:self reason:failureReason context:context];
-            success = NO;
-            *stop = YES;
+            if (self.options.removeAdditional != DSJSONSchemaValidationOptionsRemoveAdditionalNone) {
+                NSMutableDictionary *mutableInstance = (NSMutableDictionary *)instance;
+                NSAssert([mutableInstance isKindOfClass:NSMutableDictionary.class], @"Internal error: instance is immutable but removeAdditional is not None");
+                [mutableInstance removeObjectForKey:key];
+            }
+            else {
+                if (internalError == nil) {
+                    NSString *failureReason = [NSString stringWithFormat:@"Additional property '%@' is not allowed.", key];
+                    internalError = [NSError vv_JSONSchemaValidationErrorWithFailingValidator:self reason:failureReason context:context];
+                }
+            }
         }
     }];
     
-    if (success == NO) {
+    if (internalError) {
+        success = NO;
         if (error != NULL) {
             *error = internalError;
         }
@@ -292,10 +299,6 @@ static NSString * const kSchemaKeywordPatternProperties = @"patternProperties";
     }
 
     if (visitedOnce == NO) {
-        if (self.options.removeAdditional == DSJSONSchemaValidationOptionsRemoveAdditionalAll) {
-            return YES;
-        }
-        
         // if applicable schema was not found, respect additional properties configuration:
         DSJSONSchema *additionalPropertiesSchema = self.additionalPropertiesSchema;
         if (additionalPropertiesSchema != nil) {
@@ -303,7 +306,7 @@ static NSString * const kSchemaKeywordPatternProperties = @"patternProperties";
             // stop parameter is passed in the block, but not used anymore
             block(additionalPropertiesSchema, &enumerationStop);
             return YES;
-        } else if (self.additionalPropertiesAllowed || self.options.removeAdditional == DSJSONSchemaValidationOptionsRemoveAdditionalYes) {
+        } else if (self.additionalPropertiesAllowed) {
             // additional properties schema is not defined, but any additional properties are allowed
             return YES;
         } else {
