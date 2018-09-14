@@ -21,13 +21,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSJSONSchema (DashSchema)
 
-+ (instancetype)systemSchema;
-+ (instancetype)jsonSchema;
-
 + (instancetype)systemSchemaRemoveAdditional:(BOOL)removeAdditional;
 + (instancetype)jsonSchemaRemoveAdditional:(BOOL)removeAdditional;
 
-+ (instancetype)dashCustomSchemaWithObject:(NSDictionary *)schemaObject removeAdditional:(BOOL)removeAdditional;
++ (instancetype)dashCustomSchemaWithObject:(NSDictionary *)schemaObject
+                          removeAdditional:(BOOL)removeAdditional
+                                     error:(NSError * __autoreleasing *)error;
 
 @end
 

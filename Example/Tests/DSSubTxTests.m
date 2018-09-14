@@ -18,6 +18,8 @@
 #import "DSBaseTest.h"
 
 #import <dash_schema_ios/DSSchemaHash.h>
+#import <dash_schema_ios/DSSchemaValidator.h>
+#import <dash_schema_ios/DSValidationResult.h>
 
 @interface DSSubTxTests : DSBaseTest
 
@@ -47,6 +49,23 @@
     NSString *calculatedAliceId = [DSSchemaHash subtx:aliceSubTx];
     
     XCTAssertEqualObjects(aliceId, calculatedAliceId);
+}
+
+- (void)testSubTxRawValidSubTx {
+    NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"valid_subtx"
+                                                          withExtension:@"json"
+                                                           subdirectory:nil];
+    NSParameterAssert(url);
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSParameterAssert(data);
+    
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)kNilOptions error:NULL];
+    NSParameterAssert(json);
+
+    DSValidationResult *result = [DSSchemaValidator validateSubTx:json];
+    
+    XCTAssertTrue(result.valid);
 }
 
 @end

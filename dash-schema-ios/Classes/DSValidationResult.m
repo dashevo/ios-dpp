@@ -1,6 +1,6 @@
 //
 //  Created by Andrew Podkovyrin
-//  
+//
 //
 //  Licensed under the MIT License (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NSString * const DSValidationResultErrorDomain = @"DSValidationResultErrorDomain";
+NSString *const DSValidationResultErrorDomain = @"DSValidationResultErrorDomain";
 
 @implementation DSValidationResult
 
@@ -35,15 +35,24 @@ NSString * const DSValidationResultErrorDomain = @"DSValidationResultErrorDomain
                           objType:(nullable NSString *)objType
                          propName:(nullable NSString *)propName
                        schemaName:(nullable NSString *)schemaName {
+    NSError *error = [self.class errorByCode:errorCode propName:propName];
+    return [self initWithError:error objType:objType propName:propName schemaName:schemaName];
+}
+
+- (instancetype)initWithError:(NSError *)error
+                      objType:(nullable NSString *)objType
+                     propName:(nullable NSString *)propName
+                   schemaName:(nullable NSString *)schemaName {
     self = [super init];
     if (self) {
-        _error = [self.class errorByCode:errorCode propName:propName];
+        _error = error;
         _objType = [objType copy];
         _propName = [propName copy];
         _schemaName = [schemaName copy];
     }
     return self;
 }
+
 
 /**
  Create error class
@@ -59,8 +68,12 @@ NSString * const DSValidationResultErrorDomain = @"DSValidationResultErrorDomain
             localizedDescription = NSLocalizedString(@"Unknown error", nil);
             break;
         }
-        case DSValidationResultErrorCodeJSONSchema: {
-            localizedDescription = NSLocalizedString(@"JSON Schema Error", nil);
+//        case DSValidationResultErrorCodeJSONSchema: {
+//            localizedDescription = NSLocalizedString(@"JSON Schema Error", nil);
+//            break;
+//        }
+        case DSValidationResultErrorCodeMissingDAPSchema: {
+            localizedDescription = NSLocalizedString(@"Missing DAP Schema", nil);
             break;
         }
         case DSValidationResultErrorCodeDAPObjectMissingObjType: {
@@ -75,14 +88,14 @@ NSString * const DSValidationResultErrorDomain = @"DSValidationResultErrorDomain
             localizedDescription = NSLocalizedString(@"Missing subcschema", nil);
             break;
         }
-        case DSValidationResultErrorCodeDAPObjectMissingProperty: {
-            localizedDescription = NSLocalizedString(@"Missing property", nil);
-            break;
-        }
-        case DSValidationResultErrorCodeDAPObjectInvalidType: {
-            localizedDescription = NSLocalizedString(@"Invalid type", nil);
-            break;
-        }
+        //        case DSValidationResultErrorCodeDAPObjectMissingProperty: {
+        //            localizedDescription = NSLocalizedString(@"Missing property", nil);
+        //            break;
+        //        }
+        //        case DSValidationResultErrorCodeDAPObjectInvalidType: {
+        //            localizedDescription = NSLocalizedString(@"Invalid type", nil);
+        //            break;
+        //        }
         case DSValidationResultErrorCodeInvalidID: {
             localizedDescription = [NSString stringWithFormat:NSLocalizedString(@"DAP Schema must have a valid %@ property", nil), propName];
             break;
@@ -112,11 +125,11 @@ NSString * const DSValidationResultErrorDomain = @"DSValidationResultErrorDomain
             break;
         }
     }
-    
+
     NSError *error = [NSError errorWithDomain:DSValidationResultErrorDomain
                                          code:errorCode
-                                     userInfo:localizedDescription ? @{ NSLocalizedDescriptionKey: localizedDescription } : nil];
-    
+                                     userInfo:localizedDescription ? @{NSLocalizedDescriptionKey : localizedDescription} : nil];
+
     return error;
 }
 

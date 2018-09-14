@@ -10,10 +10,12 @@
 #endif
 #endif
 
+#import "DSchemaDefinition.h"
 #import "DSJSONSchema+DashSchema.h"
 #import "DSSchemaHash.h"
 #import "DSSchemaObject.h"
 #import "DSSchemaStorage.h"
+#import "DSSchemaValidator.h"
 #import "DSValidationResult.h"
 #import "DSJSONSchemaPVerValidator.h"
 #import "DSHashUtils.h"

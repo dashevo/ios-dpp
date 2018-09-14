@@ -19,20 +19,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class DSValidationResult;
+@interface DSchemaDefinition : NSObject
 
-@interface DSJsonSchemaUtils : NSObject
++ (nullable NSDictionary *)getDAPSubSchema:(NSDictionary *)object dapSchema:(NSDictionary *)dapSchema;
 
 /**
- * Validate a System Object or DAP Object.
- * DAP Object validation requires input of the DAP Schema.
- */
-+ (DSValidationResult *)validateSchemaObject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema;
-+ (DSValidationResult *)validateDapSchemaDef:(NSDictionary *)dapSchema;
-+ (DSValidationResult *)validateDapSubschemaDef:(NSDictionary *)dapSubschema;
-+ (DSValidationResult *)validateSchemaDef:(NSDictionary *)schemaObject;
+ Get schema relations
 
-+ (NSDictionary *)extractSchemaObject:(NSMutableDictionary *)mutableObject dapSchema:(nullable NSDictionary *)dapSchema;
+ @param dapSchema DAP Schema
+ */
++ (NSDictionary<NSString *, NSArray<NSString *> *> *)getSchemaRelations:(NSDictionary *)dapSchema;
+
+/**
+ Get sub schema relations
+
+ @param dapSchema DAP Schema
+ @param subSchemaKey Sub schema key
+ @return An array of relations
+ */
++ (NSArray<NSString *> *)getSubSchemaRelations:(NSDictionary *)dapSchema subSchemaKey:(NSString *)subSchemaKey;
 
 @end
 

@@ -23,12 +23,13 @@ extern NSString * const DSValidationResultErrorDomain;
 
 typedef NS_ENUM(NSUInteger, DSValidationResultErrorCode) {
     DSValidationResultErrorCodeUnknown = 0,
-    DSValidationResultErrorCodeJSONSchema = 100,
+//    DSValidationResultErrorCodeJSONSchema = 100,
+    DSValidationResultErrorCodeMissingDAPSchema = 150,
     DSValidationResultErrorCodeDAPObjectMissingObjType = 200,
     DSValidationResultErrorCodeDAPObjectUnknownObjType = 201,
     DSValidationResultErrorCodeDAPObjectMissingSubschema = 300,
-    DSValidationResultErrorCodeDAPObjectMissingProperty = 400,
-    DSValidationResultErrorCodeDAPObjectInvalidType = 401,
+//    DSValidationResultErrorCodeDAPObjectMissingProperty = 400,
+//    DSValidationResultErrorCodeDAPObjectInvalidType = 401,
     DSValidationResultErrorCodeInvalidID = 500,
     DSValidationResultErrorCodeInvalidSchemaTitle = 501,
     DSValidationResultErrorCodeInvalidDAPSubschemaCount = 510,
@@ -52,6 +53,11 @@ typedef NS_ENUM(NSUInteger, DSValidationResultErrorCode) {
                           objType:(nullable NSString *)objType
                          propName:(nullable NSString *)propName
                        schemaName:(nullable NSString *)schemaName;
+
+- (instancetype)initWithError:(NSError *)error
+                      objType:(nullable NSString *)objType
+                     propName:(nullable NSString *)propName
+                   schemaName:(nullable NSString *)schemaName;
 
 @end
 

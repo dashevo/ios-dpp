@@ -26,10 +26,10 @@
 @implementation DSSchemaLoaderTests
 
 - (void)testLoadingSchemas {
-    DSJSONSchema *jsonSchema = [DSJSONSchema jsonSchema];
+    DSJSONSchema *jsonSchema = [DSJSONSchema jsonSchemaRemoveAdditional:NO];
     XCTAssertNotNil(jsonSchema);
     
-    DSJSONSchema *systemSchema = [DSJSONSchema systemSchema];
+    DSJSONSchema *systemSchema = [DSJSONSchema systemSchemaRemoveAdditional:NO];
     XCTAssertNotNil(systemSchema);
 }
 

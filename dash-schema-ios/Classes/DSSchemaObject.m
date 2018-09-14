@@ -22,6 +22,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NSString * const DS_ACT = @"act";
+NSString * const DS_ALL_OF = @"allOf";
+NSString * const DS_DAPOBJECTS = @"dapobjects";
+NSString * const DS_DEFINITIONS = @"definitions";
+NSString * const DS_DAPMETASCHEMA = @"dapmetaschema";
+NSString * const DS_INDEX = @"index";
+NSString * const DS_IS_ROLE = @"_isrole";
+NSString * const DS_OBJECTS = @"objects";
+NSString * const DS_OBJTYPE = @"objtype";
+NSString * const DS_PROPERTIES = @"properties";
+NSString * const DS_REF = @"$ref";
+NSString * const DS_REV = @"rev";
+NSString * const DS_STPACKET = @"stpacket";
+NSString * const DS_STHEADER = @"stheader";
+NSString * const DS_TITLE = @"title";
+NSString * const DS_TYPE = @"type";
+NSString * const DS_USER_ID = @"userId";
+NSString * const DS_BUID = @"buid";
+NSString * const DS_SCHEMA_ID = @"$id";
+
 @implementation DSSchemaObject
 
 + (NSDictionary *)fromObject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema {

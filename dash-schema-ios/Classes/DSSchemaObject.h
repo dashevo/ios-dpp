@@ -19,6 +19,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString * const DS_ACT;
+extern NSString * const DS_ALL_OF;
+extern NSString * const DS_DAPOBJECTS;
+extern NSString * const DS_DEFINITIONS;
+extern NSString * const DS_DAPMETASCHEMA;
+extern NSString * const DS_INDEX;
+extern NSString * const DS_IS_ROLE;
+extern NSString * const DS_OBJECTS;
+extern NSString * const DS_OBJTYPE;
+extern NSString * const DS_PROPERTIES;
+extern NSString * const DS_REF;
+extern NSString * const DS_REV;
+extern NSString * const DS_STPACKET;
+extern NSString * const DS_STHEADER;
+extern NSString * const DS_TITLE;
+extern NSString * const DS_TYPE;
+extern NSString * const DS_USER_ID;
+extern NSString * const DS_BUID;
+extern NSString * const DS_SCHEMA_ID;
+
 @interface DSSchemaObject : NSObject
 
 /**
