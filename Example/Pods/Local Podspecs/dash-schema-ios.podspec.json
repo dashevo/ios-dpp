@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "DSJSONSchemaValidation": [
-      "2.0.2"
+      "2.0.3"
     ],
     "TinyCborObjc": [
       "0.2.0"

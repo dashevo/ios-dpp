@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (DSValidationResult *)validateDapSchemaDef:(NSDictionary *)dapSchema {
     NSError *error = nil;
-    DSJSONSchema *schema = [DSJSONSchema dashCustomSchemaWithObject:dapSchema removeAdditional:NO error:&error];
+    __unused DSJSONSchema *schema = [DSJSONSchema dashCustomSchemaWithObject:dapSchema removeAdditional:NO error:&error];
     if (error) {
         return [[DSValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
     }

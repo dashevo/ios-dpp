@@ -1,8 +1,8 @@
 PODS:
   - dash-schema-ios (0.1.0):
-    - DSJSONSchemaValidation (= 2.0.2)
+    - DSJSONSchemaValidation (= 2.0.3)
     - TinyCborObjc (= 0.2.0)
-  - DSJSONSchemaValidation (2.0.2)
+  - DSJSONSchemaValidation (2.0.3)
   - tinycbor (0.5.2)
   - TinyCborObjc (0.2.0):
     - tinycbor (= 0.5.2)
@@ -21,8 +21,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  dash-schema-ios: c257b9ab1504bbe3993ac093ccf97d57f98669d1
-  DSJSONSchemaValidation: 9cf3ca18d4e93ab30c73aae40474ed7688999e9d
+  dash-schema-ios: 38a121da7680c1f279d65bbf846adf59f5ddd8f4
+  DSJSONSchemaValidation: 5cdc8519a004fdcfe4238689a51a73015b4f0926
   tinycbor: f85efe0276ea8d90a3367c010630105853ca2d20
   TinyCborObjc: 2a6147cd9e499717bf49ff0e53a590b47e295bd7
 
