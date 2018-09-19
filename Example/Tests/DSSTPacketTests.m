@@ -80,6 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)testDapSpaceValidPacket {
+    // TODO: fix me (same as in Android Dash Schema)
     NSDictionary *object = self.testData[@"dapspace_valid_packet"];
     DSValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:self.dapSchema];
     XCTAssertTrue(result.valid);
@@ -94,7 +95,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)testPacketCreationFilterAdditionalFields {
     NSDictionary *object = self.testData[@"packet_creation_filter_additional_fields"];
     NSMutableDictionary *schemaObject = [[DSSchemaObject fromObject:object dapSchema:nil] ds_deepMutableCopy];
-    NSDictionary *dapContract = [DSSchemaObject fromObject:object[@"stpacket"][@"dapcontract"] dapSchema:nil];
+    NSDictionary *dapContract = [DSSchemaObject fromObject:schemaObject[@"stpacket"][@"dapcontract"] dapSchema:nil];
     NSMutableDictionary *stPacket = schemaObject[@"stpacket"];
     stPacket[@"dapcontract"] = dapContract;
     

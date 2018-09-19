@@ -187,7 +187,7 @@ static NSString * const kSchemaKeywordReference = @"$ref";
     else if ((self.specification.version == DSJSONSchemaSpecificationVersionDraft6 ||
               self.specification.version == DSJSONSchemaSpecificationVersionDraft7) &&
              [foundationObject isKindOfClass:NSNumber.class] &&
-             ((NSNumber *)foundationObject).vv_isBoolean) {
+             ((NSNumber *)foundationObject).ds_isBoolean) {
         BOOL schemaValue = [foundationObject boolValue];
         DSJSONBooleanSchema *schema = [[DSJSONBooleanSchema alloc] initWithScopeURI:self.scopeURI schemaValue:schemaValue specification:self.specification options:self.options];
         

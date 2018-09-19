@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Serves as a storage of schemas, allowing for quick access to any schema or subschema stored in it by its scope URI.
- @discussion Instances of this class are immutable. To create a mutable storage, use `VVMutableJSONSchemaStorage` class.
+ @discussion Instances of this class are immutable. To create a mutable storage, use `DSMutableJSONSchemaStorage` class.
  Note that schemas added into a storage should have their base scope URI explicitly specified either during instantiation or using "id" schema keyword. Otherwise, if this URI is empty, it might conflict with other schemas or make retrieving those schemas by URI more difficult.
  */
 @interface DSJSONSchemaStorage : NSObject <NSCopying, NSMutableCopying>
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Mutable counterpart of `DSJSONSchemaStorage` class.
  */
-@interface VVMutableJSONSchemaStorage : DSJSONSchemaStorage
+@interface DSMutableJSONSchemaStorage : DSJSONSchemaStorage
 
 /**
  Adds the specified schema and all its subschemas into receiver.

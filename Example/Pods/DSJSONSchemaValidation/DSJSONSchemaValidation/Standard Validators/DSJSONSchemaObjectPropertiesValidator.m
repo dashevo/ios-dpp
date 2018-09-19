@@ -122,7 +122,7 @@ static NSString * const kSchemaKeywordPatternProperties = @"patternProperties";
         if (additionalPropertiesSchema == nil) {
             return nil;
         }
-    } else if ([additionalPropertiesObject isKindOfClass:[NSNumber class]] && [additionalPropertiesObject vv_isBoolean]) {
+    } else if ([additionalPropertiesObject isKindOfClass:[NSNumber class]] && [additionalPropertiesObject ds_isBoolean]) {
         // parse as a boolean
         additionalPropertiesAllowed = [additionalPropertiesObject boolValue];
     } else if (additionalPropertiesObject != nil) {

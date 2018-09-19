@@ -17,7 +17,7 @@
 {
     // use type-strict comparison for numbers, arrays and dictionaries; otherwise, use plain old isEqual:
     if ([self isKindOfClass:[NSNumber class]] && [object isKindOfClass:[NSNumber class]]) {
-        return [(NSNumber *)self vv_isStrictEqualToNumber:object];
+        return [(NSNumber *)self ds_isStrictEqualToNumber:object];
     } else if ([self isKindOfClass:[NSArray class]] && [object isKindOfClass:[NSArray class]]) {
         return [(NSArray *)self vv_isJSONEqualToArray:object];
     } else if ([self isKindOfClass:[NSDictionary class]] && [object isKindOfClass:[NSDictionary class]]) {

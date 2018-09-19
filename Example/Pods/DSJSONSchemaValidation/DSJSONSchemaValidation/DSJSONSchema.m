@@ -60,7 +60,7 @@
         }
         
         // is boolean schema
-        if ([foundationObject isKindOfClass:NSNumber.class] && [foundationObject vv_isBoolean]) {
+        if ([foundationObject isKindOfClass:NSNumber.class] && [foundationObject ds_isBoolean]) {
             return [DSJSONBooleanSchema schemaWithNumber:foundationObject baseURI:baseURI specification:specification options:nonnullOptions error:error];
         }
         else {

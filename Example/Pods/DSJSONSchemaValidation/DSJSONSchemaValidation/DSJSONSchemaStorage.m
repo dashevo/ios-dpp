@@ -101,14 +101,16 @@
         return NO;
     }
     
-    if (_mapping.count != 0) {
-        // if adding to a non-empty container, check for duplicates first
-        NSSet<NSURL *> *existingURIs = [NSSet setWithArray:_mapping.allKeys];
-        NSSet<NSURL *> *newURIs = [NSSet setWithArray:mapping.allKeys];
-        if ([existingURIs intersectsSet:newURIs]) {
-            return NO;
-        }
-    }
+    // duplicated resolution scope URIs will be replaced
+    //
+    //    if (_mapping.count != 0) {
+    //        // if adding to a non-empty container, check for duplicates first
+    //        NSSet<NSURL *> *existingURIs = [NSSet setWithArray:_mapping.allKeys];
+    //        NSSet<NSURL *> *newURIs = [NSSet setWithArray:mapping.allKeys];
+    //        if ([existingURIs intersectsSet:newURIs]) {
+    //            return NO;
+    //        }
+    //    }
     
     [_mapping addEntriesFromDictionary:mapping];
     
@@ -148,14 +150,14 @@
 
 - (id)mutableCopyWithZone:(__unused NSZone *)zone
 {
-    return [[VVMutableJSONSchemaStorage alloc] initWithMapping:_mapping];
+    return [[DSMutableJSONSchemaStorage alloc] initWithMapping:_mapping];
 }
 
 @end
 
-#pragma mark - VVMutableJSONSchemaStorage
+#pragma mark - DSMutableJSONSchemaStorage
 
-@implementation VVMutableJSONSchemaStorage
+@implementation DSMutableJSONSchemaStorage
 
 - (BOOL)addSchema:(DSJSONSchema *)schema
 {

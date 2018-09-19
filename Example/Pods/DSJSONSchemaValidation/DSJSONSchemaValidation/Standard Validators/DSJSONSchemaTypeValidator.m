@@ -99,12 +99,12 @@ static NSString * const kSchemaKeywordType = @"type";
         return YES;
     }
     if ((types & DSJSONSchemaInstanceTypesInteger) != 0 && [instance isKindOfClass:[NSNumber class]]) {
-        if ([instance vv_isInteger]) {
+        if ([instance ds_isInteger]) {
             return YES;
         }
         if ((self.specification.version == DSJSONSchemaSpecificationVersionDraft6 ||
              self.specification.version == DSJSONSchemaSpecificationVersionDraft7) &&
-            [instance vv_isFloat]) {
+            [instance ds_isFloat]) {
             // "a float without fractional part is an integer"
             double doubleValue = [instance doubleValue];
             double fractionalPart = fmod(doubleValue, 1.0);
@@ -113,10 +113,10 @@ static NSString * const kSchemaKeywordType = @"type";
             }
         }
     }
-    if ((types & DSJSONSchemaInstanceTypesNumber) != 0 && [instance isKindOfClass:[NSNumber class]] && [instance vv_isBoolean] == NO) {
+    if ((types & DSJSONSchemaInstanceTypesNumber) != 0 && [instance isKindOfClass:[NSNumber class]] && [instance ds_isBoolean] == NO) {
         return YES;
     }
-    if ((types & DSJSONSchemaInstanceTypesBoolean) != 0 && [instance isKindOfClass:[NSNumber class]] && [instance vv_isBoolean]) {
+    if ((types & DSJSONSchemaInstanceTypesBoolean) != 0 && [instance isKindOfClass:[NSNumber class]] && [instance ds_isBoolean]) {
         return YES;
     }
     if ((types & DSJSONSchemaInstanceTypesNull) != 0 && instance == [NSNull null]) {

@@ -92,32 +92,32 @@ static NSString * const kSchemaKeywordExclusiveMinimum = @"exclusiveMinimum";
 
     // multipleOf must be a number and not a boolean, and must be greater than zero
     if (multipleOf != nil) {
-        if ([multipleOf isKindOfClass:[NSNumber class]] == NO || [multipleOf vv_isBoolean] || [(NSNumber *)multipleOf compare:@0] != NSOrderedDescending) {
+        if ([multipleOf isKindOfClass:[NSNumber class]] == NO || [multipleOf ds_isBoolean] || [(NSNumber *)multipleOf compare:@0] != NSOrderedDescending) {
             return NO;
         }
     }
     // maximum must be a number and not a boolean
     if (maximum != nil) {
-        if ([maximum isKindOfClass:[NSNumber class]] == NO || [maximum vv_isBoolean]) {
+        if ([maximum isKindOfClass:[NSNumber class]] == NO || [maximum ds_isBoolean]) {
             return NO;
         }
     }
     // minimum must be a number and not a boolean
     if (minimum != nil) {
-        if ([minimum isKindOfClass:[NSNumber class]] == NO || [minimum vv_isBoolean]) {
+        if ([minimum isKindOfClass:[NSNumber class]] == NO || [minimum ds_isBoolean]) {
             return NO;
         }
     }
     if (exclusiveMaximum != nil) {
         if (specification.version == DSJSONSchemaSpecificationVersionDraft4) {
             // exclusiveMaximum must be a number and not a boolean
-            if ([exclusiveMaximum isKindOfClass:[NSNumber class]] == NO || [exclusiveMaximum vv_isBoolean] == NO) {
+            if ([exclusiveMaximum isKindOfClass:[NSNumber class]] == NO || [exclusiveMaximum ds_isBoolean] == NO) {
                 return NO;
             }
         }
         else {
             // exclusiveMaximum must be a boolean number
-            if ([exclusiveMaximum isKindOfClass:[NSNumber class]] == NO || [exclusiveMaximum vv_isBoolean]) {
+            if ([exclusiveMaximum isKindOfClass:[NSNumber class]] == NO || [exclusiveMaximum ds_isBoolean]) {
                 return NO;
             }
         }
@@ -125,13 +125,13 @@ static NSString * const kSchemaKeywordExclusiveMinimum = @"exclusiveMinimum";
     if (exclusiveMinimum != nil) {
         if (specification.version == DSJSONSchemaSpecificationVersionDraft4) {
             // exclusiveMinimum must be a number and not a boolean
-            if ([exclusiveMinimum isKindOfClass:[NSNumber class]] == NO || [exclusiveMinimum vv_isBoolean] == NO) {
+            if ([exclusiveMinimum isKindOfClass:[NSNumber class]] == NO || [exclusiveMinimum ds_isBoolean] == NO) {
                 return NO;
             }
         }
         else {
             // exclusiveMinimum must be a boolean number
-            if ([exclusiveMinimum isKindOfClass:[NSNumber class]] == NO || [exclusiveMinimum vv_isBoolean]) {
+            if ([exclusiveMinimum isKindOfClass:[NSNumber class]] == NO || [exclusiveMinimum ds_isBoolean]) {
                 return NO;
             }
         }
@@ -169,7 +169,7 @@ static NSString * const kSchemaKeywordExclusiveMinimum = @"exclusiveMinimum";
 - (BOOL)validateInstance:(id)instance inContext:(DSJSONSchemaValidationContext *)context error:(NSError *__autoreleasing *)error
 {
     // silently succeed if value of the instance is inapplicable
-    if ([instance isKindOfClass:[NSNumber class]] == NO || [instance vv_isBoolean] == YES) {
+    if ([instance isKindOfClass:[NSNumber class]] == NO || [instance ds_isBoolean] == YES) {
         return YES;
     }
     

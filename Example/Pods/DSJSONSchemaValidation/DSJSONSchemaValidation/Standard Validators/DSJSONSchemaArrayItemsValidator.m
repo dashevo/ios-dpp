@@ -130,7 +130,7 @@ static NSString * const kSchemaKeywordAdditionalItems = @"additionalItems";
         if (additionalItemsSchema == nil) {
             return nil;
         }
-    } else if ([additionalItemsObject isKindOfClass:[NSNumber class]] && [additionalItemsObject vv_isBoolean]) {
+    } else if ([additionalItemsObject isKindOfClass:[NSNumber class]] && [additionalItemsObject ds_isBoolean]) {
         // parse as a boolean
         additionalItemsAllowed = [additionalItemsObject boolValue];
     } else if (additionalItemsObject != nil) {

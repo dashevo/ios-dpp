@@ -17,23 +17,32 @@
 
 #import "DSJSONSchema+DashSchema.h"
 
-#import "DSSchemaStorage.h"
 #import "DSJSONSchemaPVerValidator.h"
+#import "DSSchemaStorage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma mark - Storage
+#pragma mark - Storage Hodler
 
-@interface DSDashSchemaStorage: NSObject
+/**
+ Holds schema storages by BOOL `removeAdditional` key
+ 
+ We need to hold a reference to the `DSJSONSchema` objects outside because
+ validators reference external schemas by weak reference to prevent retain cycles
+ */
+@interface DSJSONSchemaStorageHolder : NSObject
 
-@property (strong, nonatomic) VVMutableJSONSchemaStorage *storage;
+@property (strong, nonatomic) NSMutableDictionary<NSString *, DSJSONSchemaStorage *> *storageMapping;
+
+- (DSJSONSchemaStorage *)jsonSchemaStorageRemoveAdditional:(BOOL)removeAdditional;
+- (DSJSONSchemaStorage *)systemSchemaStorageRemoveAdditional:(BOOL)removeAdditional;
 
 @end
 
-@implementation DSDashSchemaStorage
+@implementation DSJSONSchemaStorageHolder
 
 + (instancetype)sharedInstance {
-    static DSDashSchemaStorage *_sharedInstance = nil;
+    static DSJSONSchemaStorageHolder *_sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedInstance = [[self alloc] init];
@@ -44,20 +53,36 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _storage = [VVMutableJSONSchemaStorage storage];
-        
-        [self addSchema:[DSJSONSchema jsonSchemaRemoveAdditional:NO]
-           withScopeURI:[NSURL URLWithString:@"http://json-schema.org/draft-07/schema#"]];
+        _storageMapping = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
-- (void)addSchema:(DSJSONSchema *)schema withScopeURI:(NSURL *)scopeURI {
-    BOOL success = [self.storage addSchema:schema];
-    if (success == NO) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Failed to add reference schema with scope URI %@ into the storage.", scopeURI];
+- (DSJSONSchemaStorage *)jsonSchemaStorageRemoveAdditional:(BOOL)removeAdditional {
+    NSString *key = [self keyWithPrefix:@"json" removeAdditional:removeAdditional];
+    DSJSONSchemaStorage *storage = self.storageMapping[key];
+    if (!storage) {
+        DSJSONSchema *jsonSchema = [DSJSONSchema jsonSchemaRemoveAdditional:removeAdditional];
+        storage = [DSJSONSchemaStorage storageWithSchema:jsonSchema];
+        self.storageMapping[key] = storage;
     }
+    return storage;
+}
+
+- (DSJSONSchemaStorage *)systemSchemaStorageRemoveAdditional:(BOOL)removeAdditional {
+    NSString *key = [self keyWithPrefix:@"system" removeAdditional:removeAdditional];
+    DSJSONSchemaStorage *storage = self.storageMapping[key];
+    if (!storage) {
+        DSJSONSchema *dashSchema = [DSJSONSchema systemSchemaRemoveAdditional:removeAdditional];
+        storage = [DSJSONSchemaStorage storageWithSchema:dashSchema];
+        self.storageMapping[key] = storage;
+    }
+    return storage;
+}
+
+- (NSString *)keyWithPrefix:(NSString *)prefix removeAdditional:(BOOL)removeAdditional {
+    NSParameterAssert(prefix);
+    return [NSString stringWithFormat:@"%@-removeAdditional:%@", prefix, removeAdditional ? @"1" : @"0"];
 }
 
 @end
@@ -71,14 +96,19 @@ NS_ASSUME_NONNULL_BEGIN
                                        forMetaschemaURI:nil
                                           specification:[DSJSONSchemaSpecification draft7]
                                               withError:NULL];
-    
+
     if (success == NO) {
         [NSException raise:NSInternalInconsistencyException format:@"Failed to register Dash Schema validator."];
     }
 }
 
 + (instancetype)systemSchemaRemoveAdditional:(BOOL)removeAdditional {
-    return [self dashCustomSchemaWithObject:[DSSchemaStorage system] removeAdditional:removeAdditional error:NULL];
+    DSJSONSchemaStorage *jsonSchemaStorage = [[DSJSONSchemaStorageHolder sharedInstance] jsonSchemaStorageRemoveAdditional:removeAdditional];
+
+    return [self customSchemaWithObject:[DSSchemaStorage system]
+                       referenceStorage:jsonSchemaStorage
+                       removeAdditional:removeAdditional
+                                  error:NULL];
 }
 
 + (instancetype)jsonSchemaRemoveAdditional:(BOOL)removeAdditional {
@@ -90,10 +120,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)dashCustomSchemaWithObject:(NSDictionary *)schemaObject
                           removeAdditional:(BOOL)removeAdditional
-                                     error:(NSError * __autoreleasing *)error {
-    VVMutableJSONSchemaStorage *storage = [DSDashSchemaStorage sharedInstance].storage;
+                                     error:(NSError *__autoreleasing *)error {
+    DSJSONSchemaStorage *dashSchemaStorage = [[DSJSONSchemaStorageHolder sharedInstance] systemSchemaStorageRemoveAdditional:removeAdditional];
+
     DSJSONSchema *schema = [self customSchemaWithObject:schemaObject
-                                       referenceStorage:storage
+                                       referenceStorage:dashSchemaStorage
                                        removeAdditional:removeAdditional
                                                   error:error];
     return schema;
@@ -102,12 +133,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)customSchemaWithObject:(NSDictionary *)schemaObject
                       referenceStorage:(nullable DSJSONSchemaStorage *)referenceStorage
                       removeAdditional:(BOOL)removeAdditional
-                                 error:(NSError * __autoreleasing *)error {
+                                 error:(NSError *__autoreleasing *)error {
     DSJSONSchemaValidationOptions *options = [[DSJSONSchemaValidationOptions alloc] init];
     if (removeAdditional) {
         options.removeAdditional = DSJSONSchemaValidationOptionsRemoveAdditionalYes;
     }
-    
+
     DSJSONSchema *schema = [DSJSONSchema schemaWithObject:schemaObject
                                                   baseURI:nil
                                          referenceStorage:referenceStorage

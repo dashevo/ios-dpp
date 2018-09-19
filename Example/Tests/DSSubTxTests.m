@@ -28,6 +28,7 @@
 @implementation DSSubTxTests
 
 - (void)testValidateSubTxHash {
+    // TODO: fix me (same as in Android Dash Schema)
     NSDictionary *aliceSubTx = self.data[@"alice_subtx_1"];
     XCTAssertNotNil(aliceSubTx);
     

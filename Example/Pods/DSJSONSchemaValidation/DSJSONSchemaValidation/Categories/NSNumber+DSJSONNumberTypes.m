@@ -1,5 +1,5 @@
 //
-//  NSNumber+VVNumberTypes.m
+//  NSNumber+DSNumberTypes.m
 //  DSJSONSchemaValidation
 //
 //  Created by Vlas Voloshin on 30/12/2014.
@@ -10,32 +10,32 @@
 
 @implementation NSNumber (DSJSONNumberTypes)
 
-- (BOOL)vv_isInteger
+- (BOOL)ds_isInteger
 {
-    if (self.vv_isBoolean == NO) {
-        return self.vv_isFloat == NO;
+    if (self.ds_isBoolean == NO) {
+        return self.ds_isFloat == NO;
     } else {
         return NO;
     }
 }
 
-- (BOOL)vv_isFloat
+- (BOOL)ds_isFloat
 {
     CFNumberRef underlyingNumberRef = (__bridge CFNumberRef)self;
     return (CFNumberIsFloatType(underlyingNumberRef) == true);
 }
 
-- (BOOL)vv_isBoolean
+- (BOOL)ds_isBoolean
 {
     // this is a bit fragile, but works!
     return [self isKindOfClass:[@YES class]];
 }
 
-- (BOOL)vv_isStrictEqualToNumber:(NSNumber *)otherNumber
+- (BOOL)ds_isStrictEqualToNumber:(NSNumber *)otherNumber
 {
     if ([self isEqualToNumber:otherNumber]) {
         // no need to check for "is integer" since it's itself derived from boolean and float checks
-        return self.vv_isFloat == otherNumber.vv_isFloat && self.vv_isBoolean == otherNumber.vv_isBoolean;
+        return self.ds_isFloat == otherNumber.ds_isFloat && self.ds_isBoolean == otherNumber.ds_isBoolean;
     } else {
         return NO;
     }
