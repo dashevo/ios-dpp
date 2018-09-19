@@ -34,38 +34,40 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DSSTPacketTests
 
-- (void)setUp {
-    [super setUp];
-
-    {
+- (NSDictionary *)dapSchema {
+    if (!_dapSchema) {
         NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"somedap"
                                                               withExtension:@"json"
                                                                subdirectory:nil];
         NSParameterAssert(url);
-
+        
         NSData *data = [NSData dataWithContentsOfURL:url];
         NSParameterAssert(data);
-
+        
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)kNilOptions error:NULL];
         NSParameterAssert(json);
-
-        self.dapSchema = json;
+        
+        _dapSchema = json;
     }
+    return _dapSchema;
+}
 
-    {
+- (NSDictionary *)testData {
+    if (!_testData) {
         NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"stpacket-test-data"
                                                               withExtension:@"json"
                                                                subdirectory:nil];
         NSParameterAssert(url);
-
+        
         NSData *data = [NSData dataWithContentsOfURL:url];
         NSParameterAssert(data);
-
+        
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)kNilOptions error:NULL];
         NSParameterAssert(json);
-
-        self.testData = json;
+        
+        _testData = json;
     }
+    return _testData;
 }
 
 - (void)testDapContractObject {

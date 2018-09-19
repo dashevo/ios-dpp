@@ -21,21 +21,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DSBaseTest
 
-- (void)setUp {
-    [super setUp];
-    
-     NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"contactsdap-test-data"
-                                                           withExtension:@"json"
-                                                            subdirectory:nil];
-    NSParameterAssert(url);
-    
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    NSParameterAssert(data);
-    
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)kNilOptions error:NULL];
-    NSParameterAssert(json);
-    
-    self.data = json;
+- (NSDictionary *)data {
+    if (!_data) {
+        NSURL *url = [[NSBundle bundleForClass:[self class]] URLForResource:@"contactsdap-test-data"
+                                                              withExtension:@"json"
+                                                               subdirectory:nil];
+        NSParameterAssert(url);
+        
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        NSParameterAssert(data);
+        
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)kNilOptions error:NULL];
+        NSParameterAssert(json);
+        
+        _data = json;
+    }
+    return _data;
 }
 
 @end
