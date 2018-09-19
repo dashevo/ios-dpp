@@ -24,10 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSString *)subtx:(NSDictionary *)object;
 + (nullable NSString *)blockchainuser:(NSDictionary *)object;
 + (nullable NSString *)stheader:(NSDictionary *)object;
-+ (nullable NSString *)stpacket:(NSDictionary *)object dapSchema:(NSDictionary *)dapSchema;
++ (nullable NSString *)stpacket:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema;
 + (nullable NSString *)dapcontract:(NSDictionary *)object;
 + (nullable NSString *)dapschema:(NSDictionary *)object;
-+ (nullable NSString *)dapobject:(NSDictionary *)object dapSchema:(NSDictionary *)dapSchema;
++ (nullable NSString *)dapobject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema;
 
 @end
 

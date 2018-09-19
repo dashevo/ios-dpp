@@ -19,25 +19,29 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const DS_ACT;
-extern NSString * const DS_ALL_OF;
-extern NSString * const DS_DAPOBJECTS;
-extern NSString * const DS_DEFINITIONS;
-extern NSString * const DS_DAPMETASCHEMA;
-extern NSString * const DS_INDEX;
-extern NSString * const DS_IS_ROLE;
-extern NSString * const DS_OBJECTS;
-extern NSString * const DS_OBJTYPE;
-extern NSString * const DS_PROPERTIES;
-extern NSString * const DS_REF;
-extern NSString * const DS_REV;
-extern NSString * const DS_STPACKET;
-extern NSString * const DS_STHEADER;
-extern NSString * const DS_TITLE;
-extern NSString * const DS_TYPE;
-extern NSString * const DS_USER_ID;
-extern NSString * const DS_BUID;
-extern NSString * const DS_SCHEMA_ID;
+extern NSString *const DS_ACT;
+extern NSString *const DS_ALL_OF;
+extern NSString *const DS_DAPOBJECTS;
+extern NSString *const DS_DEFINITIONS;
+extern NSString *const DS_DAPMETASCHEMA;
+extern NSString *const DS_INDEX;
+extern NSString *const DS_IS_ROLE;
+extern NSString *const DS_OBJECTS;
+extern NSString *const DS_OBJTYPE;
+extern NSString *const DS_PROPERTIES;
+extern NSString *const DS_REF;
+extern NSString *const DS_REV;
+extern NSString *const DS_STPACKET;
+extern NSString *const DS_STHEADER;
+extern NSString *const DS_TITLE;
+extern NSString *const DS_TYPE;
+extern NSString *const DS_USER_ID;
+extern NSString *const DS_BUID;
+extern NSString *const DS_SCHEMA_ID;
+
+extern NSUInteger const DS_CREATE_OBJECT_ACTION;
+extern NSUInteger const DS_UPDATE_OBJECT_ACTION;
+extern NSUInteger const DS_REMOVE_OBJECT_ACTION;
 
 @interface DSSchemaObject : NSObject
 
@@ -48,7 +52,35 @@ extern NSString * const DS_SCHEMA_ID;
  * @param dapSchema DapSchema (optional)
  * @return object with allowed properties only
  */
-+ (NSDictionary *)fromObject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema;
++ (NSDictionary *)fromObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary *)dapSchema;
+
+/**
+ * Set metadata property value in a Schema object instance
+ * @param object Schema object instance
+ * @param key Meta section keyword
+ * @param value A value for the key
+ * @return Given object with meta of key and value
+ */
++ (NSDictionary *)setMetaObject:(NSDictionary<NSString *, id> *)object key:(NSString *)key value:(id)value;
+
+/**
+ * Classify an object as a System Object without validation
+ */
++ (BOOL)isSysObject:(nullable NSDictionary<NSString *, id> *)object;
+
+/**
+ * Return a hash of a Schema object instance
+ * @param object Schema object instance
+ * @param dapSchema DapSchema
+ */
++ (nullable NSString *)hashOfObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary *)dapSchema;
+
+/**
+ * Sets removal action on a Schema Object
+ */
++ (NSDictionary *)prepareForRemoval:(NSDictionary<NSString *, id> *)object;
+
++ (nullable NSString *)metaFromObject:(NSDictionary<NSString *, id> *)object byKey:(NSString *)key;
 
 @end
 

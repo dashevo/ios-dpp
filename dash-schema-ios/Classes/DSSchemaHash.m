@@ -41,11 +41,12 @@ NS_ASSUME_NONNULL_BEGIN
     return hash;
 }
 
-+ (nullable NSString *)stpacket:(NSDictionary *)object dapSchema:(NSDictionary *)dapSchema {
++ (nullable NSString *)stpacket:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema {
     id stpacket = object[@"stpacket"];
     NSString *hash = [DSHashUtils hashOfObject:stpacket];
-    
-/*
+
+    /*
+     
     // This code copied from Android Dash Schema Library
  
     // TODO: Different from JS Lib, however, js lib seems to be hashing string chars instead of properties: needs verification.
@@ -62,8 +63,9 @@ NS_ASSUME_NONNULL_BEGIN
     } else {
         HashUtils.toHash(obj)
     }
-*/
-    
+     
+     */
+
     return hash;
 }
 
@@ -79,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
     return hash;
 }
 
-+ (nullable NSString *)dapobject:(NSDictionary *)object dapSchema:(NSDictionary *)dapSchema {
++ (nullable NSString *)dapobject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema {
     NSDictionary *validatedObject = [DSSchemaObject fromObject:object dapSchema:dapSchema];
     NSString *hash = [DSHashUtils hashOfObject:validatedObject];
     return hash;
