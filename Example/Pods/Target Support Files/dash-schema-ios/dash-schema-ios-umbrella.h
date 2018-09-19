@@ -12,6 +12,7 @@
 
 #import "DSchemaDefinition.h"
 #import "DSJSONSchema+DashSchema.h"
+#import "DSSchemaFees.h"
 #import "DSSchemaHash.h"
 #import "DSSchemaObject.h"
 #import "DSSchemaStorage.h"

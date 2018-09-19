@@ -21,6 +21,7 @@
 		2AD755C621524D4D00D97E78 /* jsonschema-test-data.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AD755C021524D4800D97E78 /* jsonschema-test-data.json */; };
 		2AD755C721524D4D00D97E78 /* simplified-dap-schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AD755C221524D4800D97E78 /* simplified-dap-schema.json */; };
 		2AD755C821524D4D00D97E78 /* simplified-system-schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AD755C121524D4800D97E78 /* simplified-system-schema.json */; };
+		2AD755CE2152B9A800D97E78 /* DSSchemaFeesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD755CD2152B9A800D97E78 /* DSSchemaFeesTests.m */; };
 		2AE5E66A2137FF4D007BFCB8 /* DSSchemaLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE5E6692137FF4D007BFCB8 /* DSSchemaLoaderTests.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -65,6 +66,7 @@
 		2AD755C021524D4800D97E78 /* jsonschema-test-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jsonschema-test-data.json"; sourceTree = "<group>"; };
 		2AD755C121524D4800D97E78 /* simplified-system-schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simplified-system-schema.json"; sourceTree = "<group>"; };
 		2AD755C221524D4800D97E78 /* simplified-dap-schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simplified-dap-schema.json"; sourceTree = "<group>"; };
+		2AD755CD2152B9A800D97E78 /* DSSchemaFeesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSchemaFeesTests.m; sourceTree = "<group>"; };
 		2AE5E6692137FF4D007BFCB8 /* DSSchemaLoaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSchemaLoaderTests.m; sourceTree = "<group>"; };
 		36A54B463D7CE05580C4895C /* Pods_dash_schema_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dash_schema_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* dash-schema-ios_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dash-schema-ios_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,6 +212,7 @@
 				2A6B3472214C478F00094AFD /* DSSTPacketTests.m */,
 				2AD755BC21523B9D00D97E78 /* DSSchemaObjectTests.m */,
 				2AD755BE21524B9400D97E78 /* DSJsonSchemaTests.m */,
+				2AD755CD2152B9A800D97E78 /* DSSchemaFeesTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				2AE5E66A2137FF4D007BFCB8 /* DSSchemaLoaderTests.m in Sources */,
 				2A73B337214678B900DF62A9 /* DSBaseTest.m in Sources */,
 				2AD755BF21524B9400D97E78 /* DSJsonSchemaTests.m in Sources */,
+				2AD755CE2152B9A800D97E78 /* DSSchemaFeesTests.m in Sources */,
 				2A6B3474214C47E600094AFD /* DSSTPacketTests.m in Sources */,
 				2A03A86E21428D6B00788BE3 /* DSSubTxTests.m in Sources */,
 				2A6AABFE21412BB600D1E018 /* DSSchemaStorageTests.m in Sources */,
