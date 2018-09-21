@@ -38,6 +38,7 @@ extern NSString *const DS_TYPE;
 extern NSString *const DS_USER_ID;
 extern NSString *const DS_BUID;
 extern NSString *const DS_SCHEMA_ID;
+extern NSString *const DS_SCHEMA;
 
 extern NSUInteger const DS_CREATE_OBJECT_ACTION;
 extern NSUInteger const DS_UPDATE_OBJECT_ACTION;

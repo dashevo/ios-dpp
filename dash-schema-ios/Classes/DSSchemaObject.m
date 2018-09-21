@@ -44,6 +44,7 @@ NSString *const DS_TYPE = @"type";
 NSString *const DS_USER_ID = @"userId";
 NSString *const DS_BUID = @"buid";
 NSString *const DS_SCHEMA_ID = @"$id";
+NSString *const DS_SCHEMA = @"$schema";
 
 NSUInteger const DS_CREATE_OBJECT_ACTION = 1;
 NSUInteger const DS_UPDATE_OBJECT_ACTION = 2;

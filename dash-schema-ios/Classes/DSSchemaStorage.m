@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DSSchemaStorage
 
-+ (NSDictionary *)system {
++ (NSDictionary<NSString *, id> *)system {
     static NSDictionary *object = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
     return object;
 }
 
-+ (NSDictionary *)json {
++ (NSDictionary<NSString *, id> *)json {
     static NSDictionary *object = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

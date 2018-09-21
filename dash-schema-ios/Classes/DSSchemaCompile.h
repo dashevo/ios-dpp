@@ -19,10 +19,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSSchemaStorage : NSObject
+@class DSValidationResult;
 
-@property (class, readonly, copy, nonatomic) NSDictionary<NSString *, id> *system;
-@property (class, readonly, copy, nonatomic) NSDictionary<NSString *, id> *json;
+@interface DSSchemaCompile : NSObject
+
+/**
+ * Validate a DapSchema definition
+ * @param dapSchema DapSchema
+ * @return Validation Result
+ */
++ (DSValidationResult *)compileDAPSchema:(NSDictionary <NSString*, id> *)dapSchema;
 
 @end
 
