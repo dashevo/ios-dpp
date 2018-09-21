@@ -61,12 +61,6 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
                                                   schemaName:nil];
     }
 
-    // validate the DAP Schema using JSON Schema
-    DSValidationResult *result = [DSJsonSchemaUtils validateDapSchemaDef:dapSchema];
-    if (!result.valid) {
-        return result;
-    }
-
     // check subschemas
     for (NSString *keyword in dapSchema) {
         NSDictionary<NSString *, id> *subSchema = dapSchema[keyword];
@@ -76,7 +70,8 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         }
     }
 
-    return [[DSValidationResult alloc] initAsValid];
+    // validate the DAP Schema using JSON Schema
+    return [DSJsonSchemaUtils validateDapSchemaDef:dapSchema];
 }
 
 #pragma mark - Private
@@ -134,8 +129,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
     }
 
     // schema inheritance
-    NSDictionary<NSString *, id> *subSchema = dapSchema[keyword];
-    NSArray<NSDictionary *> *allOf = subSchema[DS_ALL_OF];
+    NSArray<NSDictionary *> *allOf = [dapSchema isKindOfClass:NSDictionary.class] ? dapSchema[DS_ALL_OF] : nil;
     if (!allOf) {
         return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPSubschemaInheritance
                                                      objType:@"dap subschema inheritance missing"
@@ -159,7 +153,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
                                                   schemaName:keyword];
     }
 
-    return [DSJsonSchemaUtils validateDapSubschemaDef:subSchema];
+    return [DSJsonSchemaUtils validateDapSubschemaDef:dapSchema];
 }
 
 @end

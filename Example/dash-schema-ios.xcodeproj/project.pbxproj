@@ -16,6 +16,7 @@
 		2A73B337214678B900DF62A9 /* DSBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A73B3352146787500DF62A9 /* DSBaseTest.m */; };
 		2A73B338214679FD00DF62A9 /* contactsdap-test-data.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A03A8712142A14800788BE3 /* contactsdap-test-data.json */; };
 		2A73B377214BCDF900DF62A9 /* valid_subtx.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A73B375214BCBA800DF62A9 /* valid_subtx.json */; };
+		2A8551AF21556043006054B2 /* DSDapSchemaTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8551AE21556043006054B2 /* DSDapSchemaTest.m */; };
 		2AD755BD21523B9D00D97E78 /* DSSchemaObjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD755BC21523B9D00D97E78 /* DSSchemaObjectTests.m */; };
 		2AD755BF21524B9400D97E78 /* DSJsonSchemaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD755BE21524B9400D97E78 /* DSJsonSchemaTests.m */; };
 		2AD755C621524D4D00D97E78 /* jsonschema-test-data.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AD755C021524D4800D97E78 /* jsonschema-test-data.json */; };
@@ -63,6 +64,7 @@
 		2A73B3342146787500DF62A9 /* DSBaseTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBaseTest.h; sourceTree = "<group>"; };
 		2A73B3352146787500DF62A9 /* DSBaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBaseTest.m; sourceTree = "<group>"; };
 		2A73B375214BCBA800DF62A9 /* valid_subtx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = valid_subtx.json; sourceTree = "<group>"; };
+		2A8551AE21556043006054B2 /* DSDapSchemaTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSDapSchemaTest.m; sourceTree = "<group>"; };
 		2AD755BC21523B9D00D97E78 /* DSSchemaObjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSchemaObjectTests.m; sourceTree = "<group>"; };
 		2AD755BE21524B9400D97E78 /* DSJsonSchemaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSJsonSchemaTests.m; sourceTree = "<group>"; };
 		2AD755C021524D4800D97E78 /* jsonschema-test-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jsonschema-test-data.json"; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				2AD755BE21524B9400D97E78 /* DSJsonSchemaTests.m */,
 				2AD755CD2152B9A800D97E78 /* DSSchemaFeesTests.m */,
 				2AD755CF2152BE3000D97E78 /* DSDapContractTest.m */,
+				2A8551AE21556043006054B2 /* DSDapSchemaTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				2A6B3474214C47E600094AFD /* DSSTPacketTests.m in Sources */,
 				2A03A86E21428D6B00788BE3 /* DSSubTxTests.m in Sources */,
 				2A6AABFE21412BB600D1E018 /* DSSchemaStorageTests.m in Sources */,
+				2A8551AF21556043006054B2 /* DSDapSchemaTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
