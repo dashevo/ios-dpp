@@ -1,8 +1,8 @@
 {
   "name": "dash-schema-ios",
   "version": "0.1.0",
-  "summary": "A short description of dash-schema-ios.",
-  "description": "TODO: Add long description of the pod here.",
+  "summary": "Dash Schema library",
+  "description": "Dash Schema library for iOS",
   "homepage": "https://github.com/dashevo/dash-schema-ios",
   "license": {
     "type": "MIT",
@@ -15,6 +15,7 @@
     "git": "https://github.com/dashevo/dash-schema-ios.git",
     "tag": "0.1.0"
   },
+  "social_media_url": "https://twitter.com/podkovyr",
   "platforms": {
     "ios": "10.0"
   },
@@ -29,7 +30,7 @@
       "2.0.5"
     ],
     "TinyCborObjc": [
-      "0.2.0"
+      "0.2.1"
     ]
   }
 }

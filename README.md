@@ -1,6 +1,6 @@
 # dash-schema-ios
 
-[![CI Status](https://img.shields.io/travis/Andrew Podkovyrin/dash-schema-ios.svg?style=flat)](https://travis-ci.org/Andrew Podkovyrin/dash-schema-ios)
+[![CI Status](https://img.shields.io/travis/dashevo/dash-schema-ios.svg?style=flat)](https://travis-ci.org/dashevo/dash-schema-ios)
 [![Version](https://img.shields.io/cocoapods/v/dash-schema-ios.svg?style=flat)](https://cocoapods.org/pods/dash-schema-ios)
 [![License](https://img.shields.io/cocoapods/l/dash-schema-ios.svg?style=flat)](https://cocoapods.org/pods/dash-schema-ios)
 [![Platform](https://img.shields.io/cocoapods/p/dash-schema-ios.svg?style=flat)](https://cocoapods.org/pods/dash-schema-ios)
