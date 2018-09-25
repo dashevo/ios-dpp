@@ -23,11 +23,11 @@
 static NSString *const DAP_SCHEMA_ID_URI = @"http://dash.org/schemas/dapschema";
 static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/definitions/dapobjectbase";
 
-@interface DSDapSchemaTest : XCTestCase
+@interface DSDapSchemaTests : XCTestCase
 
 @end
 
-@implementation DSDapSchemaTest
+@implementation DSDapSchemaTests
 
 - (void)testInvalidSchema_missingMetaSchema {
     NSDictionary *dapSchema = @{};

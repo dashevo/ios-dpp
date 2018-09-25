@@ -122,15 +122,19 @@
     NSMutableDictionary<NSURL *, DSJSONSchema *> *schemaURIMapping = [NSMutableDictionary dictionary];
     
     __block BOOL success = YES;
-    [schema visitUsingBlock:^(DSJSONSchema *subschema, BOOL *stop) {
+    [schema visitUsingBlock:^(DSJSONSchema *subschema, __unused BOOL *stop) {
         NSURL *subschemaURI = subschema.uri;
-        if (schemaURIMapping[subschemaURI] == nil) {
-            schemaURIMapping[subschemaURI] = subschema;
-        } else {
-            // fail on duplicate scopes
-            success = NO;
-            *stop = YES;
-        }
+        schemaURIMapping[subschemaURI] = subschema;
+        
+        // duplicated resolution scope URIs will be replaced within one schema
+        //
+        //        if (schemaURIMapping[subschemaURI] == nil) {
+        //            schemaURIMapping[subschemaURI] = subschema;
+        //        } else {
+        //            // fail on duplicate scopes
+        //            success = NO;
+        //            *stop = YES;
+        //        }
     }];
     
     if (success) {

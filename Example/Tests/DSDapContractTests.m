@@ -23,13 +23,13 @@
 #import <dash_schema_ios/DSSchemaCompile.h>
 #import <dash_schema_ios/DSSchemaValidator.h>
 
-@interface DSDapContractTest : DSBaseTest
+@interface DSDapContractTests : DSBaseTest
 
 @property (copy, nonatomic) NSDictionary *dapContract;
 
 @end
 
-@implementation DSDapContractTest
+@implementation DSDapContractTests
 
 - (NSDictionary *)dapContract {
     if (!_dapContract) {
