@@ -15,13 +15,13 @@
 //  limitations under the License.
 //
 
-#import "DSValidationResult.h"
+#import "DSSchemaValidationResult.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 NSString *const DSValidationResultErrorDomain = @"DSValidationResultErrorDomain";
 
-@implementation DSValidationResult
+@implementation DSSchemaValidationResult
 
 - (instancetype)initAsValid {
     self = [super init];
@@ -68,10 +68,10 @@ NSString *const DSValidationResultErrorDomain = @"DSValidationResultErrorDomain"
             localizedDescription = NSLocalizedString(@"Unknown error", nil);
             break;
         }
-//        case DSValidationResultErrorCodeJSONSchema: {
-//            localizedDescription = NSLocalizedString(@"JSON Schema Error", nil);
-//            break;
-//        }
+        //        case DSValidationResultErrorCodeJSONSchema: {
+        //            localizedDescription = NSLocalizedString(@"JSON Schema Error", nil);
+        //            break;
+        //        }
         case DSValidationResultErrorCodeMissingDAPSchema: {
             localizedDescription = NSLocalizedString(@"Missing DAP Schema", nil);
             break;

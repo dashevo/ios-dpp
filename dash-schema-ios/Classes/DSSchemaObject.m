@@ -19,8 +19,8 @@
 
 #import <DSJSONSchemaValidation/NSDictionary+DSJSONDeepMutableCopy.h>
 
-#import "DSJsonSchemaUtils.h"
 #import "DSSchemaHash.h"
+#import "DSSchemaJSONSchemaUtils.h"
 #import "DSSchemaStorage.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -52,19 +52,19 @@ NSUInteger const DS_REMOVE_OBJECT_ACTION = 3;
 
 @implementation DSSchemaObject
 
-+ (NSDictionary *)fromObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary *)dapSchema {
-    NSMutableDictionary *mutableObject = [object ds_deepMutableCopy];
-    NSDictionary *resultObject = [DSJsonSchemaUtils extractSchemaObject:mutableObject dapSchema:dapSchema];
++ (NSDictionary<NSString *, id> *)fromObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
+    NSMutableDictionary<NSString *, id> *mutableObject = [object ds_deepMutableCopy];
+    NSDictionary<NSString *, id> *resultObject = [DSSchemaJSONSchemaUtils extractSchemaObject:mutableObject dapSchema:dapSchema];
 
     return resultObject;
 }
 
-+ (NSDictionary *)setMetaObject:(NSDictionary<NSString *, id> *)object key:(NSString *)key value:(id)value {
++ (NSDictionary<NSString *, id> *)setMetaObject:(NSDictionary<NSString *, id> *)object key:(NSString *)key value:(id)value {
     NSParameterAssert(key);
 
-    NSMutableDictionary *mutableObject = [object ds_deepMutableCopy];
+    NSMutableDictionary<NSString *, id> *mutableObject = [object ds_deepMutableCopy];
 
-    NSMutableDictionary *typeProperty = nil;
+    NSMutableDictionary<NSString *, id> *typeProperty = nil;
     if ([self isSysObject:mutableObject]) {
         typeProperty = mutableObject.allValues.firstObject;
     }
@@ -72,7 +72,7 @@ NSUInteger const DS_REMOVE_OBJECT_ACTION = 3;
         typeProperty = mutableObject;
     }
 
-    NSMutableDictionary *meta = typeProperty[@"meta"];
+    NSMutableDictionary<NSString *, id> *meta = typeProperty[@"meta"];
     if (!meta) {
         meta = [NSMutableDictionary dictionary];
         typeProperty[@"meta"] = meta;
@@ -104,7 +104,7 @@ NSUInteger const DS_REMOVE_OBJECT_ACTION = 3;
     return NO;
 }
 
-+ (nullable NSString *)hashOfObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary *)dapSchema {
++ (nullable NSString *)hashOfObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
     NSString *subSchemaName = object.allKeys.firstObject;
     if ([subSchemaName isEqualToString:@"subtx"]) {
         return [DSSchemaHash subtx:object];
@@ -129,8 +129,8 @@ NSUInteger const DS_REMOVE_OBJECT_ACTION = 3;
     }
 }
 
-+ (NSDictionary *)prepareForRemoval:(NSDictionary<NSString *, id> *)object {
-    NSMutableDictionary *mutableObject = [object mutableCopy];
++ (NSDictionary<NSString *, id> *)prepareForRemoval:(NSDictionary<NSString *, id> *)object {
+    NSMutableDictionary<NSString *, id> *mutableObject = [object mutableCopy];
     mutableObject[DS_ACT] = @(DS_REMOVE_OBJECT_ACTION);
     NSUInteger rev = [object[DS_REV] unsignedIntegerValue] + 1;
     mutableObject[DS_REV] = @(rev);
@@ -139,7 +139,7 @@ NSUInteger const DS_REMOVE_OBJECT_ACTION = 3;
 
 + (nullable NSString *)metaFromObject:(NSDictionary<NSString *, id> *)object byKey:(NSString *)key {
     NSParameterAssert(key);
-    NSDictionary *meta = object[@"meta"];
+    NSDictionary<NSString *, id> *meta = object[@"meta"];
     return meta[key];
 }
 

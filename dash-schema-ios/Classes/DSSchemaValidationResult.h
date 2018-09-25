@@ -1,6 +1,6 @@
 //
 //  Created by Andrew Podkovyrin
-//  
+//
 //
 //  Licensed under the MIT License (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,17 +19,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const DSValidationResultErrorDomain;
+extern NSString *const DSValidationResultErrorDomain;
 
 typedef NS_ENUM(NSUInteger, DSValidationResultErrorCode) {
     DSValidationResultErrorCodeUnknown = 0,
-//    DSValidationResultErrorCodeJSONSchema = 100,
+    //    DSValidationResultErrorCodeJSONSchema = 100,
     DSValidationResultErrorCodeMissingDAPSchema = 150,
     DSValidationResultErrorCodeDAPObjectMissingObjType = 200,
     DSValidationResultErrorCodeDAPObjectUnknownObjType = 201,
     DSValidationResultErrorCodeDAPObjectMissingSubschema = 300,
-//    DSValidationResultErrorCodeDAPObjectMissingProperty = 400,
-//    DSValidationResultErrorCodeDAPObjectInvalidType = 401,
+    //    DSValidationResultErrorCodeDAPObjectMissingProperty = 400,
+    //    DSValidationResultErrorCodeDAPObjectInvalidType = 401,
     DSValidationResultErrorCodeInvalidID = 500,
     DSValidationResultErrorCodeInvalidSchemaTitle = 501,
     DSValidationResultErrorCodeInvalidDAPSubschemaCount = 510,
@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger, DSValidationResultErrorCode) {
     DSValidationResultErrorCodeMissingTitle = 600,
 };
 
-@interface DSValidationResult : NSObject
+@interface DSSchemaValidationResult : NSObject
 
 @property (readonly, assign, nonatomic) BOOL valid;
 @property (nullable, readonly, strong, nonatomic) NSError *error;

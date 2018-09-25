@@ -118,7 +118,7 @@ NS_ASSUME_NONNULL_BEGIN
                                   error:NULL];
 }
 
-+ (instancetype)dashCustomSchemaWithObject:(NSDictionary *)schemaObject
++ (instancetype)dashCustomSchemaWithObject:(NSDictionary<NSString *, id> *)schemaObject
                           removeAdditional:(BOOL)removeAdditional
                                      error:(NSError *__autoreleasing *)error {
     DSJSONSchemaStorage *dashSchemaStorage = [[DSJSONSchemaStorageHolder sharedInstance] systemSchemaStorageRemoveAdditional:removeAdditional];
@@ -130,7 +130,7 @@ NS_ASSUME_NONNULL_BEGIN
     return schema;
 }
 
-+ (instancetype)customSchemaWithObject:(NSDictionary *)schemaObject
++ (instancetype)customSchemaWithObject:(NSDictionary<NSString *, id> *)schemaObject
                       referenceStorage:(nullable DSJSONSchemaStorage *)referenceStorage
                       removeAdditional:(BOOL)removeAdditional
                                  error:(NSError *__autoreleasing *)error {

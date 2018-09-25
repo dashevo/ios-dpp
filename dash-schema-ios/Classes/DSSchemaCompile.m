@@ -17,10 +17,10 @@
 
 #import "DSSchemaCompile.h"
 
-#import "DSJsonSchemaUtils.h"
+#import "DSSchemaJSONSchemaUtils.h"
 #import "DSSchemaObject.h"
 #import "DSSchemaStorage.h"
-#import "DSValidationResult.h"
+#import "DSSchemaValidationResult.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,59 +33,59 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
 
 @implementation DSSchemaCompile
 
-+ (DSValidationResult *)compileDAPSchema:(NSDictionary<NSString *, id> *)dapSchema {
++ (DSSchemaValidationResult *)compileDAPSchema:(NSDictionary<NSString *, id> *)dapSchema {
     // valid id tag
     NSString *schemaId = dapSchema[DS_SCHEMA_ID];
     if (![schemaId isEqualToString:DAP_SCHEMA_ID_URI]) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidID
-                                                     objType:@"DAPSchema"
-                                                    propName:DS_SCHEMA_ID
-                                                  schemaName:nil];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidID
+                                                           objType:@"DAPSchema"
+                                                          propName:DS_SCHEMA_ID
+                                                        schemaName:nil];
     }
 
     // has title
     NSString *title = dapSchema[DS_TITLE];
     if (![title isKindOfClass:NSString.class] || !(title.length > 2 && title.length < 25)) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidSchemaTitle
-                                                     objType:@"DAPSchema"
-                                                    propName:DS_TITLE
-                                                  schemaName:nil];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidSchemaTitle
+                                                           objType:@"DAPSchema"
+                                                          propName:DS_TITLE
+                                                        schemaName:nil];
     }
 
     // subschema count
     NSUInteger count = dapSchema.count;
     if (count < 3 || count > 1002) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidDAPSubschemaCount
-                                                     objType:@"DAPSchema"
-                                                    propName:@"count"
-                                                  schemaName:nil];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidDAPSubschemaCount
+                                                           objType:@"DAPSchema"
+                                                          propName:@"count"
+                                                        schemaName:nil];
     }
 
     // check subschemas
     for (NSString *keyword in dapSchema) {
         NSDictionary<NSString *, id> *subSchema = dapSchema[keyword];
-        DSValidationResult *result = [self compileDAPSubschema:subSchema keyword:keyword];
+        DSSchemaValidationResult *result = [self compileDAPSubschema:subSchema keyword:keyword];
         if (!result.valid) {
             return result;
         }
     }
 
     // validate the DAP Schema using JSON Schema
-    return [DSJsonSchemaUtils validateDapSchemaDef:dapSchema];
+    return [DSSchemaJSONSchemaUtils validateDapSchemaDef:dapSchema];
 }
 
 #pragma mark - Private
 
-+ (DSValidationResult *)compileDAPSubschema:(NSDictionary<NSString *, id> *)dapSchema keyword:(NSString *)keyword {
++ (DSSchemaValidationResult *)compileDAPSubschema:(NSDictionary<NSString *, id> *)dapSchema keyword:(NSString *)keyword {
     if ([keyword isEqualToString:DS_SCHEMA_ID] || [keyword isEqualToString:DS_SCHEMA] || [keyword isEqualToString:DS_TITLE]) {
-        return [[DSValidationResult alloc] initAsValid];
+        return [[DSSchemaValidationResult alloc] initAsValid];
     }
 
     if (!(keyword.length > 2 && keyword.length < 25)) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidDAPSubschemaName
-                                                     objType:@"invalid name length"
-                                                    propName:nil
-                                                  schemaName:keyword];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidDAPSubschemaName
+                                                           objType:@"invalid name length"
+                                                          propName:nil
+                                                        schemaName:keyword];
     }
 
     // invalid chars
@@ -94,66 +94,66 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
     NSRange fullRange = NSMakeRange(0, keyword.length);
     BOOL invalid = [regexp numberOfMatchesInString:keyword options:kNilOptions range:fullRange] != 0;
     if (invalid) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidDAPSubschemaName
-                                                     objType:@"disallowed name characters"
-                                                    propName:nil
-                                                  schemaName:keyword];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeInvalidDAPSubschemaName
+                                                           objType:@"disallowed name characters"
+                                                          propName:nil
+                                                        schemaName:keyword];
     }
 
     // subschema reserved keyword from params
     NSSet<NSString *> *reservedKeywords = ReservedKeywords();
     if ([reservedKeywords containsObject:keyword]) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeReservedDAPSubschemaName
-                                                     objType:@"reserved param keyword"
-                                                    propName:nil
-                                                  schemaName:keyword];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeReservedDAPSubschemaName
+                                                           objType:@"reserved param keyword"
+                                                          propName:nil
+                                                        schemaName:keyword];
     }
 
     // subschema reserved keyword from sys schema properties
     NSDictionary<NSString *, id> *systemSchema = DSSchemaStorage.system;
     NSDictionary<NSString *, id> *properties = systemSchema[DS_PROPERTIES];
     if ([properties.allKeys containsObject:keyword]) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeReservedDAPSubschemaName
-                                                     objType:@"reserved sysobject keyword"
-                                                    propName:nil
-                                                  schemaName:keyword];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeReservedDAPSubschemaName
+                                                           objType:@"reserved sysobject keyword"
+                                                          propName:nil
+                                                        schemaName:keyword];
     }
 
     // subschema reserved keyword from sys schema definitions
     NSDictionary<NSString *, id> *definitions = systemSchema[DS_DEFINITIONS];
     if ([definitions.allKeys containsObject:keyword]) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeReservedDAPSubschemaName
-                                                     objType:@"reserved sysschema keyword"
-                                                    propName:nil
-                                                  schemaName:keyword];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeReservedDAPSubschemaName
+                                                           objType:@"reserved sysschema keyword"
+                                                          propName:nil
+                                                        schemaName:keyword];
     }
 
     // schema inheritance
-    NSArray<NSDictionary *> *allOf = [dapSchema isKindOfClass:NSDictionary.class] ? dapSchema[DS_ALL_OF] : nil;
+    NSArray<NSDictionary<NSString *, id> *> *allOf = [dapSchema isKindOfClass:NSDictionary.class] ? dapSchema[DS_ALL_OF] : nil;
     if (!allOf) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPSubschemaInheritance
-                                                     objType:@"dap subschema inheritance missing"
-                                                    propName:nil
-                                                  schemaName:keyword];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPSubschemaInheritance
+                                                           objType:@"dap subschema inheritance missing"
+                                                          propName:nil
+                                                        schemaName:keyword];
     }
 
     if (![allOf isKindOfClass:NSArray.class]) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPSubschemaInheritance
-                                                     objType:@"dap subschema inheritance invalid"
-                                                    propName:nil
-                                                  schemaName:keyword];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPSubschemaInheritance
+                                                           objType:@"dap subschema inheritance invalid"
+                                                          propName:nil
+                                                        schemaName:keyword];
     }
 
     NSDictionary<NSString *, NSString *> *allOfRule = allOf.firstObject;
     NSString *ref = allOfRule.allValues.firstObject;
     if (![ref isEqualToString:DAP_OBJECT_BASE_REF]) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPSubschemaInheritance
-                                                     objType:@"dap subschema inheritance invalid"
-                                                    propName:nil
-                                                  schemaName:keyword];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPSubschemaInheritance
+                                                           objType:@"dap subschema inheritance invalid"
+                                                          propName:nil
+                                                        schemaName:keyword];
     }
 
-    return [DSJsonSchemaUtils validateDapSubschemaDef:dapSchema];
+    return [DSSchemaJSONSchemaUtils validateDapSubschemaDef:dapSchema];
 }
 
 @end

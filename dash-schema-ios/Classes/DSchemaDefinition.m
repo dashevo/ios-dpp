@@ -23,12 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DSchemaDefinition
 
-+ (nullable NSDictionary *)getDAPSubSchema:(NSDictionary *)object dapSchema:(NSDictionary *)dapSchema {
++ (nullable NSDictionary<NSString *, id> *)getDAPSubSchema:(NSDictionary<NSString *, id> *)object dapSchema:(NSDictionary<NSString *, id> *)dapSchema {
     id key = object[@"objtype"];
     return dapSchema[key];
 }
 
-+ (NSDictionary<NSString *, NSArray<NSString *> *> *)getSchemaRelations:(NSDictionary *)dapSchema {
++ (NSDictionary<NSString *, NSArray<NSString *> *> *)getSchemaRelations:(NSDictionary<NSString *, id> *)dapSchema {
     NSMutableDictionary<NSString *, NSArray<NSString *> *> *relations = [NSMutableDictionary dictionary];
     for (NSString *key in dapSchema) {
         NSAssert([key isKindOfClass:NSString.class], @"Unexpected type");
@@ -40,14 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [relations copy];
 }
 
-+ (NSArray<NSString *> *)getSubSchemaRelations:(NSDictionary *)dapSchema subSchemaKey:(NSString *)subSchemaKey {
-    NSDictionary *subSchema = dapSchema[subSchemaKey];
-    NSDictionary *subSchemaProperties = subSchema[@"properties"];
++ (NSArray<NSString *> *)getSubSchemaRelations:(NSDictionary<NSString *, id> *)dapSchema subSchemaKey:(NSString *)subSchemaKey {
+    NSDictionary<NSString *, id> *subSchema = dapSchema[subSchemaKey];
+    NSDictionary<NSString *, id> *subSchemaProperties = subSchema[@"properties"];
 
     NSMutableArray<NSString *> *relations = [NSMutableArray array];
     for (NSString *key in subSchemaProperties) {
         NSAssert([key isKindOfClass:NSString.class], @"Unexpected type");
-        NSDictionary *propertyDefinition = subSchemaProperties[key];
+        NSDictionary<NSString *, id> *propertyDefinition = subSchemaProperties[key];
         if ([propertyDefinition[@"$ref"] isEqualToString:kRelationDefinition]) {
             [relations addObject:key];
         }

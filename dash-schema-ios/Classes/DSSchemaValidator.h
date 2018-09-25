@@ -19,7 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class DSValidationResult;
+@class DSSchemaValidationResult;
 
 @interface DSSchemaValidator : NSObject
 
@@ -28,21 +28,21 @@ NS_ASSUME_NONNULL_BEGIN
  * @param object Schema object instance
  * @return Validation result
  */
-+ (DSValidationResult *)validateSubTx:(NSDictionary *)object;
++ (DSSchemaValidationResult *)validateSubTx:(NSDictionary<NSString *, id> *)object;
 
 /**
  * Validate a Blockchain User
  * @param object Schema object instance
  * @return Validation result
  */
-+ (DSValidationResult *)validateBlockchainUser:(NSDictionary *)object;
++ (DSSchemaValidationResult *)validateBlockchainUser:(NSDictionary<NSString *, id> *)object;
 
 /**
  * Validate a State Transition Header
  * @param object Schema object instance
  * @return Validation result
  */
-+ (DSValidationResult *)validateSTHeader:(NSDictionary *)object;
++ (DSSchemaValidationResult *)validateSTHeader:(NSDictionary<NSString *, id> *)object;
 
 /**
  * Validate a State Transition Packet. When the packets contain dapobjects,
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param dapSchema DapSchema (optional)
  * @return Validation result
  */
-+ (DSValidationResult *)validateSTPacketObject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema;
++ (DSSchemaValidationResult *)validateSTPacketObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema;
 
 /**
  * Validate the objects from a Transition packet
@@ -60,14 +60,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @param dapSchema DapSchema
  * @return Validation result
  */
-+ (DSValidationResult *)validateSTPacketObjects:(NSArray *)dapObjects dapSchema:(NSDictionary *)dapSchema;
++ (DSSchemaValidationResult *)validateSTPacketObjects:(NSArray *)dapObjects dapSchema:(NSDictionary<NSString *, id> *)dapSchema;
 
 /**
  * Validate a DapContract instance
  * @param object Schema object instance
  * @return Validation result
  */
-+ (DSValidationResult *)validateDapContract:(NSDictionary *)object;
++ (DSSchemaValidationResult *)validateDapContract:(NSDictionary<NSString *, id> *)object;
 
 /**
  * Validate a DapObject instance
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param dapSchema DapSchema
  * @return Validation result
  */
-+ (DSValidationResult *)validateDapObject:(NSDictionary *)dapObject dapSchema:(NSDictionary *)dapSchema;
++ (DSSchemaValidationResult *)validateDapObject:(NSDictionary<NSString *, id> *)dapObject dapSchema:(NSDictionary<NSString *, id> *)dapSchema;
 
 /**
  * Validate a username using DIP 011 rules

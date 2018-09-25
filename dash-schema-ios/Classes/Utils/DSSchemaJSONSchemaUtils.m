@@ -15,17 +15,17 @@
 //  limitations under the License.
 //
 
-#import "DSJsonSchemaUtils.h"
+#import "DSSchemaJSONSchemaUtils.h"
 
 #import "DSJSONSchema+DashSchema.h"
-#import "DSValidationResult.h"
 #import "DSSchemaStorage.h"
+#import "DSSchemaValidationResult.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation DSJsonSchemaUtils
+@implementation DSSchemaJSONSchemaUtils
 
-+ (DSValidationResult *)validateSchemaObject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema {
++ (DSSchemaValidationResult *)validateSchemaObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
     DSJSONSchema *schema = nil;
     if (dapSchema) {
         schema = [DSJSONSchema dashCustomSchemaWithObject:dapSchema removeAdditional:NO error:NULL];
@@ -33,13 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
     else {
         schema = [DSJSONSchema systemSchemaRemoveAdditional:NO];
     }
-    
+
     NSError *error = nil;
     BOOL valid = [schema validateObject:object withError:&error];
     if (valid) {
-        return [[DSValidationResult alloc] initAsValid];
+        return [[DSSchemaValidationResult alloc] initAsValid];
     }
-    
+
     NSString *objType = nil;
     if (dapSchema) {
         objType = object[@"objtype"] ?: @"";
@@ -47,53 +47,53 @@ NS_ASSUME_NONNULL_BEGIN
     else {
         objType = object.allKeys.firstObject;
     }
-    
-    return [[DSValidationResult alloc] initWithError:error objType:objType propName:nil schemaName:schema.title];
+
+    return [[DSSchemaValidationResult alloc] initWithError:error objType:objType propName:nil schemaName:schema.title];
 }
 
-+ (DSValidationResult *)validateDapSchemaDef:(NSDictionary *)dapSchema {
++ (DSSchemaValidationResult *)validateDapSchemaDef:(NSDictionary<NSString *, id> *)dapSchema {
     NSError *error = nil;
     __unused DSJSONSchema *schema = [DSJSONSchema dashCustomSchemaWithObject:dapSchema removeAdditional:NO error:&error];
     if (error) {
-        return [[DSValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
+        return [[DSSchemaValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
     }
-    
-    return [[DSValidationResult alloc] initAsValid];
+
+    return [[DSSchemaValidationResult alloc] initAsValid];
 }
 
-+ (DSValidationResult *)validateDapSubschemaDef:(NSDictionary *)dapSubschema {
-    NSDictionary *systemSchemaObject = [DSSchemaStorage system];
-    NSDictionary *dapMetaSchemaObject = systemSchemaObject[@"definitions"][@"dapmetaschema"];
++ (DSSchemaValidationResult *)validateDapSubschemaDef:(NSDictionary<NSString *, id> *)dapSubschema {
+    NSDictionary<NSString *, id> *systemSchemaObject = [DSSchemaStorage system];
+    NSDictionary<NSString *, id> *dapMetaSchemaObject = systemSchemaObject[@"definitions"][@"dapmetaschema"];
     NSParameterAssert(dapMetaSchemaObject);
     DSJSONSchema *dapMetaSchema = [DSJSONSchema dashCustomSchemaWithObject:dapMetaSchemaObject removeAdditional:NO error:NULL];
-    
+
     NSError *error = nil;
     BOOL valid = [dapMetaSchema validateObject:dapSubschema withError:&error];
     if (!valid) {
-        return [[DSValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
+        return [[DSSchemaValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
     }
-    
+
     DSJSONSchema *systemSchema = [DSJSONSchema systemSchemaRemoveAdditional:NO];
     valid = [systemSchema validateObject:dapSubschema withError:&error];
     if (!valid) {
-        return [[DSValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
+        return [[DSSchemaValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
     }
-    
-    return [[DSValidationResult alloc] initAsValid];
+
+    return [[DSSchemaValidationResult alloc] initAsValid];
 }
 
-+ (DSValidationResult *)validateSchemaDef:(NSDictionary *)schemaObject {
++ (DSSchemaValidationResult *)validateSchemaDef:(NSDictionary<NSString *, id> *)schemaObject {
     DSJSONSchema *systemSchema = [DSJSONSchema systemSchemaRemoveAdditional:NO];
     NSError *error = nil;
     BOOL valid = [systemSchema validateObject:schemaObject withError:&error];
     if (!valid) {
-        return [[DSValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
+        return [[DSSchemaValidationResult alloc] initWithError:error objType:nil propName:nil schemaName:nil];
     }
-    
-    return [[DSValidationResult alloc] initAsValid];
+
+    return [[DSSchemaValidationResult alloc] initAsValid];
 }
 
-+ (NSDictionary *)extractSchemaObject:(NSMutableDictionary *)mutableObject dapSchema:(nullable NSDictionary *)dapSchema {
++ (NSDictionary<NSString *, id> *)extractSchemaObject:(NSMutableDictionary<NSString *, id> *)mutableObject dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
     DSJSONSchema *schema = nil;
     if (dapSchema) {
         schema = [DSJSONSchema dashCustomSchemaWithObject:dapSchema removeAdditional:YES error:NULL];
@@ -101,15 +101,15 @@ NS_ASSUME_NONNULL_BEGIN
     else {
         schema = [DSJSONSchema systemSchemaRemoveAdditional:YES];
     }
-    
+
     NSError *error = nil;
     [schema validateObject:mutableObject withError:&error];
-    
+
     if (error) {
         // TODO: Check expected type of added errors
         mutableObject[@"errors"] = error;
     }
-    
+
     return [mutableObject copy];
 }
 

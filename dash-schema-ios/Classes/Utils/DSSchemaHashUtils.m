@@ -15,13 +15,27 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "DSSchemaHashUtils.h"
+
+#import "NSData+DSSchemaUtils.h"
+#import <TinyCborObjc/NSObject+DSCborEncoding.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSBundle (DSDashSchema)
+@implementation DSSchemaHashUtils
 
-+ (instancetype)ds_dashSchemaBundle;
++ (nullable NSString *)hashOfObject:(NSObject *)object {
+    NSData *cborData = [object ds_cborEncodedObject];
+    if (!cborData) {
+        return nil;
+    }
+
+    NSData *sha256Twice = [[cborData ds_SHA256Digest] ds_SHA256Digest];
+    NSData *sha256Reversed = [sha256Twice ds_reverseData];
+    NSString *sha256String = [sha256Reversed ds_hexStringFromData];
+
+    return sha256String;
+}
 
 @end
 

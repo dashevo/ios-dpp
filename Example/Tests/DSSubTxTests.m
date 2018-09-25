@@ -19,7 +19,7 @@
 
 #import <dash_schema_ios/DSSchemaHash.h>
 #import <dash_schema_ios/DSSchemaValidator.h>
-#import <dash_schema_ios/DSValidationResult.h>
+#import <dash_schema_ios/DSSchemaValidationResult.h>
 
 @interface DSSubTxTests : DSBaseTest
 
@@ -64,7 +64,7 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)kNilOptions error:NULL];
     NSParameterAssert(json);
 
-    DSValidationResult *result = [DSSchemaValidator validateSubTx:json];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateSubTx:json];
     
     XCTAssertTrue(result.valid);
 }

@@ -19,20 +19,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class DSValidationResult;
+@interface NSBundle (DSSchema)
 
-@interface DSJsonSchemaUtils : NSObject
-
-/**
- * Validate a System Object or DAP Object.
- * DAP Object validation requires input of the DAP Schema.
- */
-+ (DSValidationResult *)validateSchemaObject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema;
-+ (DSValidationResult *)validateDapSchemaDef:(NSDictionary *)dapSchema;
-+ (DSValidationResult *)validateDapSubschemaDef:(NSDictionary *)dapSubschema;
-+ (DSValidationResult *)validateSchemaDef:(NSDictionary *)schemaObject;
-
-+ (NSDictionary *)extractSchemaObject:(NSMutableDictionary *)mutableObject dapSchema:(nullable NSDictionary *)dapSchema;
++ (instancetype)ds_dashSchemaBundle;
 
 @end
 

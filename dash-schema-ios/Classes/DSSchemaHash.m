@@ -17,33 +17,33 @@
 
 #import "DSSchemaHash.h"
 
-#import "DSHashUtils.h"
+#import "DSSchemaHashUtils.h"
 #import "DSSchemaObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation DSSchemaHash
 
-+ (nullable NSString *)subtx:(NSDictionary *)object {
-    NSDictionary *validatedObject = [DSSchemaObject fromObject:object dapSchema:nil];
-    NSString *hash = [DSHashUtils hashOfObject:validatedObject];
++ (nullable NSString *)subtx:(NSDictionary<NSString *, id> *)object {
+    NSDictionary<NSString *, id> *validatedObject = [DSSchemaObject fromObject:object dapSchema:nil];
+    NSString *hash = [DSSchemaHashUtils hashOfObject:validatedObject];
     return hash;
 }
 
-+ (nullable NSString *)blockchainuser:(NSDictionary *)object {
-    NSDictionary *validatedObject = [DSSchemaObject fromObject:object dapSchema:nil];
-    NSString *hash = [DSHashUtils hashOfObject:validatedObject];
++ (nullable NSString *)blockchainuser:(NSDictionary<NSString *, id> *)object {
+    NSDictionary<NSString *, id> *validatedObject = [DSSchemaObject fromObject:object dapSchema:nil];
+    NSString *hash = [DSSchemaHashUtils hashOfObject:validatedObject];
     return hash;
 }
 
-+ (nullable NSString *)stheader:(NSDictionary *)object {
-    NSString *hash = [DSHashUtils hashOfObject:object];
++ (nullable NSString *)stheader:(NSDictionary<NSString *, id> *)object {
+    NSString *hash = [DSSchemaHashUtils hashOfObject:object];
     return hash;
 }
 
-+ (nullable NSString *)stpacket:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema {
++ (nullable NSString *)stpacket:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
     id stpacket = object[@"stpacket"];
-    NSString *hash = [DSHashUtils hashOfObject:stpacket];
+    NSString *hash = [DSSchemaHashUtils hashOfObject:stpacket];
 
     /*
      
@@ -69,21 +69,21 @@ NS_ASSUME_NONNULL_BEGIN
     return hash;
 }
 
-+ (nullable NSString *)dapcontract:(NSDictionary *)object {
-    NSDictionary *validatedObject = [DSSchemaObject fromObject:object dapSchema:nil];
-    NSString *hash = [DSHashUtils hashOfObject:validatedObject];
++ (nullable NSString *)dapcontract:(NSDictionary<NSString *, id> *)object {
+    NSDictionary<NSString *, id> *validatedObject = [DSSchemaObject fromObject:object dapSchema:nil];
+    NSString *hash = [DSSchemaHashUtils hashOfObject:validatedObject];
     return hash;
 }
 
-+ (nullable NSString *)dapschema:(NSDictionary *)object {
-    NSDictionary *validatedObject = [DSSchemaObject fromObject:object dapSchema:nil];
-    NSString *hash = [DSHashUtils hashOfObject:validatedObject];
++ (nullable NSString *)dapschema:(NSDictionary<NSString *, id> *)object {
+    NSDictionary<NSString *, id> *validatedObject = [DSSchemaObject fromObject:object dapSchema:nil];
+    NSString *hash = [DSSchemaHashUtils hashOfObject:validatedObject];
     return hash;
 }
 
-+ (nullable NSString *)dapobject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema {
-    NSDictionary *validatedObject = [DSSchemaObject fromObject:object dapSchema:dapSchema];
-    NSString *hash = [DSHashUtils hashOfObject:validatedObject];
++ (nullable NSString *)dapobject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
+    NSDictionary<NSString *, id> *validatedObject = [DSSchemaObject fromObject:object dapSchema:dapSchema];
+    NSString *hash = [DSSchemaHashUtils hashOfObject:validatedObject];
     return hash;
 }
 

@@ -19,7 +19,7 @@
 
 #import <DSJSONSchemaValidation/NSDictionary+DSJSONDeepMutableCopy.h>
 
-#import <dash_schema_ios/DSValidationResult.h>
+#import <dash_schema_ios/DSSchemaValidationResult.h>
 #import <dash_schema_ios/DSSchemaCompile.h>
 #import <dash_schema_ios/DSSchemaValidator.h>
 
@@ -51,7 +51,7 @@
 
 - (void)testDapContractSchemaValid {
     // TODO: fix me (same as in Android Dash Schema)
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:self.data];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:self.data];
     XCTAssertTrue(result.valid);
 }
 
@@ -60,7 +60,7 @@
     NSMutableDictionary *dapContractObject = dapContract[@"dapcontract"];
     dapContractObject[@"dapschema"] = self.data;
     
-    DSValidationResult *result = [DSSchemaValidator validateDapContract:dapContract];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapContract:dapContract];
     XCTAssertTrue(result.valid);
 }
 

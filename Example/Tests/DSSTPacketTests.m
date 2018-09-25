@@ -19,7 +19,7 @@
 
 #import <DSJSONSchemaValidation/NSDictionary+DSJSONDeepMutableCopy.h>
 #import <dash_schema_ios/DSJSONSchema+DashSchema.h>
-#import <dash_schema_ios/DSValidationResult.h>
+#import <dash_schema_ios/DSSchemaValidationResult.h>
 #import <dash_schema_ios/DSSchemaValidator.h>
 #import <dash_schema_ios/DSSchemaObject.h>
 
@@ -75,20 +75,20 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableDictionary *dapcontract = object[@"dapcontract"];
     dapcontract[@"dapschema"] = self.dapSchema;
     
-    DSValidationResult *result = [DSSchemaValidator validateDapContract:object];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapContract:object];
     XCTAssertTrue(result.valid);
 }
 
 - (void)testDapSpaceValidPacket {
     // TODO: fix me (same as in Android Dash Schema)
     NSDictionary *object = self.testData[@"dapspace_valid_packet"];
-    DSValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:self.dapSchema];
     XCTAssertTrue(result.valid);
 }
 
 - (void)testDapSpaceMissingList {
     NSDictionary *object = self.testData[@"dapspace_missing_list"];
-    DSValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:self.dapSchema];
     XCTAssertFalse(result.valid);
 }
 
@@ -105,43 +105,43 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)testPacketInstanceValidDapContract {
     NSDictionary *object = self.testData[@"packet_instance_valid_dapcontract"];
-    DSValidationResult *result = [self validateAgainstSystemSchema:object];
+    DSSchemaValidationResult *result = [self validateAgainstSystemSchema:object];
     XCTAssertTrue(result.valid);
 }
 
 - (void)testPacketInstanceInvalidDapObjectsPacket {
     NSDictionary *object = self.testData[@"packet_instance_invalid_dapobjects"];
-    DSValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:nil];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:nil];
     XCTAssertFalse(result.valid);
 }
 
 - (void)testPacketInstanceInvalidMultiplePacket {
     NSDictionary *object = self.testData[@"packet_instance_invalid_multiple_packet"];
-    DSValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:nil];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:nil];
     XCTAssertFalse(result.valid);
 }
 
 - (void)testPacketInstanceInvalidEmptyPacket {
     NSDictionary *object = self.testData[@"packet_instance_invalid_empty_packet"];
-    DSValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:nil];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateSTPacketObject:object dapSchema:nil];
     XCTAssertFalse(result.valid);
 }
 
 #pragma mark - Private
 
-- (DSValidationResult *)validateAgainstSystemSchema:(NSDictionary *)object {
+- (DSSchemaValidationResult *)validateAgainstSystemSchema:(NSDictionary *)object {
     NSError *error = nil;
     __unused DSJSONSchema *schema = [DSJSONSchema dashCustomSchemaWithObject:object
                                                             removeAdditional:NO
                                                                        error:&error];
     if (error) {
-        return [[DSValidationResult alloc] initWithError:error
+        return [[DSSchemaValidationResult alloc] initWithError:error
                                                  objType:nil
                                                 propName:nil
                                               schemaName:nil];
     }
     else {
-        return [[DSValidationResult alloc] initAsValid];
+        return [[DSSchemaValidationResult alloc] initAsValid];
     }
 }
 

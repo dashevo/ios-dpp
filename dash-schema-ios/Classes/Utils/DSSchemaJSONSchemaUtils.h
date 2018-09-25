@@ -21,14 +21,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class DSSchemaValidationResult;
 
-@interface DSSchemaCompile : NSObject
+@interface DSSchemaJSONSchemaUtils : NSObject
 
 /**
- * Validate a DapSchema definition
- * @param dapSchema DapSchema
- * @return Validation Result
+ * Validate a System Object or DAP Object.
+ * DAP Object validation requires input of the DAP Schema.
  */
-+ (DSSchemaValidationResult *)compileDAPSchema:(NSDictionary<NSString *, id> *)dapSchema;
++ (DSSchemaValidationResult *)validateSchemaObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema;
++ (DSSchemaValidationResult *)validateDapSchemaDef:(NSDictionary<NSString *, id> *)dapSchema;
++ (DSSchemaValidationResult *)validateDapSubschemaDef:(NSDictionary<NSString *, id> *)dapSubschema;
++ (DSSchemaValidationResult *)validateSchemaDef:(NSDictionary<NSString *, id> *)schemaObject;
+
++ (NSDictionary<NSString *, id> *)extractSchemaObject:(NSMutableDictionary<NSString *, id> *)mutableObject dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema;
 
 @end
 

@@ -21,14 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSchemaDefinition : NSObject
 
-+ (nullable NSDictionary *)getDAPSubSchema:(NSDictionary *)object dapSchema:(NSDictionary *)dapSchema;
++ (nullable NSDictionary<NSString *, id> *)getDAPSubSchema:(NSDictionary<NSString *, id> *)object dapSchema:(NSDictionary<NSString *, id> *)dapSchema;
 
 /**
  Get schema relations
 
  @param dapSchema DAP Schema
  */
-+ (NSDictionary<NSString *, NSArray<NSString *> *> *)getSchemaRelations:(NSDictionary *)dapSchema;
++ (NSDictionary<NSString *, NSArray<NSString *> *> *)getSchemaRelations:(NSDictionary<NSString *, id> *)dapSchema;
 
 /**
  Get sub schema relations
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param subSchemaKey Sub schema key
  @return An array of relations
  */
-+ (NSArray<NSString *> *)getSubSchemaRelations:(NSDictionary *)dapSchema subSchemaKey:(NSString *)subSchemaKey;
++ (NSArray<NSString *> *)getSubSchemaRelations:(NSDictionary<NSString *, id> *)dapSchema subSchemaKey:(NSString *)subSchemaKey;
 
 @end
 

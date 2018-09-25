@@ -19,99 +19,99 @@
 
 #import <DSJSONSchemaValidation/NSDictionary+DSJSONDeepMutableCopy.h>
 
-#import "DSValidationResult.h"
+#import "DSSchemaJSONSchemaUtils.h"
 #import "DSSchemaObject.h"
-#import "DSJsonSchemaUtils.h"
+#import "DSSchemaValidationResult.h"
 #import "DSchemaDefinition.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const OBJTYPE = @"objtype";
+static NSString *const OBJTYPE = @"objtype";
 
 @implementation DSSchemaValidator
 
-+ (DSValidationResult *)validateSubTx:(NSDictionary *)object {
++ (DSSchemaValidationResult *)validateSubTx:(NSDictionary<NSString *, id> *)object {
     return [self validateSysObject:object subSchemaName:@"subtx"];
 }
 
-+ (DSValidationResult *)validateBlockchainUser:(NSDictionary *)object {
++ (DSSchemaValidationResult *)validateBlockchainUser:(NSDictionary<NSString *, id> *)object {
     return [self validateSysObject:object subSchemaName:@"blockchainuser"];
 }
 
-+ (DSValidationResult *)validateSTHeader:(NSDictionary *)object {
++ (DSSchemaValidationResult *)validateSTHeader:(NSDictionary<NSString *, id> *)object {
     return [self validateSysObject:object subSchemaName:@"stheader"];
 }
 
-+ (DSValidationResult *)validateSTPacketObject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema {
++ (DSSchemaValidationResult *)validateSTPacketObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
     // deep extract a schema object from the object
-    NSMutableDictionary *outerObject = [[DSSchemaObject fromObject:object dapSchema:nil] ds_deepMutableCopy];
-    
+    NSMutableDictionary<NSString *, id> *outerObject = [[DSSchemaObject fromObject:object dapSchema:nil] ds_deepMutableCopy];
+
     // if this is a dapobjects packet...
-    NSDictionary *objSTPacket = object[DS_STPACKET];
+    NSDictionary<NSString *, id> *objSTPacket = object[DS_STPACKET];
     NSArray *objDapObjects = objSTPacket[DS_DAPOBJECTS];
 
     if (objDapObjects) {
         if (!dapSchema) {
-            return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeMissingDAPSchema
-                                                         objType:nil
-                                                        propName:nil
-                                                      schemaName:nil];
+            return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeMissingDAPSchema
+                                                               objType:nil
+                                                              propName:nil
+                                                            schemaName:nil];
         }
-        
+
         // temporarily remove the inner dapobjects,
         // so we can validate the containing packet using the System Schema, and the
         // contained Dap objects using the dapSchema.
-        NSMutableDictionary *mutableSTPacket = outerObject[DS_STPACKET];
+        NSMutableDictionary<NSString *, id> *mutableSTPacket = outerObject[DS_STPACKET];
         NSAssert([mutableSTPacket isKindOfClass:NSMutableDictionary.class], @"stpacket is absent or ds_deepMutableCopy failed to make a deep mutable copy");
-        mutableSTPacket[DS_DAPOBJECTS] =  @[ @{} ];
-        
+        mutableSTPacket[DS_DAPOBJECTS] = @[ @{} ];
+
         // validate the empty packet as a sys object...
-        DSValidationResult *outerValid = [self validateSysObject:outerObject subSchemaName:DS_STPACKET];
-        
+        DSSchemaValidationResult *outerValid = [self validateSysObject:outerObject subSchemaName:DS_STPACKET];
+
         if (!outerValid.valid) {
             return outerValid;
         }
-        
+
         //...then validate the contents as dabobjects
         return [self validateSTPacketObjects:objDapObjects dapSchema:dapSchema];
     }
-    
+
     // not a dapobjects packet so validate as a sysobject
     return [self validateSysObject:object subSchemaName:DS_STPACKET];
 }
-                
-+ (DSValidationResult *)validateSTPacketObjects:(NSArray *)dapObjects dapSchema:(NSDictionary *)dapSchema {
-    for (NSDictionary *dapObject in dapObjects) {
-        DSValidationResult *result = [self validateDapObject:dapObject dapSchema:dapSchema];
+
++ (DSSchemaValidationResult *)validateSTPacketObjects:(NSArray *)dapObjects dapSchema:(NSDictionary<NSString *, id> *)dapSchema {
+    for (NSDictionary<NSString *, id> *dapObject in dapObjects) {
+        DSSchemaValidationResult *result = [self validateDapObject:dapObject dapSchema:dapSchema];
         if (!result.valid) {
             return result;
         }
     }
-    
-    return [[DSValidationResult alloc] initAsValid];
+
+    return [[DSSchemaValidationResult alloc] initAsValid];
 }
 
-+ (DSValidationResult *)validateDapContract:(NSDictionary *)object {
++ (DSSchemaValidationResult *)validateDapContract:(NSDictionary<NSString *, id> *)object {
     return [self validateSysObject:object subSchemaName:@"dapcontract"];
 }
 
-+ (DSValidationResult *)validateDapObject:(NSDictionary *)dapObject dapSchema:(NSDictionary *)dapSchema {
++ (DSSchemaValidationResult *)validateDapObject:(NSDictionary<NSString *, id> *)dapObject dapSchema:(NSDictionary<NSString *, id> *)dapSchema {
     id objType = dapObject[OBJTYPE];
     if (!objType || ![objType isKindOfClass:NSString.class]) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPObjectMissingObjType
-                                                     objType:@"objtype"
-                                                    propName:nil
-                                                  schemaName:dapSchema[@"title"]];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPObjectMissingObjType
+                                                           objType:@"objtype"
+                                                          propName:nil
+                                                        schemaName:dapSchema[@"title"]];
     }
-    
-    NSDictionary *subSchema = [DSchemaDefinition getDAPSubSchema:dapObject dapSchema:dapSchema];
+
+    NSDictionary<NSString *, id> *subSchema = [DSchemaDefinition getDAPSubSchema:dapObject dapSchema:dapSchema];
     if (!subSchema) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPObjectUnknownObjType
-                                                     objType:@"objtype"
-                                                    propName:nil
-                                                  schemaName:dapSchema[@"title"]];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPObjectUnknownObjType
+                                                           objType:@"objtype"
+                                                          propName:nil
+                                                        schemaName:dapSchema[@"title"]];
     }
-    
+
     return [self validateCoreObject:dapObject dapSchema:dapSchema];
 }
 
@@ -119,17 +119,17 @@ static NSString * const OBJTYPE = @"objtype";
     if (!username) {
         return NO;
     }
-    
+
     if (username.length < 3 && username.length > 24) {
         return NO;
     }
-    
+
     // TODO: case sensetive?
     NSRegularExpression *regexp = [NSRegularExpression regularExpressionWithPattern:@"[^a-z0-9._]" options:kNilOptions error:NULL];
     NSParameterAssert(regexp);
     NSRange fullRange = NSMakeRange(0, username.length);
     BOOL invalid = [regexp numberOfMatchesInString:username options:kNilOptions range:fullRange] != 0;
-    
+
     return !invalid;
 }
 
@@ -141,16 +141,16 @@ static NSString * const OBJTYPE = @"objtype";
  * @param dapSchema Dap Schema definition (optional)
  * @return Validation result
  */
-+ (DSValidationResult *)validateCoreObject:(nullable NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema {
++ (DSSchemaValidationResult *)validateCoreObject:(nullable NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
     if (!object) {
-        return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeUnknown
-                                                     objType:nil
-                                                    propName:nil
-                                                  schemaName:nil];
+        return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeUnknown
+                                                           objType:nil
+                                                          propName:nil
+                                                        schemaName:nil];
     }
-    
-    NSDictionary *validatedObject = [DSSchemaObject fromObject:object dapSchema:dapSchema];
-    return [DSJsonSchemaUtils validateSchemaObject:validatedObject dapSchema:dapSchema];
+
+    NSDictionary<NSString *, id> *validatedObject = [DSSchemaObject fromObject:object dapSchema:dapSchema];
+    return [DSSchemaJSONSchemaUtils validateSchemaObject:validatedObject dapSchema:dapSchema];
 }
 
 /**
@@ -159,16 +159,16 @@ static NSString * const OBJTYPE = @"objtype";
  * @param subSchemaName Subschema keyword
  * @returns Validation result
  */
-+ (DSValidationResult *)validateSysObject:(NSDictionary *)sysObject subSchemaName:(nullable NSString *)subSchemaName {
++ (DSSchemaValidationResult *)validateSysObject:(NSDictionary<NSString *, id> *)sysObject subSchemaName:(nullable NSString *)subSchemaName {
     if (subSchemaName) {
         if (!sysObject[subSchemaName]) {
-            return [[DSValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPObjectMissingSubschema
-                                                         objType:nil
-                                                        propName:nil
-                                                      schemaName:nil];
+            return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPObjectMissingSubschema
+                                                               objType:nil
+                                                              propName:nil
+                                                            schemaName:nil];
         }
     }
-    
+
     return [self validateCoreObject:sysObject dapSchema:nil];
 }
 

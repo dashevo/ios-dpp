@@ -17,14 +17,14 @@
 
 #import "DSSchemaStorage.h"
 
-#import "NSBundle+DSDashSchema.h"
+#import "NSBundle+DSSchema.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation DSSchemaStorage
 
 + (NSDictionary<NSString *, id> *)system {
-    static NSDictionary *object = nil;
+    static NSDictionary<NSString *, id> *object = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSURL *url = [[NSBundle ds_dashSchemaBundle] URLForResource:@"dash_system_schema" withExtension:@"json"];
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (NSDictionary<NSString *, id> *)json {
-    static NSDictionary *object = nil;
+    static NSDictionary<NSString *, id> *object = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSURL *url = [[NSBundle ds_dashSchemaBundle] URLForResource:@"schema_v7" withExtension:@"json"];

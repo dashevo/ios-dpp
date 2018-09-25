@@ -32,10 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
         const double curveParam = 8.8;
         const double curveThreshold = 1.0;
         const double curveMag = 5.0;
-        
+
         double core = pow((double)packetSize, 3.0) / pow((curveParam * pow(10.0, curveMag)), 2.0);
         double multi = ceil(MAX(curveThreshold, core));
-        
+
         _headerFee = feePerByte * stHeaderSizeBytes;
         _packetFee = (multi * _headerFee) - _headerFee;
     }

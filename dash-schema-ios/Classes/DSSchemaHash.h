@@ -21,13 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSSchemaHash : NSObject
 
-+ (nullable NSString *)subtx:(NSDictionary *)object;
-+ (nullable NSString *)blockchainuser:(NSDictionary *)object;
-+ (nullable NSString *)stheader:(NSDictionary *)object;
-+ (nullable NSString *)stpacket:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema;
-+ (nullable NSString *)dapcontract:(NSDictionary *)object;
-+ (nullable NSString *)dapschema:(NSDictionary *)object;
-+ (nullable NSString *)dapobject:(NSDictionary *)object dapSchema:(nullable NSDictionary *)dapSchema;
++ (nullable NSString *)subtx:(NSDictionary<NSString *, id> *)object;
++ (nullable NSString *)blockchainuser:(NSDictionary<NSString *, id> *)object;
++ (nullable NSString *)stheader:(NSDictionary<NSString *, id> *)object;
++ (nullable NSString *)stpacket:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema;
++ (nullable NSString *)dapcontract:(NSDictionary<NSString *, id> *)object;
++ (nullable NSString *)dapschema:(NSDictionary<NSString *, id> *)object;
++ (nullable NSString *)dapobject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema;
 
 @end
 

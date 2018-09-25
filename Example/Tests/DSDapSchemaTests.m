@@ -18,7 +18,7 @@
 #import <XCTest/XCTest.h>
 
 #import <dash_schema_ios/DSSchemaCompile.h>
-#import <dash_schema_ios/DSValidationResult.h>
+#import <dash_schema_ios/DSSchemaValidationResult.h>
 
 static NSString *const DAP_SCHEMA_ID_URI = @"http://dash.org/schemas/dapschema";
 static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/definitions/dapobjectbase";
@@ -31,7 +31,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
 
 - (void)testInvalidSchema_missingMetaSchema {
     NSDictionary *dapSchema = @{};
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidID);
 }
 
@@ -39,7 +39,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
     NSDictionary *dapSchema = @{
         @"$id" : DAP_SCHEMA_ID_URI,
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidSchemaTitle);
 }
 
@@ -48,7 +48,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"$id" : DAP_SCHEMA_ID_URI,
         @"title" : @"ab",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidSchemaTitle);
 }
 
@@ -57,7 +57,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"$id" : DAP_SCHEMA_ID_URI,
         @"title" : @"abcdefghijklmnopqrstuvwxy",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidSchemaTitle);
 }
 
@@ -66,7 +66,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"$id" : DAP_SCHEMA_ID_URI,
         @"title" : @"abcdef",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidDAPSubschemaCount);
 }
 
@@ -78,7 +78,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
     for (NSUInteger i = 0; i < 1001; i++) {
         dapSchema[[NSString stringWithFormat:@"subschema%ld", i]] = @{};
     }
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidDAPSubschemaCount);
 }
 
@@ -88,7 +88,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"title" : @"abcdef",
         @"dash" : @"1",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeReservedDAPSubschemaName);
 }
 
@@ -98,7 +98,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"title" : @"abcdef",
         @"subtx" : @"1",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeReservedDAPSubschemaName);
 }
 
@@ -108,7 +108,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"title" : @"abcdef",
         @"dapobjectbase" : @"1",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeReservedDAPSubschemaName);
 }
 
@@ -118,7 +118,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"title" : @"abcdef",
         @"#" : @"1",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidDAPSubschemaName);
 }
 
@@ -128,7 +128,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"title" : @"abcdef",
         @"ab" : @"1",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidDAPSubschemaName);
 }
 
@@ -138,7 +138,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"title" : @"abcdef",
         @"abcdefghijklmnopqrstuvwxy" : @"1",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeInvalidDAPSubschemaName);
 }
 
@@ -148,7 +148,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"title" : @"abcdef",
         @"someobject" : @"1",
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeDAPSubschemaInheritance);
 }
 
@@ -158,7 +158,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
         @"title" : @"abcdef",
         @"someobject" : @{},
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeDAPSubschemaInheritance);
 }
 
@@ -170,7 +170,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
             @"allOf" : DAP_OBJECT_BASE_REF,
         },
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeDAPSubschemaInheritance);
 }
 
@@ -182,7 +182,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
             @"allOf" : @[ @{} ],
         },
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeDAPSubschemaInheritance);
 }
 
@@ -198,7 +198,7 @@ static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/defi
             ],
         },
     };
-    DSValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaCompile compileDAPSchema:dapSchema];
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeDAPSubschemaInheritance);
 }
 

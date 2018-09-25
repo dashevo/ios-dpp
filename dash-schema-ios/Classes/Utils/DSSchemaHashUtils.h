@@ -15,20 +15,13 @@
 //  limitations under the License.
 //
 
-#import "NSBundle+DSDashSchema.h"
-
-#import "DSValidationResult.h"
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation NSBundle (DSDashSchema)
+@interface DSSchemaHashUtils : NSObject
 
-+ (instancetype)ds_dashSchemaBundle {
-    NSString *bundlePath = [[NSBundle bundleForClass:DSValidationResult.class] pathForResource:@"dash-schema-ios" ofType:@"bundle"];
-    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
-    NSParameterAssert(bundle);
-    return bundle;
-}
++ (nullable NSString *)hashOfObject:(NSObject *)object;
 
 @end
 

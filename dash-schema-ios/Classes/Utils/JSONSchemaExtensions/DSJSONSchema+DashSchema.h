@@ -15,13 +15,18 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <DSJSONSchemaValidation/DSJSONSchema.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DSHashUtils : NSObject
+@interface DSJSONSchema (DashSchema)
 
-+ (nullable NSString *)hashOfObject:(NSObject *)object;
++ (instancetype)systemSchemaRemoveAdditional:(BOOL)removeAdditional;
++ (instancetype)jsonSchemaRemoveAdditional:(BOOL)removeAdditional;
+
++ (instancetype)dashCustomSchemaWithObject:(NSDictionary<NSString *, id> *)schemaObject
+                          removeAdditional:(BOOL)removeAdditional
+                                     error:(NSError *__autoreleasing *)error;
 
 @end
 

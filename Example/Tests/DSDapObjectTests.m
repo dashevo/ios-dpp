@@ -17,7 +17,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import <dash_schema_ios/DSValidationResult.h>
+#import <dash_schema_ios/DSSchemaValidationResult.h>
 #import <dash_schema_ios/DSSchemaValidator.h>
 
 @interface DSDapObjectTests : XCTestCase
@@ -67,46 +67,46 @@
 
 - (void)testValidDapObjects_validDapObject1 {
     NSDictionary *dapObject = self.dapObjects[@"valid_dapobject_1"];
-    DSValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
     XCTAssertTrue(result.valid);
 }
 
 - (void)testValidDapObjects_validDapObject2 {
     NSDictionary *dapObject = self.dapObjects[@"valid_dapobject_2"];
-    DSValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
     XCTAssertTrue(result.valid);
 }
 
 - (void)testProperties_additionalProperties {
     NSDictionary *dapObject = self.dapObjects[@"additional_properties"];
-    DSValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
     XCTAssertTrue(result.valid);
 }
 
 - (void)testProperties_missingInheritedProperties {
     // TODO: fix me (same as in Android Dash Schema)
     NSDictionary *dapObject = self.dapObjects[@"missing_inherited_properties"];
-    DSValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
     XCTAssertFalse(result.valid);
 }
 
 - (void)testProperties_missingLocalProperties {
     // TODO: fix me (same as in Android Dash Schema)
     NSDictionary *dapObject = self.dapObjects[@"missing_local_properties"];
-    DSValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
     XCTAssertFalse(result.valid);
 }
 
 - (void)testDapObjectType_missingObjectType {
     NSDictionary *dapObject = self.dapObjects[@"missing_object_type"];
-    DSValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
     XCTAssertFalse(result.valid);
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeDAPObjectMissingObjType);
 }
 
 - (void)testDapObjectType_unknownObjectType {
     NSDictionary *dapObject = self.dapObjects[@"unknown_object_type"];
-    DSValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
     XCTAssertFalse(result.valid);
     XCTAssertEqual(result.error.code, DSValidationResultErrorCodeDAPObjectUnknownObjType);
 }
@@ -114,7 +114,7 @@
 - (void)testDapObjectType_mismatchedObjectType {
     // TODO: fix me (same as in Android Dash Schema)
     NSDictionary *dapObject = self.dapObjects[@"mismatched_object_type"];
-    DSValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
+    DSSchemaValidationResult *result = [DSSchemaValidator validateDapObject:dapObject dapSchema:self.dapSchema];
     XCTAssertFalse(result.valid);
 }
 

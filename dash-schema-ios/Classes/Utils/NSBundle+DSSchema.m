@@ -15,26 +15,19 @@
 //  limitations under the License.
 //
 
-#import "DSHashUtils.h"
+#import "NSBundle+DSSchema.h"
 
-#import <TinyCborObjc/NSObject+DSCborEncoding.h>
-#import "NSData+DSSchemaUtils.h"
+#import "DSSchemaValidationResult.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation DSHashUtils
+@implementation NSBundle (DSSchema)
 
-+ (nullable NSString *)hashOfObject:(NSObject *)object {
-    NSData *cborData = [object ds_cborEncodedObject];
-    if (!cborData) {
-        return nil;
-    }
-    
-    NSData *sha256Twice = [[cborData ds_SHA256Digest] ds_SHA256Digest];
-    NSData *sha256Reversed = [sha256Twice ds_reverseData];
-    NSString *sha256String = [sha256Reversed ds_hexStringFromData];
-    
-    return sha256String;
++ (instancetype)ds_dashSchemaBundle {
+    NSString *bundlePath = [[NSBundle bundleForClass:DSSchemaValidationResult.class] pathForResource:@"dash-schema-ios" ofType:@"bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+    NSParameterAssert(bundle);
+    return bundle;
 }
 
 @end

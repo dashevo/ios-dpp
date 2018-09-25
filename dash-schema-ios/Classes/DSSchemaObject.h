@@ -53,7 +53,7 @@ extern NSUInteger const DS_REMOVE_OBJECT_ACTION;
  * @param dapSchema DapSchema (optional)
  * @return object with allowed properties only
  */
-+ (NSDictionary *)fromObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary *)dapSchema;
++ (NSDictionary<NSString *, id> *)fromObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema;
 
 /**
  * Set metadata property value in a Schema object instance
@@ -62,7 +62,7 @@ extern NSUInteger const DS_REMOVE_OBJECT_ACTION;
  * @param value A value for the key
  * @return Given object with meta of key and value
  */
-+ (NSDictionary *)setMetaObject:(NSDictionary<NSString *, id> *)object key:(NSString *)key value:(id)value;
++ (NSDictionary<NSString *, id> *)setMetaObject:(NSDictionary<NSString *, id> *)object key:(NSString *)key value:(id)value;
 
 /**
  * Classify an object as a System Object without validation
@@ -74,12 +74,12 @@ extern NSUInteger const DS_REMOVE_OBJECT_ACTION;
  * @param object Schema object instance
  * @param dapSchema DapSchema
  */
-+ (nullable NSString *)hashOfObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary *)dapSchema;
++ (nullable NSString *)hashOfObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema;
 
 /**
  * Sets removal action on a Schema Object
  */
-+ (NSDictionary *)prepareForRemoval:(NSDictionary<NSString *, id> *)object;
++ (NSDictionary<NSString *, id> *)prepareForRemoval:(NSDictionary<NSString *, id> *)object;
 
 + (nullable NSString *)metaFromObject:(NSDictionary<NSString *, id> *)object byKey:(NSString *)key;
 

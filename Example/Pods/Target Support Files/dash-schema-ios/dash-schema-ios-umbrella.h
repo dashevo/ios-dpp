@@ -11,18 +11,18 @@
 #endif
 
 #import "DSchemaDefinition.h"
-#import "DSJSONSchema+DashSchema.h"
 #import "DSSchemaCompile.h"
 #import "DSSchemaFees.h"
 #import "DSSchemaHash.h"
 #import "DSSchemaObject.h"
 #import "DSSchemaStorage.h"
+#import "DSSchemaValidationResult.h"
 #import "DSSchemaValidator.h"
-#import "DSValidationResult.h"
+#import "DSSchemaHashUtils.h"
+#import "DSSchemaJSONSchemaUtils.h"
+#import "DSJSONSchema+DashSchema.h"
 #import "DSJSONSchemaPVerValidator.h"
-#import "DSHashUtils.h"
-#import "DSJsonSchemaUtils.h"
-#import "NSBundle+DSDashSchema.h"
+#import "NSBundle+DSSchema.h"
 #import "NSData+DSSchemaUtils.h"
 
 FOUNDATION_EXPORT double dash_schema_iosVersionNumber;
