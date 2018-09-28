@@ -18,6 +18,7 @@
 #import "DSSchemaStorage.h"
 #import "DSSchemaValidationResult.h"
 #import "DSSchemaValidator.h"
+#import "DSSchemaPersistenceStack.h"
 #import "DSSchemaHashUtils.h"
 #import "DSSchemaJSONSchemaUtils.h"
 #import "DSJSONSchema+DashSchema.h"
