@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSManagedObjectModel *)buildManagedObjectModel {
     NSManagedObjectModel *model = [[NSManagedObjectModel alloc] init];
-    model.entities = self.entities;
+    model.entities = [[NSArray alloc] initWithArray:self.entities copyItems:YES];
     return model;
 }
 

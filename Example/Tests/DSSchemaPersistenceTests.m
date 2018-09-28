@@ -88,34 +88,27 @@
     model = [builder buildManagedObjectModel];
     XCTAssertNotNil(model.entitiesByName[@"stheader"]);
 
-    builder = [[DSSchemaModelBuilder alloc] init];
     [builder addSTPacketEntity];
     model = [builder buildManagedObjectModel];
     XCTAssertNotNil(model.entitiesByName[@"stpacket"]);
 
-    builder = [[DSSchemaModelBuilder alloc] init];
     [builder addDAPContractEntity];
     model = [builder buildManagedObjectModel];
     XCTAssertNotNil(model.entitiesByName[@"dapcontract"]);
 
-    builder = [[DSSchemaModelBuilder alloc] init];
     [builder addDAPObjectEntityWithTypeName:@"testdapobject"];
     model = [builder buildManagedObjectModel];
     XCTAssertNotNil(model.entitiesByName[@"testdapobject"]);
 
-    builder = [[DSSchemaModelBuilder alloc] init];
     [builder addBlockchainUserEntity];
     model = [builder buildManagedObjectModel];
     XCTAssertNotNil(model.entitiesByName[@"blockchainuser"]);
-
-    builder = [[DSSchemaModelBuilder alloc] init];
-    [builder addSTHeaderEntity];
-    [builder addSTPacketEntity];
-    [builder addDAPContractEntity];
-    [builder addDAPObjectEntityWithTypeName:@"testdapobject"];
-    [builder addBlockchainUserEntity];
+    
+    [builder addCustomEntityName:@"custom" objectModel:@{@"name": @[]}];
     model = [builder buildManagedObjectModel];
-    XCTAssertTrue(model.entities.count == 5);
+    XCTAssertNotNil(model.entitiesByName[@"custom"]);
+
+    XCTAssertTrue(model.entities.count == 6);
 }
 
 @end
