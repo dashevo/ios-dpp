@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0303206795782B5DEE459D0A /* Pods_dash_schema_ios_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A54B463D7CE05580C4895C /* Pods_dash_schema_ios_Tests.framework */; };
 		2A03A86E21428D6B00788BE3 /* DSSubTxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A03A86D21428D6A00788BE3 /* DSSubTxTests.m */; };
+		2A5D893E215E243600958CDD /* DSSchemaPersistenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A5D893D215E243600958CDD /* DSSchemaPersistenceTests.m */; };
 		2A6AABFE21412BB600D1E018 /* DSSchemaStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6AABFD21412BB600D1E018 /* DSSchemaStorageTests.m */; };
 		2A6B3474214C47E600094AFD /* DSSTPacketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6B3472214C478F00094AFD /* DSSTPacketTests.m */; };
 		2A6B3477214C4D1800094AFD /* somedap.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A6B3475214C4D1700094AFD /* somedap.json */; };
@@ -59,6 +60,7 @@
 		0560A52C5E8585B8712893DC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2A03A86D21428D6A00788BE3 /* DSSubTxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSubTxTests.m; sourceTree = "<group>"; };
 		2A03A8712142A14800788BE3 /* contactsdap-test-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "contactsdap-test-data.json"; sourceTree = "<group>"; };
+		2A5D893D215E243600958CDD /* DSSchemaPersistenceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSchemaPersistenceTests.m; sourceTree = "<group>"; };
 		2A6AABFD21412BB600D1E018 /* DSSchemaStorageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSchemaStorageTests.m; sourceTree = "<group>"; };
 		2A6B3472214C478F00094AFD /* DSSTPacketTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSSTPacketTests.m; sourceTree = "<group>"; };
 		2A6B3475214C4D1700094AFD /* somedap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = somedap.json; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				2A6AABFD21412BB600D1E018 /* DSSchemaStorageTests.m */,
 				2A6B3472214C478F00094AFD /* DSSTPacketTests.m */,
 				2A03A86D21428D6A00788BE3 /* DSSubTxTests.m */,
+				2A5D893D215E243600958CDD /* DSSchemaPersistenceTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				2A6B3474214C47E600094AFD /* DSSTPacketTests.m in Sources */,
 				2A8551B321557034006054B2 /* DSDapContractTests.m in Sources */,
 				2A03A86E21428D6B00788BE3 /* DSSubTxTests.m in Sources */,
+				2A5D893E215E243600958CDD /* DSSchemaPersistenceTests.m in Sources */,
 				2A6AABFE21412BB600D1E018 /* DSSchemaStorageTests.m in Sources */,
 				2A8551AF21556043006054B2 /* DSDapSchemaTests.m in Sources */,
 			);
