@@ -18,6 +18,7 @@
 #import "DSSchemaStorage.h"
 #import "DSSchemaValidationResult.h"
 #import "DSSchemaValidator.h"
+#import "DSSchemaModelBuilder.h"
 #import "DSSchemaPersistenceStack.h"
 #import "NSAttributeDescription+DSSchema.h"
 #import "NSEntityDescription+DSSchema.h"

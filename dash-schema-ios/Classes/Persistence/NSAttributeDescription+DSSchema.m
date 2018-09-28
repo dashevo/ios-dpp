@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithName:(NSString *)name value:(id)value {
     NSParameterAssert(name);
     NSParameterAssert(value);
-    
+
     self = [self init];
     if (self) {
         self.name = name;

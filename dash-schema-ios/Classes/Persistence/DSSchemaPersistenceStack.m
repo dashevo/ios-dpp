@@ -32,10 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
     self = [super init];
     if (self) {
         _managedObjectModel = managedObjectModel;
-        
+
         NSURL *directoryURL = [NSPersistentContainer defaultDirectoryURL];
         _storeURL = [directoryURL URLByAppendingPathComponent:fileName];
-        
+
         NSPersistentStoreDescription *storeDescription = [[NSPersistentStoreDescription alloc] initWithURL:_storeURL];
         _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"DashSchema" managedObjectModel:_managedObjectModel];
         _persistentContainer.persistentStoreDescriptions = @[ storeDescription ];
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 
         if (error != nil) {
             NSLog(@"DSSchemaPersistenceStack: %@", error);
-            
+
             if (cleanStart) {
                 // TODO: handle more gently
 

@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSEntityDescription (DSSchema)
 
-- (instancetype)initWithName:(NSString *)name modelDictionary:(NSDictionary <NSString *, id> *)modelDicitonary;
+- (instancetype)initWithName:(NSString *)name modelDictionary:(NSDictionary<NSString *, id> *)modelDicitonary;
 
 @end
 

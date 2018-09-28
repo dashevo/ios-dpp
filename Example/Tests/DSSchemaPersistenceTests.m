@@ -17,6 +17,7 @@
 
 #import <XCTest/XCTest.h>
 
+#import <dash_schema_ios/DSSchemaModelBuilder.h>
 #import <dash_schema_ios/DSSchemaPersistenceStack.h>
 #import <dash_schema_ios/NSEntityDescription+DSSchema.h>
 
@@ -63,18 +64,58 @@
     BOOL result = [context save:&error];
     XCTAssertNil(error);
     XCTAssertTrue(result);
-    
+
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:entityName];
     fetchRequest.returnsObjectsAsFaults = NO;
     NSManagedObject *fetchedObject = [context executeFetchRequest:fetchRequest error:&error].firstObject;
     XCTAssertNil(error);
     XCTAssertNotNil(fetchedObject);
-    
+
     NSString *objtype = [fetchedObject valueForKey:@"objtype"];
     XCTAssertEqualObjects(objtype, @"someObject1");
-    
+
     NSDictionary *dictdata = [fetchedObject valueForKey:@"dictdata"];
     XCTAssertNotNil(dictdata);
+}
+
+- (void)testManagedObjectModelBuilder {
+    DSSchemaModelBuilder *builder = [[DSSchemaModelBuilder alloc] init];
+
+    NSManagedObjectModel *model = [builder buildManagedObjectModel];
+    XCTAssertTrue(model.entities.count == 0);
+
+    [builder addSTHeaderEntity];
+    model = [builder buildManagedObjectModel];
+    XCTAssertNotNil(model.entitiesByName[@"stheader"]);
+
+    builder = [[DSSchemaModelBuilder alloc] init];
+    [builder addSTPacketEntity];
+    model = [builder buildManagedObjectModel];
+    XCTAssertNotNil(model.entitiesByName[@"stpacket"]);
+
+    builder = [[DSSchemaModelBuilder alloc] init];
+    [builder addDAPContractEntity];
+    model = [builder buildManagedObjectModel];
+    XCTAssertNotNil(model.entitiesByName[@"dapcontract"]);
+
+    builder = [[DSSchemaModelBuilder alloc] init];
+    [builder addDAPObjectEntityWithTypeName:@"testdapobject"];
+    model = [builder buildManagedObjectModel];
+    XCTAssertNotNil(model.entitiesByName[@"testdapobject"]);
+
+    builder = [[DSSchemaModelBuilder alloc] init];
+    [builder addBlockchainUserEntity];
+    model = [builder buildManagedObjectModel];
+    XCTAssertNotNil(model.entitiesByName[@"blockchainuser"]);
+
+    builder = [[DSSchemaModelBuilder alloc] init];
+    [builder addSTHeaderEntity];
+    [builder addSTPacketEntity];
+    [builder addDAPContractEntity];
+    [builder addDAPObjectEntityWithTypeName:@"testdapobject"];
+    [builder addBlockchainUserEntity];
+    model = [builder buildManagedObjectModel];
+    XCTAssertTrue(model.entities.count == 5);
 }
 
 @end

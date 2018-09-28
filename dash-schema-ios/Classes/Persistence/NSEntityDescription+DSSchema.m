@@ -23,16 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation NSEntityDescription (DSSchema)
 
-- (instancetype)initWithName:(NSString *)name modelDictionary:(NSDictionary <NSString *, id> *)modelDicitonary {
+- (instancetype)initWithName:(NSString *)name modelDictionary:(NSDictionary<NSString *, id> *)modelDicitonary {
     NSParameterAssert(name);
     NSParameterAssert(modelDicitonary);
-    
+
     self = [self init];
     if (self) {
         self.name = name;
         self.managedObjectClassName = name;
-        
-        NSMutableArray <NSAttributeDescription *> *properties = [NSMutableArray array];
+
+        NSMutableArray<NSAttributeDescription *> *properties = [NSMutableArray array];
         for (NSString *key in modelDicitonary) {
             id value = modelDicitonary[key];
             NSAttributeDescription *attributeDescription = [[NSAttributeDescription alloc] initWithName:key value:value];
