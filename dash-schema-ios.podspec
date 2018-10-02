@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'dash-schema-ios'
-  s.version          = '0.1.0'
+  s.version          = '0.1.2'
   s.summary          = 'Dash Schema library'
 
   s.description      = <<-DESC

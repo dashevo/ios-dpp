@@ -15,13 +15,13 @@
 //  limitations under the License.
 //
 
-#import "DSchemaDefinition.h"
+#import "DSSchemaDefinition.h"
 
 static NSString *const kRelationDefinition = @"http://dash.org/schemas/sys#/definitions/relation";
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation DSchemaDefinition
+@implementation DSSchemaDefinition
 
 + (nullable NSDictionary<NSString *, id> *)getDAPSubSchema:(NSDictionary<NSString *, id> *)object dapSchema:(NSDictionary<NSString *, id> *)dapSchema {
     id key = object[@"objtype"];

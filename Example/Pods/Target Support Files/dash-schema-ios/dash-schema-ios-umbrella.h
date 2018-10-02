@@ -10,8 +10,8 @@
 #endif
 #endif
 
-#import "DSchemaDefinition.h"
 #import "DSSchemaCompile.h"
+#import "DSSchemaDefinition.h"
 #import "DSSchemaFees.h"
 #import "DSSchemaHash.h"
 #import "DSSchemaObject.h"

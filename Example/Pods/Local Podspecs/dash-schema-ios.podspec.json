@@ -1,6 +1,6 @@
 {
   "name": "dash-schema-ios",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "summary": "Dash Schema library",
   "description": "Dash Schema library for iOS",
   "homepage": "https://github.com/dashevo/dash-schema-ios",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/dashevo/dash-schema-ios.git",
-    "tag": "0.1.0"
+    "tag": "0.1.2"
   },
   "social_media_url": "https://twitter.com/podkovyr",
   "platforms": {

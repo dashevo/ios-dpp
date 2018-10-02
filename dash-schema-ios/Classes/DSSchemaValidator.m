@@ -22,7 +22,7 @@
 #import "DSSchemaJSONSchemaUtils.h"
 #import "DSSchemaObject.h"
 #import "DSSchemaValidationResult.h"
-#import "DSchemaDefinition.h"
+#import "DSSchemaDefinition.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -104,7 +104,7 @@ static NSString *const OBJTYPE = @"objtype";
                                                         schemaName:dapSchema[@"title"]];
     }
 
-    NSDictionary<NSString *, id> *subSchema = [DSchemaDefinition getDAPSubSchema:dapObject dapSchema:dapSchema];
+    NSDictionary<NSString *, id> *subSchema = [DSSchemaDefinition getDAPSubSchema:dapObject dapSchema:dapSchema];
     if (!subSchema) {
         return [[DSSchemaValidationResult alloc] initWithErrorCode:DSValidationResultErrorCodeDAPObjectUnknownObjType
                                                            objType:@"objtype"
