@@ -35,7 +35,7 @@
     NSString *aliceId = aliceSubTx[@"subtx"][@"meta"][@"id"];
     XCTAssertNotNil(aliceId);
     
-    NSString *calculatedAliceId = [DSSchemaHash subtx:aliceSubTx];
+    NSString *calculatedAliceId = [DSSchemaHash subTx:aliceSubTx];
     
     XCTAssertEqualObjects(aliceId, calculatedAliceId);
 }
@@ -47,7 +47,7 @@
     NSString *aliceId = @"e2b72d50f1e12ac0a849d3ed53b470d9d70d3bd5dd8c5037d565e6b763b36d4e"; //aliceSubTx[@"subtx"][@"meta"][@"id"];
     XCTAssertNotNil(aliceId);
     
-    NSString *calculatedAliceId = [DSSchemaHash subtx:aliceSubTx];
+    NSString *calculatedAliceId = [DSSchemaHash subTx:aliceSubTx];
     
     XCTAssertEqualObjects(aliceId, calculatedAliceId);
 }

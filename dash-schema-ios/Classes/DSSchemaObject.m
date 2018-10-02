@@ -107,25 +107,25 @@ NSUInteger const DS_REMOVE_OBJECT_ACTION = 3;
 + (nullable NSString *)hashOfObject:(NSDictionary<NSString *, id> *)object dapSchema:(nullable NSDictionary<NSString *, id> *)dapSchema {
     NSString *subSchemaName = object.allKeys.firstObject;
     if ([subSchemaName isEqualToString:@"subtx"]) {
-        return [DSSchemaHash subtx:object];
+        return [DSSchemaHash subTx:object];
     }
     else if ([subSchemaName isEqualToString:@"blockchainuser"]) {
-        return [DSSchemaHash blockchainuser:object];
+        return [DSSchemaHash blockchainUser:object];
     }
     else if ([subSchemaName isEqualToString:@"stheader"]) {
-        return [DSSchemaHash stheader:object];
+        return [DSSchemaHash stHeader:object];
     }
     else if ([subSchemaName isEqualToString:@"stpacket"]) {
-        return [DSSchemaHash stpacket:object dapSchema:dapSchema];
+        return [DSSchemaHash stPacket:object dapSchema:dapSchema];
     }
     else if ([subSchemaName isEqualToString:@"dapcontract"]) {
-        return [DSSchemaHash dapcontract:object];
+        return [DSSchemaHash dapContract:object];
     }
     else if ([subSchemaName isEqualToString:@"dapschema"]) {
-        return [DSSchemaHash dapschema:object];
+        return [DSSchemaHash dapSchema:object];
     }
     else {
-        return [DSSchemaHash dapobject:object dapSchema:dapSchema];
+        return [DSSchemaHash dapObject:object dapSchema:dapSchema];
     }
 }
 
