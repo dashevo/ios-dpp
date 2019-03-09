@@ -1,14 +1,14 @@
 PODS:
-  - dash-schema-ios (0.1.2):
-    - DSJSONSchemaValidation (= 2.0.5)
-    - TinyCborObjc (= 0.2.1)
   - DSJSONSchemaValidation (2.0.5)
+  - ios-dpp (0.0.1):
+    - DSJSONSchemaValidation (= 2.0.5)
+    - TinyCborObjc (= 0.2.2)
   - tinycbor (0.5.3-alpha1)
-  - TinyCborObjc (0.2.1):
+  - TinyCborObjc (0.2.2):
     - tinycbor (= 0.5.3-alpha1)
 
 DEPENDENCIES:
-  - dash-schema-ios (from `../`)
+  - ios-dpp (from `../`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -17,15 +17,15 @@ SPEC REPOS:
     - TinyCborObjc
 
 EXTERNAL SOURCES:
-  dash-schema-ios:
+  ios-dpp:
     :path: "../"
 
 SPEC CHECKSUMS:
-  dash-schema-ios: e63993b878325ef51d1435bfde96b6e1bca66edb
   DSJSONSchemaValidation: a0d791d3c8a4801cb3c72f3c8701342e2cb66f58
+  ios-dpp: f58d86d3b346b7ccb94f2c93f1ec046c3879ec87
   tinycbor: 81999417a2c8ee8c4a7651738a11ad0711c82935
-  TinyCborObjc: 492ad8c859a14f8d5d2ce0b2df1e8732f26c3ff3
+  TinyCborObjc: f42aa647c81de86a395a5691d6a93d04294f6d03
 
-PODFILE CHECKSUM: fcefe2a6f4cde11b27eb4f6860be1ef46612332f
+PODFILE CHECKSUM: 073dd568b0c49fcf58a7cd0d57966c5fc437b1c7
 
 COCOAPODS: 1.5.3

@@ -17,8 +17,8 @@
 
 #import <XCTest/XCTest.h>
 
-#import <dash_schema_ios/DSSchemaCompile.h>
-#import <dash_schema_ios/DSSchemaValidationResult.h>
+#import <DPP/DSSchemaCompile.h>
+#import <DPP/DSSchemaValidationResult.h>
 
 static NSString *const DAP_SCHEMA_ID_URI = @"http://dash.org/schemas/dapschema";
 static NSString *const DAP_OBJECT_BASE_REF = @"http://dash.org/schemas/sys#/definitions/dapobjectbase";

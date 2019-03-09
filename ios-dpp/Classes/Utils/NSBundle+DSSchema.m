@@ -15,22 +15,21 @@
 //  limitations under the License.
 //
 
-#import <XCTest/XCTest.h>
+#import "NSBundle+DSSchema.h"
 
-#import <DPP/DSSchemaStorage.h>
+#import "DSSchemaValidationResult.h"
 
-@interface DSSchemaStorageTests : XCTestCase
+NS_ASSUME_NONNULL_BEGIN
 
-@end
+@implementation NSBundle (DSSchema)
 
-@implementation DSSchemaStorageTests
-
-- (void)testLoadingSchemaObjects {
-    NSDictionary *json = [DSSchemaStorage json];
-    XCTAssertNotNil(json);
-    
-    NSDictionary *system = [DSSchemaStorage system];
-    XCTAssertNotNil(system);
++ (instancetype)ds_dashSchemaBundle {
+    NSString *bundlePath = [[NSBundle bundleForClass:DSSchemaValidationResult.class] pathForResource:@"ios-dpp" ofType:@"bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+    NSParameterAssert(bundle);
+    return bundle;
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

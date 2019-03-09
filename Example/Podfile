@@ -2,12 +2,10 @@ use_frameworks!
 
 platform :ios, '10.0'
 
-target 'dash-schema-ios_Example' do
-  pod 'dash-schema-ios', :path => '../'
-
-  target 'dash-schema-ios_Tests' do
-    inherit! :search_paths
-
+target 'ios-dpp_Example' do
+    pod 'ios-dpp', :path => '../'
     
-  end
+    target 'ios-dpp_Tests' do
+        inherit! :search_paths
+    end
 end

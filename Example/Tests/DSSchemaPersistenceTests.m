@@ -17,9 +17,9 @@
 
 #import <XCTest/XCTest.h>
 
-#import <dash_schema_ios/DSSchemaModelBuilder.h>
-#import <dash_schema_ios/DSSchemaPersistenceStack.h>
-#import <dash_schema_ios/NSEntityDescription+DSSchema.h>
+#import <DPP/DSSchemaModelBuilder.h>
+#import <DPP/DSSchemaPersistenceStack.h>
+#import <DPP/NSEntityDescription+DSSchema.h>
 
 @interface DSSchemaPersistenceTests : XCTestCase
 
