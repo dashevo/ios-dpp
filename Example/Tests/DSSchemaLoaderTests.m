@@ -17,7 +17,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import <dash_schema_ios/DSJSONSchema+DashSchema.h>
+#import <DPP/DSJSONSchema+DashSchema.h>
 
 @interface DSSchemaLoaderTests : XCTestCase
 

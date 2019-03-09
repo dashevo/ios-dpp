@@ -17,7 +17,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import <dash_schema_ios/DSSchemaFees.h>
+#import <DPP/DSSchemaFees.h>
 
 @interface DSSchemaFeesTests : XCTestCase
 

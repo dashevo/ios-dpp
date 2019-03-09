@@ -1,9 +1,9 @@
-# dash-schema-ios
+# ios-dpp
 
-[![CI Status](https://img.shields.io/travis/dashevo/dash-schema-ios.svg?style=flat)](https://travis-ci.org/dashevo/dash-schema-ios)
-[![Version](https://img.shields.io/cocoapods/v/dash-schema-ios.svg?style=flat)](https://cocoapods.org/pods/dash-schema-ios)
-[![License](https://img.shields.io/cocoapods/l/dash-schema-ios.svg?style=flat)](https://cocoapods.org/pods/dash-schema-ios)
-[![Platform](https://img.shields.io/cocoapods/p/dash-schema-ios.svg?style=flat)](https://cocoapods.org/pods/dash-schema-ios)
+[![CI Status](https://img.shields.io/travis/dashevo/ios-dpp.svg?style=flat)](https://travis-ci.org/dashevo/ios-dpp)
+[![Version](https://img.shields.io/cocoapods/v/ios-dpp.svg?style=flat)](https://cocoapods.org/pods/ios-dpp)
+[![License](https://img.shields.io/cocoapods/l/ios-dpp.svg?style=flat)](https://cocoapods.org/pods/ios-dpp)
+[![Platform](https://img.shields.io/cocoapods/p/ios-dpp.svg?style=flat)](https://cocoapods.org/pods/ios-dpp)
 
 ## Example
 
@@ -13,11 +13,11 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-dash-schema-ios is available through [CocoaPods](https://cocoapods.org). To install
+ios-dpp is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'dash-schema-ios'
+pod 'ios-dpp'
 ```
 
 ## Author
@@ -26,4 +26,4 @@ Andrew Podkovyrin, podkovyrin@gmail.com
 
 ## License
 
-dash-schema-ios is available under the MIT license. See the LICENSE file for more info.
+ios-dpp is available under the MIT license. See the LICENSE file for more info.
