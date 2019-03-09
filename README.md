@@ -1,6 +1,6 @@
 # ios-dpp
 
-[![CI Status](https://img.shields.io/travis/dashevo/ios-dpp.svg?style=flat)](https://travis-ci.org/dashevo/ios-dpp)
+[![CI Status](https://img.shields.io/travis/dashevo/ios-dpp.svg?style=flat)](https://travis-ci.com/dashevo/ios-dpp)
 [![Version](https://img.shields.io/cocoapods/v/ios-dpp.svg?style=flat)](https://cocoapods.org/pods/ios-dpp)
 [![License](https://img.shields.io/cocoapods/l/ios-dpp.svg?style=flat)](https://cocoapods.org/pods/ios-dpp)
 [![Platform](https://img.shields.io/cocoapods/p/ios-dpp.svg?style=flat)](https://cocoapods.org/pods/ios-dpp)
