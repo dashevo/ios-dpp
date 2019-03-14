@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DSDAPObjectsFactory : NSObject
 
++ (NSMutableDictionary<NSString *, id> *)createSTPacketInstance;
 + (NSMutableDictionary<NSString *, id> *)createDAPObjectForTypeName:(NSString *)typeName;
 
 @end
