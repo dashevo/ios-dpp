@@ -1,6 +1,6 @@
 //
 //  Created by Andrew Podkovyrin
-//  Copyright © 2018 Dash Core Group. All rights reserved.
+//  Copyright © 2019 Dash Core Group. All rights reserved.
 //
 //  Licensed under the MIT License (the "License");
 //  you may not use this file except in compliance with the License.
@@ -15,18 +15,11 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef DPPTypes_h
+#define DPPTypes_h
 
-NS_ASSUME_NONNULL_BEGIN
+typedef NSDictionary<NSString *, id>        DPJSONObject;
+typedef NSMutableDictionary<NSString *, id> DPMutableJSONObject;
+typedef NSMutableDictionary<NSString *, id> DPMutableLeafsJSONObject;
 
-// TODO: rename DPSerializeUtils
-@interface DSSchemaHashUtils : NSObject
-
-+ (nullable NSData *)serializeObject:(NSObject *)object;
-+ (nullable NSData *)hashOfSerializedObject:(NSData *)data;
-+ (nullable NSData *)hashOfObject:(NSObject *)object;
-+ (nullable NSString *)hashStringOfObject:(NSObject *)object;
-
-@end
-
-NS_ASSUME_NONNULL_END
+#endif /* DPPTypes_h */

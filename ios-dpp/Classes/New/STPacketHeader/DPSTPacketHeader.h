@@ -1,6 +1,6 @@
 //
 //  Created by Andrew Podkovyrin
-//  Copyright © 2018 Dash Core Group. All rights reserved.
+//  Copyright © 2019 Dash Core Group. All rights reserved.
 //
 //  Licensed under the MIT License (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,15 +17,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DPPSerializableObject.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-// TODO: rename DPSerializeUtils
-@interface DSSchemaHashUtils : NSObject
+@interface DPSTPacketHeader : NSObject <DPPSerializableObject>
 
-+ (nullable NSData *)serializeObject:(NSObject *)object;
-+ (nullable NSData *)hashOfSerializedObject:(NSData *)data;
-+ (nullable NSData *)hashOfObject:(NSObject *)object;
-+ (nullable NSString *)hashStringOfObject:(NSObject *)object;
+@property (copy, nonatomic) NSString *dpContractId;
+@property (copy, nonatomic) NSString *itemsMerkleRoot;
+@property (copy, nonatomic) NSString *itemsHash;
 
 @end
 
