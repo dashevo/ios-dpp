@@ -18,7 +18,7 @@ The iOS implementation of the Dash Platform Protocol
   s.source_files = 'ios-dpp/Classes/**/*'
   
   s.resource_bundles = {
-    'ios-dpp' => ['ios-dpp/Assets/*.json']
+    'ios-dpp' => ['ios-dpp/Assets/**/*.json']
   }
 
   s.module_name = 'DPP'

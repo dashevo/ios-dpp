@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A2985E3409E4442E5F12E42 /* Pods_ios_dpp_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF9D828DD5FB744E76D0217 /* Pods_ios_dpp_Tests.framework */; };
 		1FEB27377652BB5923B59A49 /* Pods_ios_dpp_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23534BC70F65B3C9E538BFCB /* Pods_ios_dpp_Example.framework */; };
+		2A9C0ADA224A59F30036F529 /* DPJSONSchemaValidatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C0AD9224A59F30036F529 /* DPJSONSchemaValidatorTests.m */; };
 		2A9FFEEB22339A8A00956D5F /* dapobjects.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A9FFEE222339A8A00956D5F /* dapobjects.json */; };
 		2A9FFEEC22339A8A00956D5F /* simplified-dap-schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A9FFEE322339A8A00956D5F /* simplified-dap-schema.json */; };
 		2A9FFEED22339A8A00956D5F /* somedap.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A9FFEE422339A8A00956D5F /* somedap.json */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		14FFD2C1951FD35F0F4E44C3 /* Pods-ios-dpp_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-dpp_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-dpp_Tests/Pods-ios-dpp_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		23534BC70F65B3C9E538BFCB /* Pods_ios_dpp_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_dpp_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A9C0AD9224A59F30036F529 /* DPJSONSchemaValidatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPJSONSchemaValidatorTests.m; sourceTree = "<group>"; };
 		2A9FFECA22339A7100956D5F /* DSDapSchemaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDapSchemaTests.m; sourceTree = "<group>"; };
 		2A9FFECB22339A7100956D5F /* DSDapContractTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDapContractTests.m; sourceTree = "<group>"; };
 		2A9FFECC22339A7100956D5F /* DSBaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSBaseTest.m; sourceTree = "<group>"; };
@@ -214,7 +216,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				2A9FFEE122339A8A00956D5F /* Resources */,
+				2A9C0AD9224A59F30036F529 /* DPJSONSchemaValidatorTests.m */,
 				2A9FFED022339A7100956D5F /* DSBaseTest.h */,
 				2A9FFECC22339A7100956D5F /* DSBaseTest.m */,
 				2A9FFECB22339A7100956D5F /* DSDapContractTests.m */,
@@ -227,6 +229,7 @@
 				2A9FFECF22339A7100956D5F /* DSSchemaPersistenceTests.m */,
 				2A9FFED322339A7100956D5F /* DSSchemaStorageTests.m */,
 				2A9FFED422339A7100956D5F /* DSSTPacketTests.m */,
+				2A9FFEE122339A8A00956D5F /* Resources */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -310,8 +313,8 @@
 		6003F582195388D10070C39A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = DS;
-				LastUpgradeCheck = 1010;
+				CLASSPREFIX = DP;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Andrew Podkovyrin";
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
@@ -470,6 +473,7 @@
 				2A9FFEF422339A9300956D5F /* DSBaseTest.m in Sources */,
 				2A9FFEFA22339A9300956D5F /* DSSchemaLoaderTests.m in Sources */,
 				2A9FFEFE22339A9300956D5F /* DSSTPacketTests.m in Sources */,
+				2A9C0ADA224A59F30036F529 /* DPJSONSchemaValidatorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
