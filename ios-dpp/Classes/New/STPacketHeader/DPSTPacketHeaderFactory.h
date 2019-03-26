@@ -15,21 +15,21 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
-
-#import "DPBaseObject.h"
+#import "DPBaseObjectFactory.h"
+#import "DPSTPacketHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketHeader : DPBaseObject
+@class DPJSONSchemaValidator;
 
-@property (copy, nonatomic) NSString *contractId;
-@property (copy, nonatomic) NSString *itemsMerkleRoot;
-@property (copy, nonatomic) NSString *itemsHash;
+@interface DPSTPacketHeaderFactory : DPBaseObjectFactory
 
-- (instancetype)initWithContractId:(NSString *)contractId
-                   itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                         itemsHash:(NSString *)itemsHash;
+- (DPSTPacketHeader *)objectWithContractId:(NSString *)contractId
+                           itemsMerkleRoot:(NSString *)itemsMerkleRoot
+                                 itemsHash:(NSString *)itemsHash;
+
+- (nullable DPSTPacketHeader *)objectWithRawSTPacketHeader:(DPJSONObject *)jsonObject
+                                                     error:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 

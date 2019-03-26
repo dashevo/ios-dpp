@@ -1,4 +1,4 @@
-//
+//  
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -17,20 +17,15 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DPBaseObject.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketHeader : DPBaseObject
+extern NSErrorDomain const DPErrorDomain;
 
-@property (copy, nonatomic) NSString *contractId;
-@property (copy, nonatomic) NSString *itemsMerkleRoot;
-@property (copy, nonatomic) NSString *itemsHash;
-
-- (instancetype)initWithContractId:(NSString *)contractId
-                   itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                         itemsHash:(NSString *)itemsHash;
-
-@end
+typedef NS_ENUM(NSInteger, DPErrorCode) {
+    /// Data is not allowed for objects with $action DELETE
+    DPErrorCode_DataIsNotAllowedWithActionDelete,
+    DPErrorCode_InvalidDPObject,
+    DPErrorCode_InvalidDocumentType,
+};
 
 NS_ASSUME_NONNULL_END

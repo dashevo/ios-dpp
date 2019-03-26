@@ -1,4 +1,4 @@
-//
+//  
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -15,21 +15,22 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
-
-#import "DPBaseObject.h"
+#import "DPBaseObjectFactory.h"
+#import "DPContract.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketHeader : DPBaseObject
+@interface DPContractFactory : DPBaseObjectFactory
 
-@property (copy, nonatomic) NSString *contractId;
-@property (copy, nonatomic) NSString *itemsMerkleRoot;
-@property (copy, nonatomic) NSString *itemsHash;
+- (DPContract *)contractWithName:(NSString *)name
+                       documents:(NSDictionary<NSString *, DPJSONObject *> *)documents;
 
-- (instancetype)initWithContractId:(NSString *)contractId
-                   itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                         itemsHash:(NSString *)itemsHash;
+- (nullable DPContract *)contractFromRawContract:(DPJSONObject *)rawContract
+                                           error:(NSError *_Nullable __autoreleasing *)error;
+
+- (nullable DPContract *)contractFromRawContract:(DPJSONObject *)rawContract
+                                  skipValidation:(BOOL)skipValidation
+                                           error:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 

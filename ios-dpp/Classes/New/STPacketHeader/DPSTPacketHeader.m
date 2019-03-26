@@ -17,47 +17,24 @@
 
 #import "DPSTPacketHeader.h"
 
-#import "DSSchemaHashUtils.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPSTPacketHeader
 
-#pragma mark - DPPSerializableObject
-
-@synthesize json=_json;
-@synthesize serialized=_serialized;
-@synthesize serializedHash=_serializedHash;
-
-- (DPMutableJSONObject *)json {
-    if (_json == nil) {
-        DPMutableJSONObject *json = [[DPMutableJSONObject alloc] init];
-        json[@"contractId"] = self.dpContractId;
-        json[@"itemsMerkleRoot"] = self.itemsMerkleRoot;
-        json[@"itemsHash"] = self.itemsHash;
-        _json = json;
+- (instancetype)initWithContractId:(NSString *)contractId
+                   itemsMerkleRoot:(NSString *)itemsMerkleRoot
+                         itemsHash:(NSString *)itemsHash {
+    self = [super init];
+    if (self) {
+        _contractId = [contractId copy];
+        _itemsMerkleRoot = [itemsMerkleRoot copy];
+        _itemsHash = [itemsHash copy];
     }
-    return _json;
+    return self;
 }
 
-- (NSData *)serialized {
-    if (_serialized == nil) {
-        _serialized = [DSSchemaHashUtils serializeObject:self.json];
-    }
-    return _serialized;
-}
-
-- (NSData *)serializedHash {
-    if (_serializedHash == nil) {
-        _serializedHash = [DSSchemaHashUtils hashOfSerializedObject:self.serialized];
-    }
-    return _serializedHash;
-}
-
-#pragma mark - Private
-
-- (void)setDpContractId:(NSString *)dpContractId {
-    _dpContractId = [dpContractId copy];
+- (void)setContractId:(NSString *)contractId {
+    _contractId = [contractId copy];
     [self resetSerializedValues];
 }
 
@@ -72,9 +49,23 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)resetSerializedValues {
+    [super resetSerializedValues];
     _json = nil;
-    _serialized = nil;
-    _serializedHash = nil;
+}
+
+#pragma mark - DPPSerializableObject
+
+@synthesize json=_json;
+
+- (DPMutableJSONObject *)json {
+    if (_json == nil) {
+        DPMutableJSONObject *json = [[DPMutableJSONObject alloc] init];
+        json[@"contractId"] = self.contractId;
+        json[@"itemsMerkleRoot"] = self.itemsMerkleRoot;
+        json[@"itemsHash"] = self.itemsHash;
+        _json = json;
+    }
+    return _json;
 }
 
 @end

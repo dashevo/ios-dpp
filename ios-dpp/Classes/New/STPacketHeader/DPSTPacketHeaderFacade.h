@@ -1,4 +1,4 @@
-//
+//  
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -17,19 +17,18 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DPBaseObject.h"
+#import "DPSTPacketHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketHeader : DPBaseObject
+@interface DPSTPacketHeaderFacade : NSObject
 
-@property (copy, nonatomic) NSString *contractId;
-@property (copy, nonatomic) NSString *itemsMerkleRoot;
-@property (copy, nonatomic) NSString *itemsHash;
+- (DPSTPacketHeader *)objectWithContractId:(NSString *)contractId
+                           itemsMerkleRoot:(NSString *)itemsMerkleRoot
+                                 itemsHash:(NSString *)itemsHash;
 
-- (instancetype)initWithContractId:(NSString *)contractId
-                   itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                         itemsHash:(NSString *)itemsHash;
+- (nullable DPSTPacketHeader *)objectWithRawSTPacketHeader:(DPJSONObject *)jsonObject
+                                                     error:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 

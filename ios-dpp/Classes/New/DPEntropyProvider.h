@@ -1,4 +1,4 @@
-//
+//  
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -17,19 +17,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DPBaseObject.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketHeader : DPBaseObject
+@protocol DPEntropyProvider <NSObject>
 
-@property (copy, nonatomic) NSString *contractId;
-@property (copy, nonatomic) NSString *itemsMerkleRoot;
-@property (copy, nonatomic) NSString *itemsHash;
-
-- (instancetype)initWithContractId:(NSString *)contractId
-                   itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                         itemsHash:(NSString *)itemsHash;
+- (NSString *)generateEntropyString;
+- (BOOL)validateEntropyString:(NSString *)entropyString;
 
 @end
 
