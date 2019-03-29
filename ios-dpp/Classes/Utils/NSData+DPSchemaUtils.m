@@ -15,13 +15,28 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "NSData+DPSchemaUtils.h"
+
+#import <CommonCrypto/CommonDigest.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSBundle (DSSchema)
+@implementation NSData (DSSchemaUtils)
 
-+ (instancetype)ds_dashSchemaBundle;
+- (NSData *)dp_SHA256Digest {
+    unsigned char result[CC_SHA256_DIGEST_LENGTH];
+
+    CC_SHA256(self.bytes, (CC_LONG)self.length, result);
+    return [[NSData alloc] initWithBytes:result length:CC_SHA256_DIGEST_LENGTH];
+}
+
+- (NSData *)dp_reverseData {
+    NSMutableData *data = [[NSMutableData alloc] init];
+    for (NSInteger i = self.length - 1; i >= 0; i--) {
+        [data appendBytes:&self.bytes[i] length:1];
+    }
+    return [data copy];
+}
 
 @end
 

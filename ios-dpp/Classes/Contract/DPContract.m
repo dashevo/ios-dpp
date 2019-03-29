@@ -17,7 +17,7 @@
 
 #import "DPContract.h"
 
-#import "DSSchemaHashUtils.h"
+#import "DPSchemaHashUtils.h"
 #import "NSString+DPUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -48,7 +48,7 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
 }
 
 - (NSString *)identifier {
-    NSData *serializedData = [DSSchemaHashUtils hashOfSerializedObject:self.serialized];
+    NSData *serializedData = [DPSchemaHashUtils hashOfSerializedObject:self.serialized];
     return [NSString dp_base58WithData:serializedData];
 }
 

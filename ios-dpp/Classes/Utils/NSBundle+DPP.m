@@ -15,14 +15,20 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "NSBundle+DPP.h"
+
+#import "DashPlatformProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSData (DSSchemaUtils)
+@implementation NSBundle (DSSchema)
 
-- (NSData *)ds_SHA256Digest;
-- (NSData *)ds_reverseData;
++ (instancetype)dp_dppBundle {
+    NSString *bundlePath = [[NSBundle bundleForClass:DashPlatformProtocol.class] pathForResource:@"ios-dpp" ofType:@"bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+    NSParameterAssert(bundle);
+    return bundle;
+}
 
 @end
 

@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
     return contract;
 }
 
-// TODO create contract from cbor
+// TODO: create contract from cbor
 
 @end
 

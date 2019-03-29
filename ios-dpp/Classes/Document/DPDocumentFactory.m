@@ -18,7 +18,7 @@
 #import "DPDocumentFactory.h"
 
 #import "DPErrors.h"
-#import "DSSchemaHashUtils.h"
+#import "DPSchemaHashUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -71,7 +71,7 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
     }
 
     NSString *scopeString = [self.contract.identifier stringByAppendingString:self.userId];
-    NSString *scopeStringHash = [DSSchemaHashUtils hashStringOfObject:scopeString];
+    NSString *scopeStringHash = [DPSchemaHashUtils hashStringOfObject:scopeString];
 
     DPMutableJSONObject *rawObject = [[DPMutableJSONObject alloc] init];
     rawObject[@"$type"] = type;

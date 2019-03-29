@@ -15,22 +15,22 @@
 //  limitations under the License.
 //
 
-#import "DSSchemaHashUtils.h"
+#import "DPSchemaHashUtils.h"
 
-#import "NSData+DSSchemaUtils.h"
+#import "NSData+DPSchemaUtils.h"
 #import <TinyCborObjc/NSObject+DSCborEncoding.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation DSSchemaHashUtils
+@implementation DPSchemaHashUtils
 
 + (nullable NSData *)serializeObject:(NSObject *)object {
     return [object ds_cborEncodedObject];
 }
 
 + (nullable NSData *)hashOfSerializedObject:(NSData *)data {
-    NSData *sha256Twice = [[data ds_SHA256Digest] ds_SHA256Digest];
-    NSData *sha256Reversed = [sha256Twice ds_reverseData];
+    NSData *sha256Twice = [[data dp_SHA256Digest] dp_SHA256Digest];
+    NSData *sha256Reversed = [sha256Twice dp_reverseData];
     
     return sha256Reversed;
 }

@@ -17,7 +17,7 @@
 
 #import "DPBaseObject.h"
 
-#import "DSSchemaHashUtils.h"
+#import "DPSchemaHashUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,14 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSData *)serialized {
     if (_serialized == nil) {
-        _serialized = [DSSchemaHashUtils serializeObject:self.json];
+        _serialized = [DPSchemaHashUtils serializeObject:self.json];
     }
     return _serialized;
 }
 
 - (NSData *)serializedHash {
     if (_serializedHash == nil) {
-        _serializedHash = [DSSchemaHashUtils hashOfSerializedObject:self.serialized];
+        _serializedHash = [DPSchemaHashUtils hashOfSerializedObject:self.serialized];
     }
     return _serializedHash;
 }

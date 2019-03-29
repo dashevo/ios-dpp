@@ -20,7 +20,7 @@
 #import <DSJSONSchemaValidation/DSJSONSchema.h>
 #import <DSJSONSchemaValidation/DSJSONSchemaStorage.h>
 
-#import "NSBundle+DSSchema.h"
+#import "NSBundle+DPP.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -124,8 +124,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Private Factory
 
 + (NSDictionary<NSString *, id> *)schemaJSONObjectForFilename:(NSString *)filename {
-    NSURL *url = [[NSBundle ds_dashSchemaBundle] URLForResource:filename
-                                                  withExtension:@"json"];
+    NSURL *url = [[NSBundle dp_dppBundle] URLForResource:filename
+                                           withExtension:@"json"];
     NSAssert(url, @"The resource `%@` not found in application bundle", filename);
 
     NSData *data = [NSData dataWithContentsOfURL:url];
