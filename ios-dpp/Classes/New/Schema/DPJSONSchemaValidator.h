@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, DPJSONSchemaValidatorType) {
     DPJSONSchemaValidatorType_DPContract,
-    DPJSONSchemaValidatorType_DPObject,
+    DPJSONSchemaValidatorType_DPDocument,
     DPJSONSchemaValidatorType_STPacket,
     DPJSONSchemaValidatorType_STPacketHeader,
 };

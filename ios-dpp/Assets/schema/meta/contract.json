@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.dash.org/dpp-0-4-0/meta/dash-schema",
-  "$id": "https://schema.dash.org/dpp-0-4-0/meta/dp-contract",
+  "$id": "https://schema.dash.org/dpp-0-4-0/meta/contract",
   "type": "object",
   "allOf": [
     {
@@ -10,7 +10,7 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://schema.dash.org/dpp-0-4-0/meta/dp-contract"
+      "const": "https://schema.dash.org/dpp-0-4-0/meta/contract"
     },
     "name": {
       "type": "string",
@@ -23,7 +23,7 @@
       "multipleOf": 1.0,
       "minimum": 1
     },
-    "dpObjectsDefinition": {
+    "documents": {
       "type": "object",
       "patternProperties": {
         "^[a-zA-Z0-9-_]{1,255}$": {
@@ -39,15 +39,21 @@
                 "type": "object",
                 "properties": {
                   "properties": {
-                    "type": "object",
-                    "patternProperties": {
-                      "^[a-zA-Z0-9-_$]{1,255}$": {
-                        "type": "string",
-                        "enum": ["asc", "desc"]
-                      }
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "patternProperties": {
+                        "^[a-zA-Z0-9-_$]{1,255}$": {
+                          "type": "string",
+                          "enum": ["asc", "desc"]
+                        }
+                      },
+                      "minProperties": 1,
+                      "maxProperties": 1,
+                      "additionalProperties": false
                     },
-                    "minProperties": 1,
-                    "additionalProperties": false
+                    "minItems": 1,
+                    "maxItems": 100
                   },
                   "unique": {
                     "type": "boolean",
@@ -95,7 +101,7 @@
     "$schema",
     "name",
     "version",
-    "dpObjectsDefinition"
+    "documents"
   ],
   "additionalProperties": false
 }

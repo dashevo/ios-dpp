@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
         NSAssert(stPacketHeaderSchema, @"STPacket Header schema should exists");
         [schemaStorage addSchema:stPacketHeaderSchema];
 
-        DSJSONSchema *dpContractSchema = [self.class schemaForFilename:@"dp-contract"
+        DSJSONSchema *dpContractSchema = [self.class schemaForFilename:@"contract"
                                                       referenceStorage:schemaStorage];
         NSAssert(dpContractSchema, @"DPContract schema should exists");
         if (!dpContractSchema) {
@@ -95,8 +95,8 @@ NS_ASSUME_NONNULL_BEGIN
     DSJSONSchema *schema = self.schemas[key];
     if (!schema) {
         switch (type) {
-            case DPJSONSchemaValidatorType_DPObject: {
-                schema = [self.class schemaForFilename:@"dp-object"
+            case DPJSONSchemaValidatorType_DPDocument: {
+                schema = [self.class schemaForFilename:@"document"
                                       referenceStorage:self.schemaStorage];
                 NSAssert(schema, @"DPObject schema should exists");
                 self.schemas[key] = schema;

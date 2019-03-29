@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -36,7 +36,7 @@
 }
 
 - (void)testInstantiatingDPObjectSchema {
-    NSError *error = [self.validator validateObject:@{} forType:DPJSONSchemaValidatorType_DPObject];
+    NSError *error = [self.validator validateObject:@{} forType:DPJSONSchemaValidatorType_DPDocument];
     XCTAssertNotNil(error);
 }
 
