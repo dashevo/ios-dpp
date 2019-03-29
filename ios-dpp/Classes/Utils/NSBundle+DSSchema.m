@@ -17,14 +17,14 @@
 
 #import "NSBundle+DSSchema.h"
 
-#import "DSSchemaValidationResult.h"
+#import "DashPlatformProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation NSBundle (DSSchema)
 
 + (instancetype)ds_dashSchemaBundle {
-    NSString *bundlePath = [[NSBundle bundleForClass:DSSchemaValidationResult.class] pathForResource:@"ios-dpp" ofType:@"bundle"];
+    NSString *bundlePath = [[NSBundle bundleForClass:DashPlatformProtocol.class] pathForResource:@"ios-dpp" ofType:@"bundle"];
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
     NSParameterAssert(bundle);
     return bundle;
