@@ -25,17 +25,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, weak, nonatomic) DashPlatformProtocol *dpp;
 @property (strong, nonatomic) id<DPEntropyProvider> entropyProvider;
+@property (strong, nonatomic) id<DPBase58DataEncoder> base58DataEncoder;
 
 @end
 
 @implementation DPDocumentFacade
 
 - (instancetype)initWithDPP:(DashPlatformProtocol *)dpp
-            entropyProvider:(id<DPEntropyProvider>)entropyProvider {
+            entropyProvider:(id<DPEntropyProvider>)entropyProvider
+          base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
     self = [super init];
     if (self) {
         _dpp = dpp;
         _entropyProvider = entropyProvider;
+        _base58DataEncoder = base58DataEncoder;
     }
     return self;
 }
@@ -91,7 +94,8 @@ NS_ASSUME_NONNULL_BEGIN
 
     DPDocumentFactory *factory = [[DPDocumentFactory alloc] initWithUserId:userId
                                                                   contract:contract
-                                                           entropyProvider:self.entropyProvider];
+                                                           entropyProvider:self.entropyProvider
+                                                         base58DataEncoder:self.base58DataEncoder];
 
     return factory;
 }

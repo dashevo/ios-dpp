@@ -21,12 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPContractFactory (CreateContract)
 
-+ (DPContract *)dp_contractFromRawContract:(DPJSONObject *)rawContract {
++ (DPContract *)dp_contractFromRawContract:(DPJSONObject *)rawContract
+                         base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
     NSString *name = rawContract[@"name"];
     NSDictionary<NSString *, DPJSONObject *> *documents = rawContract[@"documents"];
 
     DPContract *contract = [[DPContract alloc] initWithName:name
-                                                  documents:documents];
+                                                  documents:documents
+                                          base58DataEncoder:base58DataEncoder];
 
     NSString *jsonMetaSchema = rawContract[@"$schema"];
     if (jsonMetaSchema) {

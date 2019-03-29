@@ -24,15 +24,18 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DPSTPacketFactory ()
 
 @property (strong, nonatomic) id<DPMerkleRootOperation> merkleRootOperation;
+@property (strong, nonatomic) id<DPBase58DataEncoder> base58DataEncoder;
 
 @end
 
 @implementation DPSTPacketFactory
 
-- (instancetype)initWithMerkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation {
+- (instancetype)initWithMerkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation
+                          base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
     self = [super init];
     if (self) {
         _merkleRootOperation = merkleRootOperation;
+        _base58DataEncoder = base58DataEncoder;
     }
     return self;
 }
@@ -79,7 +82,8 @@ NS_ASSUME_NONNULL_BEGIN
     NSArray<DPJSONObject *> *rawContracts = rawPacket[@"contracts"];
     if (rawContracts.count > 0) {
         DPJSONObject *rawContract = rawContracts.firstObject;
-        DPContract *contract = [DPContractFactory dp_contractFromRawContract:rawContract];
+        DPContract *contract = [DPContractFactory dp_contractFromRawContract:rawContract
+                                                           base58DataEncoder:self.base58DataEncoder];
         [packet setContract:contract error:error];
         if (*error != nil) {
             return nil;
@@ -90,7 +94,8 @@ NS_ASSUME_NONNULL_BEGIN
     if (rawDocuments.count > 0) {
         NSMutableArray<DPDocument *> *documents = [NSMutableArray array];
         for (DPJSONObject *rawDocument in rawDocuments) {
-            DPDocument *document = [[DPDocument alloc] initWithRawDocument:rawDocument];
+            DPDocument *document = [[DPDocument alloc] initWithRawDocument:rawDocument
+                                                         base58DataEncoder:self.base58DataEncoder];
             [documents addObject:document];
         }
         [packet setDocuments:documents error:error];

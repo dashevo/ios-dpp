@@ -10,5 +10,6 @@ before_install:
 - gem install cocoapods # Since Travis is not always on latest version
 - pod repo update
 script:
+- xcodebuild clean -workspace Example/ios-dpp.xcworkspace -scheme ios-dpp-Example
 - set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/ios-dpp.xcworkspace -scheme ios-dpp-Example -destination 'platform=iOS Simulator,name=iPhone 8' ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint

@@ -17,6 +17,8 @@
 
 #import "DPBaseObject.h"
 
+#import "DPBase58DataEncoder.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DPContract : DPBaseObject
@@ -31,7 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSDictionary<NSString *, DPJSONObject *> *definitions;
 
 - (instancetype)initWithName:(NSString *)name
-                   documents:(NSDictionary<NSString *, DPJSONObject *> *)documents;
+                   documents:(NSDictionary<NSString *, DPJSONObject *> *)documents
+           base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
 - (BOOL)isDocumentDefinedForType:(NSString *)type;
 - (void)setDocumentSchema:(DPJSONObject *)schema forType:(NSString *)type;

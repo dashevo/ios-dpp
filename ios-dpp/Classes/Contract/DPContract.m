@@ -18,7 +18,6 @@
 #import "DPContract.h"
 
 #import "DPSchemaHashUtils.h"
-#import "NSString+DPUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,6 +27,7 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
 
 @interface DPContract ()
 
+@property (strong, nonatomic) id<DPBase58DataEncoder> base58DataEncoder;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, DPJSONObject *> *mutableDocuments;
 
 @end
@@ -35,9 +35,11 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
 @implementation DPContract
 
 - (instancetype)initWithName:(NSString *)name
-                   documents:(NSDictionary<NSString *, DPJSONObject *> *)documents {
+                   documents:(NSDictionary<NSString *, DPJSONObject *> *)documents
+           base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
     self = [super init];
     if (self) {
+        _base58DataEncoder = base58DataEncoder;
         _name = [name copy];
         _version = DEFAULT_VERSION;
         _jsonMetaSchema = DEFAULT_SCHEMA;
@@ -49,7 +51,7 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
 
 - (NSString *)identifier {
     NSData *serializedData = [DPSchemaHashUtils hashOfSerializedObject:self.serialized];
-    return [NSString dp_base58WithData:serializedData];
+    return [self.base58DataEncoder base58WithData:serializedData];
 }
 
 - (NSString *)jsonSchemaId {

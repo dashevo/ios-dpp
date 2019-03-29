@@ -21,7 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DPContractFactory (CreateContract)
 
-+ (DPContract *)dp_contractFromRawContract:(DPJSONObject *)rawContract;
++ (DPContract *)dp_contractFromRawContract:(DPJSONObject *)rawContract
+                         base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
 @end
 

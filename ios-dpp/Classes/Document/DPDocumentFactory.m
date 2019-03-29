@@ -30,6 +30,7 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
 @property (copy, nonatomic) NSString *userId;
 @property (strong, nonatomic) DPContract *contract;
 @property (strong, nonatomic) id<DPEntropyProvider> entropyProvider;
+@property (strong, nonatomic) id<DPBase58DataEncoder> base58DataEncoder;
 
 @end
 
@@ -37,12 +38,14 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
 
 - (instancetype)initWithUserId:(NSString *)userId
                       contract:(DPContract *)contract
-               entropyProvider:(id<DPEntropyProvider>)entropyProvider {
+               entropyProvider:(id<DPEntropyProvider>)entropyProvider
+             base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
     self = [super init];
     if (self) {
         _userId = [userId copy];
         _contract = contract;
         _entropyProvider = entropyProvider;
+        _base58DataEncoder = base58DataEncoder;
     }
     return self;
 }
@@ -81,7 +84,8 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
     rawObject[@"$rev"] = @(DEFAULT_REVISION);
     [rawObject addEntriesFromDictionary:data];
 
-    DPDocument *object = [[DPDocument alloc] initWithRawDocument:rawObject];
+    DPDocument *object = [[DPDocument alloc] initWithRawDocument:rawObject
+                                               base58DataEncoder:self.base58DataEncoder];
 
     return object;
 }
@@ -96,7 +100,8 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
                                            error:(NSError *_Nullable __autoreleasing *)error {
     // TODO: validate rawDocument
 
-    DPDocument *object = [[DPDocument alloc] initWithRawDocument:rawDocument];
+    DPDocument *object = [[DPDocument alloc] initWithRawDocument:rawDocument
+                                               base58DataEncoder:self.base58DataEncoder];
 
     return object;
 }

@@ -29,10 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPSTPacketFacade
 
-- (instancetype)initWithMerkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation {
+- (instancetype)initWithMerkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation
+                          base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
     self = [super init];
     if (self) {
-        _factory = [[DPSTPacketFactory alloc] initWithMerkleRootOperation:merkleRootOperation];
+        _factory = [[DPSTPacketFactory alloc] initWithMerkleRootOperation:merkleRootOperation
+                                                        base58DataEncoder:base58DataEncoder];
     }
     return self;
 }

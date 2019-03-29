@@ -23,14 +23,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface DPContractFactory ()
+
+@property (strong, nonatomic) id<DPBase58DataEncoder> base58DataEncoder;
+
+@end
+
 @implementation DPContractFactory
+
+- (instancetype)initWithBase58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
+    self = [super init];
+    if (self) {
+        _base58DataEncoder = base58DataEncoder;
+    }
+    return self;
+}
 
 - (DPContract *)contractWithName:(NSString *)name
                        documents:(NSDictionary<NSString *, DPJSONObject *> *)documents {
-    DPContract *contract = [self.class dp_contractFromRawContract:@{
+    NSDictionary *rawContract = @{
         @"name" : name,
         @"documents" : documents,
-    }];
+    };
+    DPContract *contract = [self.class dp_contractFromRawContract:rawContract
+                                                base58DataEncoder:self.base58DataEncoder];
 
     return contract;
 }
@@ -45,7 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
                                            error:(NSError *_Nullable __autoreleasing *)error {
     // TODO: validate rawContract
 
-    DPContract *contract = [self.class dp_contractFromRawContract:rawContract];
+    DPContract *contract = [self.class dp_contractFromRawContract:rawContract
+                                                base58DataEncoder:self.base58DataEncoder];
 
     return contract;
 }

@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DPContractFacade : NSObject
 
+- (instancetype)initWithBase58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)init NS_UNAVAILABLE;
+
 - (DPContract *)contractWithName:(NSString *)name
                        documents:(NSDictionary<NSString *, DPJSONObject *> *)documents;
 

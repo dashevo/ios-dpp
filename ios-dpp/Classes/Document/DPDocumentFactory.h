@@ -27,7 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithUserId:(NSString *)userId
                       contract:(DPContract *)contract
-               entropyProvider:(id<DPEntropyProvider>)entropyProvider;
+               entropyProvider:(id<DPEntropyProvider>)entropyProvider
+             base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
 - (nullable DPDocument *)documentWithType:(NSString *)type
                                      data:(nullable DPJSONObject *)data

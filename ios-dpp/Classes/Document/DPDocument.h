@@ -17,6 +17,8 @@
 
 #import "DPBaseObject.h"
 
+#import "DPBase58DataEncoder.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, DPDocumentAction) {
@@ -36,7 +38,8 @@ typedef NS_ENUM(NSUInteger, DPDocumentAction) {
 @property (strong, nonatomic) NSNumber *revision;
 @property (readonly, copy, nonatomic) DPJSONObject *data;
 
-- (instancetype)initWithRawDocument:(DPJSONObject *)rawDocument;
+- (instancetype)initWithRawDocument:(DPJSONObject *)rawDocument
+                  base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
 - (void)setAction:(DPDocumentAction)action error:(NSError *_Nullable __autoreleasing *)error;
 - (void)setData:(DPJSONObject *)data error:(NSError *_Nullable __autoreleasing *)error;

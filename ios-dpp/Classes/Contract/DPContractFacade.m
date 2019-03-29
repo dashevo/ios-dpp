@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPContractFacade
 
-- (instancetype)init {
+- (instancetype)initWithBase58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
     self = [super init];
     if (self) {
-        _factory = [[DPContractFactory alloc] init];
+        _factory = [[DPContractFactory alloc] initWithBase58DataEncoder:base58DataEncoder];
     }
     return self;
 }

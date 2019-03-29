@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -19,9 +19,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSString (DPUtils)
+@protocol DPBase58DataEncoder <NSObject>
 
-+ (nullable NSString *)dp_base58WithData:(NSData *)d;
++ (nullable NSString *)base58WithData:(NSData *)data;
 
 @end
 

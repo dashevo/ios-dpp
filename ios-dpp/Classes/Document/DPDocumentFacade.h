@@ -26,7 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DPDocumentFacade : NSObject
 
 - (instancetype)initWithDPP:(DashPlatformProtocol *)dpp
-            entropyProvider:(id<DPEntropyProvider>)entropyProvider;
+            entropyProvider:(id<DPEntropyProvider>)entropyProvider
+          base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
 - (nullable DPDocument *)documentWithType:(NSString *)type
                                      data:(nullable DPJSONObject *)data

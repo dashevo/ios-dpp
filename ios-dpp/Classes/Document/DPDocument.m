@@ -18,12 +18,12 @@
 #import "DPDocument.h"
 
 #import "DPErrors.h"
-#import "NSString+DPUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DPDocument ()
 
+@property (strong, nonatomic) id<DPBase58DataEncoder> base58DataEncoder;
 @property (assign, nonatomic) DPDocumentAction action;
 @property (copy, nonatomic) DPJSONObject *data;
 
@@ -33,9 +33,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @synthesize identifier = _identifier;
 
-- (instancetype)initWithRawDocument:(DPJSONObject *)rawDocument {
+- (instancetype)initWithRawDocument:(DPJSONObject *)rawDocument
+                  base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
     self = [super init];
     if (self) {
+        _base58DataEncoder = base58DataEncoder;
+
         DPMutableJSONObject *mutableRawObject = [rawDocument mutableCopy];
 
         NSString *type = mutableRawObject[@"$type"];
@@ -74,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
     if (_identifier == nil) {
         NSString *identifierString = [self.scope stringByAppendingString:self.scopeId];
         NSData *data = [identifierString dataUsingEncoding:NSUTF8StringEncoding];
-        _identifier = [NSString dp_base58WithData:data];
+        _identifier = [self.base58DataEncoder base58WithData:data];
     }
     return _identifier;
 }
