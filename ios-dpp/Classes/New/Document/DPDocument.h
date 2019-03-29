@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, DPDocumentAction) {
 
 - (instancetype)initWithRawDocument:(DPJSONObject *)rawDocument;
 
-- (void)setAction:(DPDocumentAction)action error:( NSError * _Nullable __autoreleasing *)error;
+- (void)setAction:(DPDocumentAction)action error:(NSError *_Nullable __autoreleasing *)error;
 - (void)setData:(DPJSONObject *)data error:(NSError *_Nullable __autoreleasing *)error;
 
 @end

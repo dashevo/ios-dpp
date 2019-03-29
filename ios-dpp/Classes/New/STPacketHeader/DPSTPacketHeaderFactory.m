@@ -21,9 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPSTPacketHeaderFactory
 
-- (DPSTPacketHeader *)objectWithContractId:(NSString *)contractId
-                           itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                                 itemsHash:(NSString *)itemsHash {
+- (DPSTPacketHeader *)packetHeaderWithContractId:(NSString *)contractId
+                                 itemsMerkleRoot:(NSString *)itemsMerkleRoot
+                                       itemsHash:(NSString *)itemsHash {
     DPSTPacketHeader *object = [[DPSTPacketHeader alloc] initWithContractId:contractId
                                                             itemsMerkleRoot:itemsMerkleRoot
                                                                   itemsHash:itemsHash];
@@ -31,18 +31,18 @@ NS_ASSUME_NONNULL_BEGIN
     return object;
 }
 
-- (nullable DPSTPacketHeader *)objectWithRawSTPacketHeader:(DPJSONObject *)jsonObject
-                                                     error:(NSError * _Nullable __autoreleasing *)error {
+- (nullable DPSTPacketHeader *)packetHeaderWithContractId:(DPJSONObject *)rawPacketHeader
+                                                    error:(NSError *_Nullable __autoreleasing *)error {
     // TODO: validate jsonObject
 
-    DPSTPacketHeader *object = [self objectWithContractId:jsonObject[@"contractId"]
-                                          itemsMerkleRoot:jsonObject[@"itemsMerkleRoot"]
-                                                itemsHash:jsonObject[@"itemsHash"]];
+    DPSTPacketHeader *object = [self packetHeaderWithContractId:rawPacketHeader[@"contractId"]
+                                                itemsMerkleRoot:rawPacketHeader[@"itemsMerkleRoot"]
+                                                      itemsHash:rawPacketHeader[@"itemsHash"]];
 
     return object;
 }
 
-// TODO: add method to create from cbor
+// TODO: create packet header from cbor
 
 @end
 

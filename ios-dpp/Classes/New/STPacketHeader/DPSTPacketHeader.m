@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - DPPSerializableObject
 
-@synthesize json=_json;
+@synthesize json = _json;
 
 - (DPMutableJSONObject *)json {
     if (_json == nil) {

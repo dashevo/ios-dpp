@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -48,12 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
     if (!factory) {
         return nil;
     }
-    
+
     return [factory documentWithType:type data:data error:error];
 }
 
 - (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
-                                         error:(NSError *_Nullable __autoreleasing *)error {
+                                           error:(NSError *_Nullable __autoreleasing *)error {
     DPDocumentFactory *factory = [self factory];
     NSParameterAssert(factory);
     if (!factory) {
@@ -64,8 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
-                                skipValidation:(BOOL)skipValidation
-                                         error:(NSError *_Nullable __autoreleasing *)error {
+                                  skipValidation:(BOOL)skipValidation
+                                           error:(NSError *_Nullable __autoreleasing *)error {
     DPDocumentFactory *factory = [self factory];
     NSParameterAssert(factory);
     if (!factory) {
@@ -88,11 +88,11 @@ NS_ASSUME_NONNULL_BEGIN
     if (!contract) {
         return nil;
     }
-    
+
     DPDocumentFactory *factory = [[DPDocumentFactory alloc] initWithUserId:userId
                                                                   contract:contract
                                                            entropyProvider:self.entropyProvider];
-    
+
     return factory;
 }
 

@@ -19,17 +19,19 @@
 
 #import "DPContractFactory.h"
 
+#import "DPContractFactory+CreateContract.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPContractFactory
 
 - (DPContract *)contractWithName:(NSString *)name
-                      documents:(NSDictionary<NSString *, DPJSONObject *> *)documents {
-    DPContract *contract = [self.class contractFromRawContract:@{
+                       documents:(NSDictionary<NSString *, DPJSONObject *> *)documents {
+    DPContract *contract = [self.class dp_contractFromRawContract:@{
         @"name" : name,
         @"documents" : documents,
     }];
-    
+
     return contract;
 }
 
@@ -42,40 +44,13 @@ NS_ASSUME_NONNULL_BEGIN
                                   skipValidation:(BOOL)skipValidation
                                            error:(NSError *_Nullable __autoreleasing *)error {
     // TODO: validate rawContract
-    
-    DPContract *contract = [self.class contractFromRawContract:rawContract];
-    
-    return contract;
-}
 
-// TODO add method to create from cbor
-
-#pragma mark - Private
-
-+ (DPContract *)contractFromRawContract:(DPJSONObject *)rawContract {
-    NSString *name = rawContract[@"name"];
-    NSDictionary<NSString *, DPJSONObject *> *documents = rawContract[@"documents"];
-
-    DPContract *contract = [[DPContract alloc] initWithName:name
-                                        documents:documents];
-
-    NSString *jsonMetaSchema = rawContract[@"$schema"];
-    if (jsonMetaSchema) {
-        contract.jsonMetaSchema = jsonMetaSchema;
-    }
-
-    NSNumber *version = rawContract[@"version"];
-    if (version) {
-        contract.version = version.integerValue;
-    }
-
-    NSDictionary<NSString *, DPJSONObject *> *definitions = rawContract[@"definitions"];
-    if (definitions) {
-        contract.definitions = definitions;
-    }
+    DPContract *contract = [self.class dp_contractFromRawContract:rawContract];
 
     return contract;
 }
+
+// TODO create contract from cbor
 
 @end
 

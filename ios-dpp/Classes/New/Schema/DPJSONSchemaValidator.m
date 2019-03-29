@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
     self = [super init];
     if (self) {
         DSMutableJSONSchemaStorage *schemaStorage = [DSMutableJSONSchemaStorage storage];
-        
+
         DSJSONSchema *jsonSchema = [self.class schemaForFilename:@"schema_v7"
                                                 referenceStorage:nil];
         NSAssert(jsonSchema, @"JSON Schema should exists");
@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
             return nil;
         }
         [schemaStorage addSchema:jsonSchema];
-        
+
         DSJSONSchema *dashSchema = [self.class schemaForFilename:@"dash-schema"
                                                 referenceStorage:schemaStorage];
         NSAssert(dashSchema, @"Dash schema should exists");
@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
             return nil;
         }
         [schemaStorage addSchema:dashSchema];
-        
+
         DSJSONSchema *stPacketHeaderSchema = [self.class schemaForFilename:@"st-packet-header"
                                                           referenceStorage:schemaStorage];
         if (!stPacketHeaderSchema) {
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
         }
         NSAssert(stPacketHeaderSchema, @"STPacket Header schema should exists");
         [schemaStorage addSchema:stPacketHeaderSchema];
-        
+
         DSJSONSchema *dpContractSchema = [self.class schemaForFilename:@"dp-contract"
                                                       referenceStorage:schemaStorage];
         NSAssert(dpContractSchema, @"DPContract schema should exists");
@@ -69,11 +69,11 @@ NS_ASSUME_NONNULL_BEGIN
             return nil;
         }
         [schemaStorage addSchema:dpContractSchema];
-        
+
         NSMutableDictionary<NSNumber *, DSJSONSchema *> *schemas = [NSMutableDictionary dictionary];
         schemas[@(DPJSONSchemaValidatorType_DPContract)] = dpContractSchema;
         schemas[@(DPJSONSchemaValidatorType_STPacketHeader)] = stPacketHeaderSchema;
-        
+
         _schemaStorage = [schemaStorage copy];
         _schemas = schemas;
     }
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
     DSJSONSchema *schema = [self schemaForType:type];
     NSError *error = nil;
     [schema validateObject:jsonObject withError:&error];
-    
+
     return error;
 }
 
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
                                       referenceStorage:self.schemaStorage];
                 NSAssert(schema, @"DPObject schema should exists");
                 self.schemas[key] = schema;
-                
+
                 break;
             }
             case DPJSONSchemaValidatorType_STPacket: {
@@ -108,16 +108,16 @@ NS_ASSUME_NONNULL_BEGIN
                                       referenceStorage:self.schemaStorage];
                 NSAssert(schema, @"STPacket schema should exists");
                 self.schemas[key] = schema;
-                
+
                 break;
             }
             default:
                 NSAssert(NO, @"The schema for type %ld should have been instantiated during -init", type);
-                
+
                 break;
         }
     }
-    
+
     return schema;
 }
 
@@ -127,10 +127,10 @@ NS_ASSUME_NONNULL_BEGIN
     NSURL *url = [[NSBundle ds_dashSchemaBundle] URLForResource:filename
                                                   withExtension:@"json"];
     NSAssert(url, @"The resource `%@` not found in application bundle", filename);
-    
+
     NSData *data = [NSData dataWithContentsOfURL:url];
     NSAssert(data, @"Invalid data object at `%@`", url);
-    
+
     NSError *error = nil;
     NSDictionary<NSString *, id> *json = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:(NSJSONReadingOptions)kNilOptions
@@ -151,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                     error:&error];
     NSAssert(error == nil, @"Failed to instantiate JSON schema: %@", schemaObject);
     NSAssert(schema, @"Failed to instantiate JSON schema: %@", schemaObject);
-    
+
     return schema;
 }
 
@@ -160,7 +160,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSDictionary<NSString *, id> *schemaObject = [self schemaJSONObjectForFilename:filename];
     DSJSONSchema *schema = [self schemaForSchemaObject:schemaObject
                                       referenceStorage:referenceStorage];
-    
+
     return schema;
 }
 

@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -15,11 +15,13 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "DPContractFactory.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPBaseObjectFactory : NSObject
+@interface DPContractFactory (CreateContract)
+
++ (DPContract *)dp_contractFromRawContract:(DPJSONObject *)rawContract;
 
 @end
 

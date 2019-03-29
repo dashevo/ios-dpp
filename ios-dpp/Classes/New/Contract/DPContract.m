@@ -71,16 +71,16 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
     [self resetSerializedValues];
 }
 
-- (NSDictionary<NSString *,DPJSONObject *> *)documents {
+- (NSDictionary<NSString *, DPJSONObject *> *)documents {
     return [self.mutableDocuments copy];
 }
 
-- (void)setDocuments:(NSDictionary<NSString *,DPJSONObject *> *)documents {
+- (void)setDocuments:(NSDictionary<NSString *, DPJSONObject *> *)documents {
     _mutableDocuments = [documents mutableCopy];
     [self resetSerializedValues];
 }
 
-- (void)setDefinitions:(NSDictionary<NSString *,DPJSONObject *> *)definitions {
+- (void)setDefinitions:(NSDictionary<NSString *, DPJSONObject *> *)definitions {
     _definitions = [definitions copy];
     [self resetSerializedValues];
 }
@@ -120,7 +120,7 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
     if (!type) {
         return nil;
     }
-    
+
     if (![self isDocumentDefinedForType:type]) {
         return nil;
     }

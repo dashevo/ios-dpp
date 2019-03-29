@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -29,8 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPContractFacade
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         _factory = [[DPContractFactory alloc] init];

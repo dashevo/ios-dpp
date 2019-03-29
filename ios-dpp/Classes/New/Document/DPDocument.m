@@ -86,10 +86,10 @@ NS_ASSUME_NONNULL_BEGIN
                                          code:DPErrorCode_DataIsNotAllowedWithActionDelete
                                      userInfo:@{NSDebugDescriptionErrorKey : self}];
         }
-        
+
         return;
     }
-    
+
     _action = action;
     [self resetSerializedValues];
 }
@@ -106,10 +106,10 @@ NS_ASSUME_NONNULL_BEGIN
                                          code:DPErrorCode_DataIsNotAllowedWithActionDelete
                                      userInfo:@{NSDebugDescriptionErrorKey : self}];
         }
-        
+
         return;
     }
-    
+
     _data = data;
     [self resetSerializedValues];
 }

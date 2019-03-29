@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -37,17 +37,17 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (DPSTPacketHeader *)objectWithContractId:(NSString *)contractId
-                           itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                                 itemsHash:(NSString *)itemsHash {
-    return [self.factory objectWithContractId:contractId
-                              itemsMerkleRoot:itemsMerkleRoot
-                                    itemsHash:itemsHash];
+- (DPSTPacketHeader *)packetHeaderWithContractId:(NSString *)contractId
+                                 itemsMerkleRoot:(NSString *)itemsMerkleRoot
+                                       itemsHash:(NSString *)itemsHash {
+    return [self.factory packetHeaderWithContractId:contractId
+                                    itemsMerkleRoot:itemsMerkleRoot
+                                          itemsHash:itemsHash];
 }
 
-- (nullable DPSTPacketHeader *)objectWithRawSTPacketHeader:(DPJSONObject *)jsonObject
-                                                     error:(NSError *_Nullable __autoreleasing *)error {
-    return [self.factory objectWithRawSTPacketHeader:jsonObject error:error];
+- (nullable DPSTPacketHeader *)packetHeaderWithContractId:(DPJSONObject *)rawPacketHeader
+                                                    error:(NSError *_Nullable __autoreleasing *)error {
+    return [self.factory packetHeaderWithContractId:rawPacketHeader error:error];
 }
 
 

@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, DPErrorCode) {
     DPErrorCode_DataIsNotAllowedWithActionDelete,
     DPErrorCode_InvalidDPObject,
     DPErrorCode_InvalidDocumentType,
+    DPErrorCode_ContractAndDocumentsNotAllowedSamePacket,
 };
 
 NS_ASSUME_NONNULL_END

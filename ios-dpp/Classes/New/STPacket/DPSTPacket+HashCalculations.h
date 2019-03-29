@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -15,11 +15,16 @@
 //  limitations under the License.
 //
 
-#import "DPBaseObjectFactory.h"
+#import "DPSTPacket.h"
+
+#import "DPMerkleRootOperation.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation DPBaseObjectFactory
+@interface DPSTPacket (HashCalculations)
+
+- (nullable NSString *)dp_calculateItemsMerkleRootWithOperation:(id<DPMerkleRootOperation>)merkleRootOperation;
+- (nullable NSString *)dp_calculateItemsHash;
 
 @end
 

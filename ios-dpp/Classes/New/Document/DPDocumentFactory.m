@@ -36,8 +36,8 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
 @implementation DPDocumentFactory
 
 - (instancetype)initWithUserId:(NSString *)userId
-                         contract:(DPContract *)contract
-                  entropyProvider:(id<DPEntropyProvider>)entropyProvider {
+                      contract:(DPContract *)contract
+               entropyProvider:(id<DPEntropyProvider>)entropyProvider {
     self = [super init];
     if (self) {
         _userId = [userId copy];
@@ -48,8 +48,8 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
 }
 
 - (nullable DPDocument *)documentWithType:(NSString *)type
-                                 data:(nullable DPJSONObject *)data
-                                error:(NSError *_Nullable __autoreleasing *)error {
+                                     data:(nullable DPJSONObject *)data
+                                    error:(NSError *_Nullable __autoreleasing *)error {
     NSParameterAssert(type);
 
     if (!data) {
@@ -60,12 +60,13 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
         if (error != NULL) {
             *error = [NSError errorWithDomain:DPErrorDomain
                                          code:DPErrorCode_InvalidDocumentType
-                                     userInfo:@{ NSLocalizedDescriptionKey :
-                                                     [NSString stringWithFormat:@"Contract '%@' doesn't contain type '%@'",
-                                                                                self.contract.name, type],
+                                     userInfo:@{
+                                         NSLocalizedDescriptionKey :
+                                             [NSString stringWithFormat:@"Contract '%@' doesn't contain type '%@'",
+                                                                        self.contract.name, type],
                                      }];
         }
-        
+
         return nil;
     }
 
@@ -79,20 +80,20 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
     rawObject[@"$action"] = @(DEFAULT_ACTION);
     rawObject[@"$rev"] = @(DEFAULT_REVISION);
     [rawObject addEntriesFromDictionary:data];
-    
+
     DPDocument *object = [[DPDocument alloc] initWithRawDocument:rawObject];
-    
+
     return object;
 }
 
 - (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
-                                     error:(NSError *_Nullable __autoreleasing *)error {
+                                           error:(NSError *_Nullable __autoreleasing *)error {
     return [self documentFromRawDocument:rawDocument skipValidation:NO error:error];
 }
 
 - (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
-                            skipValidation:(BOOL)skipValidation
-                                     error:(NSError *_Nullable __autoreleasing *)error {
+                                  skipValidation:(BOOL)skipValidation
+                                           error:(NSError *_Nullable __autoreleasing *)error {
     // TODO: validate rawDocument
 
     DPDocument *object = [[DPDocument alloc] initWithRawDocument:rawDocument];
