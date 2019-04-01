@@ -19,8 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// TODO: rename DPSerializeUtils
-@interface DPSchemaHashUtils : NSObject
+@interface DPSerializeUtils : NSObject
 
 + (nullable NSData *)serializeObject:(NSObject *)object;
 + (nullable NSData *)hashOfSerializedObject:(NSData *)data;

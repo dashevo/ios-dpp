@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithContractId:(NSString *)contractId
                    itemsMerkleRoot:(NSString *)itemsMerkleRoot
                          itemsHash:(NSString *)itemsHash {
+    NSParameterAssert(contractId);
+    NSParameterAssert(itemsMerkleRoot);
+    NSParameterAssert(itemsHash);
+
     self = [super init];
     if (self) {
         _contractId = [contractId copy];

@@ -35,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithRawDocument:(DPJSONObject *)rawDocument
                   base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
+    NSParameterAssert(rawDocument);
+    NSParameterAssert(base58DataEncoder);
+
     self = [super init];
     if (self) {
         _base58DataEncoder = base58DataEncoder;
@@ -103,6 +106,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)setData:(DPJSONObject *)data error:(NSError *_Nullable __autoreleasing *)error {
+    NSParameterAssert(data);
+
     if (self.action == DPDocumentAction_Delete && data.count != 0) {
         if (error != NULL) {
             *error = [NSError errorWithDomain:DPErrorDomain

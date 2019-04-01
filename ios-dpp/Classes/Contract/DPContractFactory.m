@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation DPContractFactory
 
 - (instancetype)initWithBase58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
+    NSParameterAssert(base58DataEncoder);
+
     self = [super init];
     if (self) {
         _base58DataEncoder = base58DataEncoder;
@@ -43,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (DPContract *)contractWithName:(NSString *)name
                        documents:(NSDictionary<NSString *, DPJSONObject *> *)documents {
+    NSParameterAssert(name);
+    NSParameterAssert(documents);
+
     NSDictionary *rawContract = @{
         @"name" : name,
         @"documents" : documents,
@@ -61,6 +66,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable DPContract *)contractFromRawContract:(DPJSONObject *)rawContract
                                   skipValidation:(BOOL)skipValidation
                                            error:(NSError *_Nullable __autoreleasing *)error {
+    NSParameterAssert(rawContract);
+
     // TODO: validate rawContract
 
     DPContract *contract = [self.class dp_contractFromRawContract:rawContract

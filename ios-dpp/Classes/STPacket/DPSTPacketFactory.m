@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithMerkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation
                           base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
+    NSParameterAssert(merkleRootOperation);
+    NSParameterAssert(base58DataEncoder);
+
     self = [super init];
     if (self) {
         _merkleRootOperation = merkleRootOperation;

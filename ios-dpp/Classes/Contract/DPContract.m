@@ -17,7 +17,7 @@
 
 #import "DPContract.h"
 
-#import "DPSchemaHashUtils.h"
+#import "DPSerializeUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,6 +37,10 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
 - (instancetype)initWithName:(NSString *)name
                    documents:(NSDictionary<NSString *, DPJSONObject *> *)documents
            base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
+    NSParameterAssert(name);
+    NSParameterAssert(documents);
+    NSParameterAssert(base58DataEncoder);
+
     self = [super init];
     if (self) {
         _base58DataEncoder = base58DataEncoder;
@@ -50,7 +54,7 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
 }
 
 - (NSString *)identifier {
-    NSData *serializedData = [DPSchemaHashUtils hashOfSerializedObject:self.serialized];
+    NSData *serializedData = [DPSerializeUtils hashOfSerializedObject:self.serialized];
     return [self.base58DataEncoder base58WithData:serializedData];
 }
 

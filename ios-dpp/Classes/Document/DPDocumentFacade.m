@@ -34,6 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDPP:(DashPlatformProtocol *)dpp
             entropyProvider:(id<DPEntropyProvider>)entropyProvider
           base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
+    NSParameterAssert(dpp);
+    NSParameterAssert(entropyProvider);
+    NSParameterAssert(base58DataEncoder);
+
     self = [super init];
     if (self) {
         _dpp = dpp;

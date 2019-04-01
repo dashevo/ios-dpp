@@ -34,6 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithContractId:(NSString *)contractId
                merkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation {
+    NSParameterAssert(contractId);
+    NSParameterAssert(merkleRootOperation);
+
     self = [super init];
     if (self) {
         _merkleRootOperation = merkleRootOperation;
@@ -46,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithContract:(DPContract *)contract
              merkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation {
+    NSParameterAssert(contract);
+    NSParameterAssert(merkleRootOperation);
+
     self = [self initWithContractId:contract.identifier merkleRootOperation:merkleRootOperation];
     if (self) {
         _contracts = @[ contract ];
@@ -56,6 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithContractId:(NSString *)contractId
                          documents:(NSArray<DPDocument *> *)documents
                merkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation {
+    NSParameterAssert(contractId);
+    NSParameterAssert(documents);
+    NSParameterAssert(merkleRootOperation);
+
     self = [self initWithContractId:contractId merkleRootOperation:merkleRootOperation];
     if (self) {
         _mutableDocuments = [documents mutableCopy];

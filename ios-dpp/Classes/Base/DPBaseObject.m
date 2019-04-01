@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -17,7 +17,7 @@
 
 #import "DPBaseObject.h"
 
-#import "DPSchemaHashUtils.h"
+#import "DPSerializeUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - DPPSerializableObject
 
-@synthesize serialized=_serialized;
-@synthesize serializedHash=_serializedHash;
+@synthesize serialized = _serialized;
+@synthesize serializedHash = _serializedHash;
 
 - (DPMutableJSONObject *)json {
     NSAssert(NO, @"Should be overriden in subclass");
@@ -40,14 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSData *)serialized {
     if (_serialized == nil) {
-        _serialized = [DPSchemaHashUtils serializeObject:self.json];
+        _serialized = [DPSerializeUtils serializeObject:self.json];
     }
     return _serialized;
 }
 
 - (NSData *)serializedHash {
     if (_serializedHash == nil) {
-        _serializedHash = [DPSchemaHashUtils hashOfSerializedObject:self.serialized];
+        _serializedHash = [DPSerializeUtils hashOfSerializedObject:self.serialized];
     }
     return _serializedHash;
 }

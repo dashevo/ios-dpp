@@ -17,7 +17,7 @@
 
 #import "DPSTPacket+HashCalculations.h"
 
-#import "DPSchemaHashUtils.h"
+#import "DPSerializeUtils.h"
 #import <TinyCborObjc/NSObject+DSCborEncoding.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
         @"contracts" : contractsHashes,
     };
 
-    NSString *hash = [DPSchemaHashUtils hashStringOfObject:itemsHashesDictionary];
+    NSString *hash = [DPSerializeUtils hashStringOfObject:itemsHashesDictionary];
 
     return hash;
 }

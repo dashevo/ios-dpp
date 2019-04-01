@@ -18,7 +18,7 @@
 #import "DPDocumentFactory.h"
 
 #import "DPErrors.h"
-#import "DPSchemaHashUtils.h"
+#import "DPSerializeUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,6 +40,11 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
                       contract:(DPContract *)contract
                entropyProvider:(id<DPEntropyProvider>)entropyProvider
              base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder {
+    NSParameterAssert(userId);
+    NSParameterAssert(contract);
+    NSParameterAssert(entropyProvider);
+    NSParameterAssert(base58DataEncoder);
+
     self = [super init];
     if (self) {
         _userId = [userId copy];
@@ -76,7 +81,7 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
     }
 
     NSString *scopeString = [self.contract.identifier stringByAppendingString:self.userId];
-    NSString *scopeStringHash = [DPSchemaHashUtils hashStringOfObject:scopeString];
+    NSString *scopeStringHash = [DPSerializeUtils hashStringOfObject:scopeString];
 
     DPMutableJSONObject *rawObject = [[DPMutableJSONObject alloc] init];
     rawObject[@"$type"] = type;
@@ -100,6 +105,8 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
 - (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
                                   skipValidation:(BOOL)skipValidation
                                            error:(NSError *_Nullable __autoreleasing *)error {
+    NSParameterAssert(rawDocument);
+
     // TODO: validate rawDocument
 
     DPDocument *object = [[DPDocument alloc] initWithRawDocument:rawDocument

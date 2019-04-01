@@ -26,6 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (DPSTPacketHeader *)packetHeaderWithContractId:(NSString *)contractId
                                  itemsMerkleRoot:(NSString *)itemsMerkleRoot
                                        itemsHash:(NSString *)itemsHash {
+    NSParameterAssert(contractId);
+    NSParameterAssert(itemsMerkleRoot);
+    NSParameterAssert(itemsHash);
+
     DPSTPacketHeader *object = [[DPSTPacketHeader alloc] initWithContractId:contractId
                                                             itemsMerkleRoot:itemsMerkleRoot
                                                                   itemsHash:itemsHash];
@@ -35,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable DPSTPacketHeader *)packetHeaderWithContractId:(DPJSONObject *)rawPacketHeader
                                                     error:(NSError *_Nullable __autoreleasing *)error {
+    NSParameterAssert(rawPacketHeader);
+
     // TODO: validate jsonObject
 
     DPSTPacketHeader *object = [self packetHeaderWithContractId:rawPacketHeader[@"contractId"]

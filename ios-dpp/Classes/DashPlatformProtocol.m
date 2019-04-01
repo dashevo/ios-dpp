@@ -38,6 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBase58DataEncode:(id<DPBase58DataEncoder>)base58DataEncoder
                          entropyProvider:(id<DPEntropyProvider>)entropyProvider
                      merkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation {
+    NSParameterAssert(base58DataEncoder);
+    NSParameterAssert(entropyProvider);
+    NSParameterAssert(merkleRootOperation);
+
     self = [super init];
     if (self) {
         _contractFacade = [[DPContractFacade alloc] initWithBase58DataEncoder:base58DataEncoder];
