@@ -55,6 +55,17 @@ NS_ASSUME_NONNULL_BEGIN
     return [self.factory contractFromRawContract:rawContract skipValidation:skipValidation error:error];
 }
 
+- (nullable DPContract *)contractFromSerialized:(NSData *)data
+                                          error:(NSError *_Nullable __autoreleasing *)error {
+    return [self.factory contractFromSerialized:data error:error];
+}
+
+- (nullable DPContract *)contractFromSerialized:(NSData *)data
+                                 skipValidation:(BOOL)skipValidation
+                                          error:(NSError *_Nullable __autoreleasing *)error {
+    return [self.factory contractFromSerialized:data skipValidation:skipValidation error:error];
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

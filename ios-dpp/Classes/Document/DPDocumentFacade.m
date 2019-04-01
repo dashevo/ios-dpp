@@ -84,6 +84,30 @@ NS_ASSUME_NONNULL_BEGIN
     return [factory documentFromRawDocument:rawDocument skipValidation:skipValidation error:error];
 }
 
+
+- (nullable DPDocument *)documentFromSerialized:(NSData *)data
+                                          error:(NSError *_Nullable __autoreleasing *)error {
+    DPDocumentFactory *factory = [self factory];
+    NSParameterAssert(factory);
+    if (!factory) {
+        return nil;
+    }
+
+    return [factory documentFromSerialized:data error:error];
+}
+
+- (nullable DPDocument *)documentFromSerialized:(NSData *)data
+                                 skipValidation:(BOOL)skipValidation
+                                          error:(NSError *_Nullable __autoreleasing *)error {
+    DPDocumentFactory *factory = [self factory];
+    NSParameterAssert(factory);
+    if (!factory) {
+        return nil;
+    }
+
+    return [factory documentFromSerialized:data skipValidation:skipValidation error:error];
+}
+
 #pragma mark - Private
 
 - (nullable DPDocumentFactory *)factory {
@@ -105,7 +129,6 @@ NS_ASSUME_NONNULL_BEGIN
 
     return factory;
 }
-
 
 @end
 

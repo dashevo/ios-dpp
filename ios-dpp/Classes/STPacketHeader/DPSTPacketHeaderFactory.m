@@ -17,6 +17,8 @@
 
 #import "DPSTPacketHeaderFactory.h"
 
+#import "DPSerializeUtils.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPSTPacketHeaderFactory
@@ -37,11 +39,17 @@ NS_ASSUME_NONNULL_BEGIN
     return object;
 }
 
-- (nullable DPSTPacketHeader *)packetHeaderWithContractId:(DPJSONObject *)rawPacketHeader
-                                                    error:(NSError *_Nullable __autoreleasing *)error {
+- (nullable DPSTPacketHeader *)packetHeaderFromRawPacketHeader:(DPJSONObject *)rawPacketHeader
+                                                         error:(NSError *_Nullable __autoreleasing *)error {
+    return [self packetHeaderFromRawPacketHeader:rawPacketHeader skipValidation:NO error:error];
+}
+
+- (nullable DPSTPacketHeader *)packetHeaderFromRawPacketHeader:(DPJSONObject *)rawPacketHeader
+                                                skipValidation:(BOOL)skipValidation
+                                                         error:(NSError *_Nullable __autoreleasing *)error {
     NSParameterAssert(rawPacketHeader);
 
-    // TODO: validate jsonObject
+    // TODO: validate rawPacketHeader
 
     DPSTPacketHeader *object = [self packetHeaderWithContractId:rawPacketHeader[@"contractId"]
                                                 itemsMerkleRoot:rawPacketHeader[@"itemsMerkleRoot"]
@@ -50,7 +58,26 @@ NS_ASSUME_NONNULL_BEGIN
     return object;
 }
 
-// TODO: create packet header from cbor
+- (nullable DPSTPacketHeader *)packetHeaderFromSerialized:(NSData *)data
+                                                    error:(NSError *_Nullable __autoreleasing *)error {
+    return [self packetHeaderFromSerialized:data skipValidation:NO error:error];
+}
+
+- (nullable DPSTPacketHeader *)packetHeaderFromSerialized:(NSData *)data
+                                           skipValidation:(BOOL)skipValidation
+                                                    error:(NSError *_Nullable __autoreleasing *)error {
+    NSParameterAssert(data);
+
+    DPJSONObject *rawPacketHeader = [DPSerializeUtils decodeSerializedObject:data
+                                                                       error:error];
+    if (!rawPacketHeader) {
+        return nil;
+    }
+
+    return [self packetHeaderFromRawPacketHeader:rawPacketHeader
+                                  skipValidation:skipValidation
+                                           error:error];
+}
 
 @end
 

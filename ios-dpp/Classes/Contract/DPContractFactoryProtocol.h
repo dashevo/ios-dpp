@@ -31,6 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
                                   skipValidation:(BOOL)skipValidation
                                            error:(NSError *_Nullable __autoreleasing *)error;
 
+- (nullable DPContract *)contractFromSerialized:(NSData *)data
+                                          error:(NSError *_Nullable __autoreleasing *)error;
+
+- (nullable DPContract *)contractFromSerialized:(NSData *)data
+                                 skipValidation:(BOOL)skipValidation
+                                          error:(NSError *_Nullable __autoreleasing *)error;
+
 @end
 
 NS_ASSUME_NONNULL_END

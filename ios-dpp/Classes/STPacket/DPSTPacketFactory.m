@@ -18,6 +18,7 @@
 #import "DPSTPacketFactory.h"
 
 #import "DPContractFactory+CreateContract.h"
+#import "DPSerializeUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -66,12 +67,12 @@ NS_ASSUME_NONNULL_BEGIN
     return packet;
 }
 
-- (nullable DPSTPacket *)packetWithRawPacket:(DPJSONObject *)rawPacket
+- (nullable DPSTPacket *)packetFromRawPacket:(DPJSONObject *)rawPacket
                                        error:(NSError *_Nullable __autoreleasing *)error {
-    return [self packetWithRawPacket:rawPacket skipValidation:NO error:error];
+    return [self packetFromRawPacket:rawPacket skipValidation:NO error:error];
 }
 
-- (nullable DPSTPacket *)packetWithRawPacket:(DPJSONObject *)rawPacket
+- (nullable DPSTPacket *)packetFromRawPacket:(DPJSONObject *)rawPacket
                               skipValidation:(BOOL)skipValidation
                                        error:(NSError *_Nullable __autoreleasing *)error {
     NSParameterAssert(rawPacket);
@@ -112,7 +113,27 @@ NS_ASSUME_NONNULL_BEGIN
     return packet;
 }
 
-// TODO: create packet from cbor
+- (nullable DPSTPacket *)packetFromSerialized:(NSData *)data
+                                        error:(NSError *_Nullable __autoreleasing *)error {
+    return [self packetFromSerialized:data skipValidation:NO error:error];
+}
+
+- (nullable DPSTPacket *)packetFromSerialized:(NSData *)data
+                               skipValidation:(BOOL)skipValidation
+                                        error:(NSError *_Nullable __autoreleasing *)error {
+    NSParameterAssert(data);
+
+    DPJSONObject *rawPacket = [DPSerializeUtils decodeSerializedObject:data
+                                                                 error:error];
+    if (!rawPacket) {
+        return nil;
+    }
+
+    return [self packetFromRawPacket:rawPacket
+                      skipValidation:skipValidation
+                               error:error];
+}
+
 
 @end
 

@@ -34,6 +34,13 @@ NS_ASSUME_NONNULL_BEGIN
                                   skipValidation:(BOOL)skipValidation
                                            error:(NSError *_Nullable __autoreleasing *)error;
 
+- (nullable DPDocument *)documentFromSerialized:(NSData *)data
+                                          error:(NSError *_Nullable __autoreleasing *)error;
+
+- (nullable DPDocument *)documentFromSerialized:(NSData *)data
+                                 skipValidation:(BOOL)skipValidation
+                                          error:(NSError *_Nullable __autoreleasing *)error;
+
 @end
 
 NS_ASSUME_NONNULL_END

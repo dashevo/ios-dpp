@@ -20,6 +20,7 @@
 #import "DPContractFactory.h"
 
 #import "DPContractFactory+CreateContract.h"
+#import "DPSerializeUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -76,7 +77,26 @@ NS_ASSUME_NONNULL_BEGIN
     return contract;
 }
 
-// TODO: create contract from cbor
+- (nullable DPContract *)contractFromSerialized:(NSData *)data
+                                          error:(NSError *_Nullable __autoreleasing *)error {
+    return [self contractFromSerialized:data skipValidation:NO error:error];
+}
+
+- (nullable DPContract *)contractFromSerialized:(NSData *)data
+                                 skipValidation:(BOOL)skipValidation
+                                          error:(NSError *_Nullable __autoreleasing *)error {
+    NSParameterAssert(data);
+
+    DPJSONObject *rawContract = [DPSerializeUtils decodeSerializedObject:data
+                                                                   error:error];
+    if (!rawContract) {
+        return nil;
+    }
+
+    return [self contractFromRawContract:rawContract
+                          skipValidation:skipValidation
+                                   error:error];
+}
 
 @end
 

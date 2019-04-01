@@ -115,7 +115,26 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
     return object;
 }
 
-// TODO: create document from cbor
+- (nullable DPDocument *)documentFromSerialized:(NSData *)data
+                                          error:(NSError *_Nullable __autoreleasing *)error {
+    return [self documentFromSerialized:data skipValidation:NO error:error];
+}
+
+- (nullable DPDocument *)documentFromSerialized:(NSData *)data
+                                 skipValidation:(BOOL)skipValidation
+                                          error:(NSError *_Nullable __autoreleasing *)error {
+    NSParameterAssert(data);
+
+    DPJSONObject *rawDocument = [DPSerializeUtils decodeSerializedObject:data
+                                                                   error:error];
+    if (!rawDocument) {
+        return nil;
+    }
+
+    return [self documentFromRawDocument:rawDocument
+                          skipValidation:skipValidation
+                                   error:error];
+}
 
 @end
 

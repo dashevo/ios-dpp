@@ -17,10 +17,30 @@
 
 #import "DPSerializeUtils.h"
 
-#import "NSData+DPSchemaUtils.h"
+#import <TinyCborObjc/NSData+DSCborDecoding.h>
 #import <TinyCborObjc/NSObject+DSCborEncoding.h>
 
+#import "NSData+DPSchemaUtils.h"
+
 NS_ASSUME_NONNULL_BEGIN
+
+static _Nullable id DecodeCborData(NSData *data, size_t outBufferSize, NSError *_Nullable __autoreleasing *error) {
+    const size_t MAX_BUFFER_SIZE = 1024 * 1024 * 4; // 4 Mb
+
+    NSError *decodingError = nil;
+    id decoded = [data ds_decodeCborWithOutBufferSize:outBufferSize error:&decodingError];
+    if ([decodingError.domain isEqualToString:DSTinyCborDecodingErrorDomain] &&
+        decodingError.code == 4 /* CborErrorIO */ &&
+        outBufferSize <= MAX_BUFFER_SIZE) {
+        return DecodeCborData(data, outBufferSize * 2, error);
+    }
+
+    if (error != NULL) {
+        *error = decodingError;
+    }
+
+    return decoded;
+}
 
 @implementation DPSerializeUtils
 
@@ -53,6 +73,11 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *sha256String = [hash ds_hexStringFromData];
 
     return sha256String;
+}
+
++ (nullable id)decodeSerializedObject:(NSData *)data error:(NSError *_Nullable __autoreleasing *)error {
+    const size_t START_BUFFER_SIZE = 1024; // 1 Kb
+    return DecodeCborData(data, START_BUFFER_SIZE, error);
 }
 
 @end

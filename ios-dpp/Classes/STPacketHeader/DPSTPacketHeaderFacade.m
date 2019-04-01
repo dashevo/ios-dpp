@@ -47,11 +47,27 @@ NS_ASSUME_NONNULL_BEGIN
                                           itemsHash:itemsHash];
 }
 
-- (nullable DPSTPacketHeader *)packetHeaderWithContractId:(DPJSONObject *)rawPacketHeader
-                                                    error:(NSError *_Nullable __autoreleasing *)error {
-    return [self.factory packetHeaderWithContractId:rawPacketHeader error:error];
+- (nullable DPSTPacketHeader *)packetHeaderFromRawPacketHeader:(DPJSONObject *)rawPacketHeader
+                                                         error:(NSError *_Nullable __autoreleasing *)error {
+    return [self.factory packetHeaderFromRawPacketHeader:rawPacketHeader error:error];
 }
 
+- (nullable DPSTPacketHeader *)packetHeaderFromRawPacketHeader:(DPJSONObject *)rawPacketHeader
+                                                skipValidation:(BOOL)skipValidation
+                                                         error:(NSError *_Nullable __autoreleasing *)error {
+    return [self.factory packetHeaderFromRawPacketHeader:rawPacketHeader skipValidation:skipValidation error:error];
+}
+
+- (nullable DPSTPacketHeader *)packetHeaderFromSerialized:(NSData *)data
+                                                    error:(NSError *_Nullable __autoreleasing *)error {
+    return [self.factory packetHeaderFromSerialized:data error:error];
+}
+
+- (nullable DPSTPacketHeader *)packetHeaderFromSerialized:(NSData *)data
+                                           skipValidation:(BOOL)skipValidation
+                                                    error:(NSError *_Nullable __autoreleasing *)error {
+    return [self.factory packetHeaderFromSerialized:data skipValidation:skipValidation error:error];
+}
 
 @end
 

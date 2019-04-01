@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSData *)hashOfSerializedObject:(NSData *)data;
 + (nullable NSData *)hashOfObject:(NSObject *)object;
 + (nullable NSString *)hashStringOfObject:(NSObject *)object;
++ (nullable id)decodeSerializedObject:(NSData *)data error:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 
