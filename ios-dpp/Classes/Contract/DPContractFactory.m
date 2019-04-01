@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+#pragma mark - DPContractFactory
+
 - (DPContract *)contractWithName:(NSString *)name
                        documents:(NSDictionary<NSString *, DPJSONObject *> *)documents {
     NSDictionary *rawContract = @{

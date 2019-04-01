@@ -15,17 +15,21 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
-
-#import "DPSTPacketFactoryProtocol.h"
+#import "DPContract.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketFactory : NSObject <DPSTPacketFactory>
+@protocol DPContractFactory <NSObject>
 
-- (instancetype)initWithMerkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation
-                          base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
-- (instancetype)init NS_UNAVAILABLE;
+- (DPContract *)contractWithName:(NSString *)name
+                       documents:(NSDictionary<NSString *, DPJSONObject *> *)documents;
+
+- (nullable DPContract *)contractFromRawContract:(DPJSONObject *)rawContract
+                                           error:(NSError *_Nullable __autoreleasing *)error;
+
+- (nullable DPContract *)contractFromRawContract:(DPJSONObject *)rawContract
+                                  skipValidation:(BOOL)skipValidation
+                                           error:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 

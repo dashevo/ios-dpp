@@ -41,6 +41,8 @@ typedef NS_ENUM(NSUInteger, DPDocumentAction) {
 - (instancetype)initWithRawDocument:(DPJSONObject *)rawDocument
                   base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (void)setAction:(DPDocumentAction)action error:(NSError *_Nullable __autoreleasing *)error;
 - (void)setData:(DPJSONObject *)data error:(NSError *_Nullable __autoreleasing *)error;
 

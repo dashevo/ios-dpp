@@ -17,18 +17,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DPSTPacketHeader.h"
+#import "DPSTPacketHeaderFactoryProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketHeaderFactory : NSObject
-
-- (DPSTPacketHeader *)packetHeaderWithContractId:(NSString *)contractId
-                                 itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                                       itemsHash:(NSString *)itemsHash;
-
-- (nullable DPSTPacketHeader *)packetHeaderWithContractId:(DPJSONObject *)rawPacketHeader
-                                                    error:(NSError *_Nullable __autoreleasing *)error;
+@interface DPSTPacketHeaderFactory : NSObject <DPSTPacketHeaderFactory>
 
 @end
 

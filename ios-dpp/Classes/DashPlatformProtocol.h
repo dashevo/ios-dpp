@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -17,14 +17,30 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DPContract.h"
+#import "DPContractFactoryProtocol.h"
+#import "DPDocumentFactoryProtocol.h"
+#import "DPEntropyProvider.h"
+#import "DPMerkleRootOperation.h"
+#import "DPSTPacketFactoryProtocol.h"
+#import "DPSTPacketHeaderFactoryProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DashPlatformProtocol : NSObject
 
 @property (nullable, copy, nonatomic) NSString *userId;
-@property (nullable, copy, nonatomic) DPContract *contract;
+@property (nullable, strong, nonatomic) DPContract *contract;
+
+@property (readonly, strong, nonatomic) id<DPContractFactory> contractFactory;
+@property (readonly, strong, nonatomic) id<DPDocumentFactory> documentFactory;
+@property (readonly, strong, nonatomic) id<DPSTPacketFactory> stPacketFactory;
+@property (readonly, strong, nonatomic) id<DPSTPacketHeaderFactory> stPacketHeaderFactory;
+
+- (instancetype)initWithBase58DataEncode:(id<DPBase58DataEncoder>)base58DataEncoder
+                         entropyProvider:(id<DPEntropyProvider>)entropyProvider
+                     merkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

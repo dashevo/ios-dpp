@@ -1,4 +1,4 @@
-//  
+//
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -17,9 +17,55 @@
 
 #import "DashPlatformProtocol.h"
 
+#import "DPContractFacade.h"
+#import "DPDocumentFacade.h"
+#import "DPSTPacketFacade.h"
+#import "DPSTPacketHeaderFacade.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
+@interface DashPlatformProtocol ()
+
+@property (strong, nonatomic) DPContractFacade *contractFacade;
+@property (strong, nonatomic) DPDocumentFacade *documentFacade;
+@property (strong, nonatomic) DPSTPacketFacade *stPacketFacade;
+@property (strong, nonatomic) DPSTPacketHeaderFacade *stPacketHeaderFacade;
+
+@end
+
 @implementation DashPlatformProtocol
+
+- (instancetype)initWithBase58DataEncode:(id<DPBase58DataEncoder>)base58DataEncoder
+                         entropyProvider:(id<DPEntropyProvider>)entropyProvider
+                     merkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation {
+    self = [super init];
+    if (self) {
+        _contractFacade = [[DPContractFacade alloc] initWithBase58DataEncoder:base58DataEncoder];
+        _documentFacade = [[DPDocumentFacade alloc] initWithDPP:self
+                                                entropyProvider:entropyProvider
+                                              base58DataEncoder:base58DataEncoder];
+        _stPacketFacade = [[DPSTPacketFacade alloc] initWithMerkleRootOperation:merkleRootOperation
+                                                              base58DataEncoder:base58DataEncoder];
+        _stPacketHeaderFacade = [[DPSTPacketHeaderFacade alloc] init];
+    }
+    return self;
+}
+
+- (id<DPContractFactory>)contractFactory {
+    return self.contractFacade;
+}
+
+- (id<DPDocumentFactory>)documentFactory {
+    return self.documentFactory;
+}
+
+- (id<DPSTPacketFactory>)stPacketFactory {
+    return self.stPacketFacade;
+}
+
+- (id<DPSTPacketHeaderFactory>)stPacketHeaderFactory {
+    return self.stPacketHeaderFacade;
+}
 
 @end
 

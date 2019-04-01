@@ -18,28 +18,19 @@
 #import <Foundation/Foundation.h>
 
 #import "DPContract.h"
-#import "DPDocument.h"
+#import "DPDocumentFactoryProtocol.h"
 #import "DPEntropyProvider.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPDocumentFactory : NSObject
+@interface DPDocumentFactory : NSObject <DPDocumentFactory>
 
 - (instancetype)initWithUserId:(NSString *)userId
                       contract:(DPContract *)contract
                entropyProvider:(id<DPEntropyProvider>)entropyProvider
              base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
-- (nullable DPDocument *)documentWithType:(NSString *)type
-                                     data:(nullable DPJSONObject *)data
-                                    error:(NSError *_Nullable __autoreleasing *)error;
-
-- (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
-                                           error:(NSError *_Nullable __autoreleasing *)error;
-
-- (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
-                                  skipValidation:(BOOL)skipValidation
-                                           error:(NSError *_Nullable __autoreleasing *)error;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

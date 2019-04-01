@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+#pragma mark - DPSTPacketFactory
+
 - (DPSTPacket *)packetWithContract:(DPContract *)contract {
     return [self.factory packetWithContract:contract];
 }

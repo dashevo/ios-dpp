@@ -17,24 +17,15 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DPContract.h"
+#import "DPContractFactoryProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPContractFactory : NSObject
+@interface DPContractFactory : NSObject <DPContractFactory>
 
-- (instancetype)initWithBase58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithBase58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
+
 - (instancetype)init NS_UNAVAILABLE;
-
-- (DPContract *)contractWithName:(NSString *)name
-                       documents:(NSDictionary<NSString *, DPJSONObject *> *)documents;
-
-- (nullable DPContract *)contractFromRawContract:(DPJSONObject *)rawContract
-                                           error:(NSError *_Nullable __autoreleasing *)error;
-
-- (nullable DPContract *)contractFromRawContract:(DPJSONObject *)rawContract
-                                  skipValidation:(BOOL)skipValidation
-                                           error:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 

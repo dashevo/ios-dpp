@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation DPSTPacketHeaderFactory
 
+#pragma mark - DPSTPacketHeaderFactory
+
 - (DPSTPacketHeader *)packetHeaderWithContractId:(NSString *)contractId
                                  itemsMerkleRoot:(NSString *)itemsMerkleRoot
                                        itemsHash:(NSString *)itemsHash {

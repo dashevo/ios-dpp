@@ -17,28 +17,19 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DPDocument.h"
+#import "DPDocumentFactoryProtocol.h"
 #import "DPEntropyProvider.h"
 #import "DashPlatformProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPDocumentFacade : NSObject
+@interface DPDocumentFacade : NSObject <DPDocumentFactory>
 
 - (instancetype)initWithDPP:(DashPlatformProtocol *)dpp
             entropyProvider:(id<DPEntropyProvider>)entropyProvider
           base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
-- (nullable DPDocument *)documentWithType:(NSString *)type
-                                     data:(nullable DPJSONObject *)data
-                                    error:(NSError *_Nullable __autoreleasing *)error;
-
-- (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
-                                           error:(NSError *_Nullable __autoreleasing *)error;
-
-- (nullable DPDocument *)documentFromRawDocument:(DPJSONObject *)rawDocument
-                                  skipValidation:(BOOL)skipValidation
-                                           error:(NSError *_Nullable __autoreleasing *)error;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

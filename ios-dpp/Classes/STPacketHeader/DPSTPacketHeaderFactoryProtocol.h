@@ -15,43 +15,20 @@
 //  limitations under the License.
 //
 
-#import "DPSTPacketHeaderFacade.h"
+#import <Foundation/Foundation.h>
 
-#import "DPSTPacketHeaderFactory.h"
+#import "DPSTPacketHeader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketHeaderFacade ()
-
-@property (strong, nonatomic) DPSTPacketHeaderFactory *factory;
-
-@end
-
-@implementation DPSTPacketHeaderFacade
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _factory = [[DPSTPacketHeaderFactory alloc] init];
-    }
-    return self;
-}
-
-#pragma mark - DPSTPacketHeaderFactory
+@protocol DPSTPacketHeaderFactory <NSObject>
 
 - (DPSTPacketHeader *)packetHeaderWithContractId:(NSString *)contractId
                                  itemsMerkleRoot:(NSString *)itemsMerkleRoot
-                                       itemsHash:(NSString *)itemsHash {
-    return [self.factory packetHeaderWithContractId:contractId
-                                    itemsMerkleRoot:itemsMerkleRoot
-                                          itemsHash:itemsHash];
-}
+                                       itemsHash:(NSString *)itemsHash;
 
 - (nullable DPSTPacketHeader *)packetHeaderWithContractId:(DPJSONObject *)rawPacketHeader
-                                                    error:(NSError *_Nullable __autoreleasing *)error {
-    return [self.factory packetHeaderWithContractId:rawPacketHeader error:error];
-}
-
+                                                    error:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 

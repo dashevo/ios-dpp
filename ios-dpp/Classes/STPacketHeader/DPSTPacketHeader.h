@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
                    itemsMerkleRoot:(NSString *)itemsMerkleRoot
                          itemsHash:(NSString *)itemsHash;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 @end
 
 NS_ASSUME_NONNULL_END

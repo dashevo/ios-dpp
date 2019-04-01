@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+#pragma mark - DPSTPacketFactory
+
 - (DPSTPacket *)packetWithContract:(DPContract *)contract {
     NSParameterAssert(contract);
 

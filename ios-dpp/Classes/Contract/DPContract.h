@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
                    documents:(NSDictionary<NSString *, DPJSONObject *> *)documents
            base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 - (BOOL)isDocumentDefinedForType:(NSString *)type;
 - (void)setDocumentSchema:(DPJSONObject *)schema forType:(NSString *)type;
 - (nullable DPJSONObject *)documentSchemaForType:(NSString *)type;

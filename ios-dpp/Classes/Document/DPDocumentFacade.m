@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+#pragma mark - DPDocumentFactory
+
 - (nullable DPDocument *)documentWithType:(NSString *)type
                                      data:(nullable DPJSONObject *)data
                                     error:(NSError *_Nullable __autoreleasing *)error {

@@ -17,15 +17,22 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DPSTPacketFactoryProtocol.h"
+#import "DPSTPacket.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DPSTPacketFactory : NSObject <DPSTPacketFactory>
+@protocol DPSTPacketFactory <NSObject>
 
-- (instancetype)initWithMerkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation
-                          base58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder;
-- (instancetype)init NS_UNAVAILABLE;
+- (DPSTPacket *)packetWithContract:(DPContract *)contract;
+- (DPSTPacket *)packetWithContractId:(NSString *)contractId
+                           documents:(NSArray<DPDocument *> *)documents;
+
+- (nullable DPSTPacket *)packetWithRawPacket:(DPJSONObject *)rawPacket
+                                       error:(NSError *_Nullable __autoreleasing *)error;
+
+- (nullable DPSTPacket *)packetWithRawPacket:(DPJSONObject *)rawPacket
+                              skipValidation:(BOOL)skipValidation
+                                       error:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 
