@@ -400,7 +400,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ios-dpp_Example/Pods-ios-dpp_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ios-dpp_Example/Pods-ios-dpp_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DSJSONSchemaValidation/DSJSONSchemaValidation.framework",
 				"${BUILT_PRODUCTS_DIR}/TinyCborObjc/TinyCborObjc.framework",
 				"${BUILT_PRODUCTS_DIR}/ios-dpp/DPP.framework",
@@ -417,7 +417,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios-dpp_Example/Pods-ios-dpp_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-dpp_Example/Pods-ios-dpp_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FAEA441DB60C417CC8E3E156 /* [CP] Check Pods Manifest.lock */ = {
