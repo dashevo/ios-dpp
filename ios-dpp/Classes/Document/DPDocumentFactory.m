@@ -22,7 +22,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSInteger const DEFAULT_REVISION = 0;
+static NSInteger const DEFAULT_REVISION = 1;
 static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
 
 @interface DPDocumentFactory ()
