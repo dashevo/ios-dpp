@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A2985E3409E4442E5F12E42 /* Pods_ios_dpp_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF9D828DD5FB744E76D0217 /* Pods_ios_dpp_Tests.framework */; };
 		1FEB27377652BB5923B59A49 /* Pods_ios_dpp_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23534BC70F65B3C9E538BFCB /* Pods_ios_dpp_Example.framework */; };
-		2A9C0ADA224A59F30036F529 /* DPJSONSchemaValidatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C0AD9224A59F30036F529 /* DPJSONSchemaValidatorTests.m */; };
+		2A1BDBD6225A4EAB0028F6DE /* DPDummyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1BDBD5225A4EAB0028F6DE /* DPDummyTests.m */; };
 		2A9FFEEB22339A8A00956D5F /* dapobjects.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A9FFEE222339A8A00956D5F /* dapobjects.json */; };
 		2A9FFEEC22339A8A00956D5F /* simplified-dap-schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A9FFEE322339A8A00956D5F /* simplified-dap-schema.json */; };
 		2A9FFEED22339A8A00956D5F /* somedap.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A9FFEE422339A8A00956D5F /* somedap.json */; };
@@ -48,7 +48,7 @@
 /* Begin PBXFileReference section */
 		14FFD2C1951FD35F0F4E44C3 /* Pods-ios-dpp_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-dpp_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-dpp_Tests/Pods-ios-dpp_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		23534BC70F65B3C9E538BFCB /* Pods_ios_dpp_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_dpp_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A9C0AD9224A59F30036F529 /* DPJSONSchemaValidatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPJSONSchemaValidatorTests.m; sourceTree = "<group>"; };
+		2A1BDBD5225A4EAB0028F6DE /* DPDummyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPDummyTests.m; sourceTree = "<group>"; };
 		2A9FFEE222339A8A00956D5F /* dapobjects.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dapobjects.json; sourceTree = "<group>"; };
 		2A9FFEE322339A8A00956D5F /* simplified-dap-schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simplified-dap-schema.json"; sourceTree = "<group>"; };
 		2A9FFEE422339A8A00956D5F /* somedap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = somedap.json; sourceTree = "<group>"; };
@@ -193,9 +193,9 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				2A9C0AD9224A59F30036F529 /* DPJSONSchemaValidatorTests.m */,
 				2A9FFEE122339A8A00956D5F /* Resources */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
+				2A1BDBD5225A4EAB0028F6DE /* DPDummyTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -369,7 +369,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ios-dpp_Example/Pods-ios-dpp_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/DSJSONSchemaValidation/DSJSONSchemaValidation.framework",
 				"${BUILT_PRODUCTS_DIR}/TinyCborObjc/TinyCborObjc.framework",
 				"${BUILT_PRODUCTS_DIR}/ios-dpp/DPP.framework",
 				"${BUILT_PRODUCTS_DIR}/tinycbor/tinycbor.framework",
@@ -378,7 +377,6 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DSJSONSchemaValidation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinyCborObjc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DPP.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/tinycbor.framework",
@@ -427,7 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A9C0ADA224A59F30036F529 /* DPJSONSchemaValidatorTests.m in Sources */,
+				2A1BDBD6225A4EAB0028F6DE /* DPDummyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

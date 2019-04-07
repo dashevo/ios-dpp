@@ -1,4 +1,4 @@
-//
+//  
 //  Created by Andrew Podkovyrin
 //  Copyright © 2019 Dash Core Group. All rights reserved.
 //
@@ -15,25 +15,15 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <XCTest/XCTest.h>
 
-#import "DPPTypes.h"
-
-NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSUInteger, DPJSONSchemaValidatorType) {
-    DPJSONSchemaValidatorType_DPContract,
-    DPJSONSchemaValidatorType_DPDocument,
-    DPJSONSchemaValidatorType_STPacket,
-    DPJSONSchemaValidatorType_STPacketHeader,
-};
-
-@interface DPJSONSchemaValidator : NSObject
-
-- (nullable instancetype)init;
-
-- (nullable NSError *)validateObject:(DPJSONObject *)jsonObject forType:(DPJSONSchemaValidatorType)type;
+@interface DPDummyTests : XCTestCase
 
 @end
 
-NS_ASSUME_NONNULL_END
+@implementation DPDummyTests
+
+- (void)testDummy {
+}
+
+@end
