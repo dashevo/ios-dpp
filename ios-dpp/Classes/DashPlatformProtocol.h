@@ -36,9 +36,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, strong, nonatomic) id<DPSTPacketFactory> stPacketFactory;
 @property (readonly, strong, nonatomic) id<DPSTPacketHeaderFactory> stPacketHeaderFactory;
 
-- (instancetype)initWithBase58DataEncode:(id<DPBase58DataEncoder>)base58DataEncoder
-                         entropyProvider:(id<DPEntropyProvider>)entropyProvider
-                     merkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation;
+- (instancetype)initWithBase58DataEncoder:(id<DPBase58DataEncoder>)base58DataEncoder
+                          entropyProvider:(id<DPEntropyProvider>)entropyProvider
+                      merkleRootOperation:(id<DPMerkleRootOperation>)merkleRootOperation;
 
 - (instancetype)init NS_UNAVAILABLE;
 
