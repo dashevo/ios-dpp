@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol DPBase58DataEncoder <NSObject>
 
-+ (nullable NSString *)base58WithData:(NSData *)data;
+- (nullable NSString *)base58WithData:(NSData *)data;
 
 @end
 
