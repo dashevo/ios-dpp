@@ -24,5 +24,5 @@ The iOS implementation of the Dash Platform Protocol
   s.module_name = 'DPP'
 
   # s.dependency 'DSJSONSchemaValidation', '2.0.5'
-  s.dependency 'TinyCborObjc', '0.4.0'
+  s.dependency 'TinyCborObjc', '0.4.1'
 end

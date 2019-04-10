@@ -1,8 +1,8 @@
 PODS:
   - ios-dpp (0.0.1):
-    - TinyCborObjc (= 0.4.0)
+    - TinyCborObjc (= 0.4.1)
   - tinycbor (0.5.3-alpha3)
-  - TinyCborObjc (0.4.0):
+  - TinyCborObjc (0.4.1):
     - tinycbor (= 0.5.3-alpha3)
 
 DEPENDENCIES:
@@ -18,9 +18,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ios-dpp: 7e674f8dbf44fa6f4b8f0771d6c55f637616ca7a
+  ios-dpp: 49fd8a6b749bdfd770dd3debbf5efea80df92c3c
   tinycbor: f3596b9acc8493b19c9e0cc2d0417d9c7aa58daa
-  TinyCborObjc: 36e3ce1b66042017f91bafef403353254235a35f
+  TinyCborObjc: e36a42aad1134bc6eaa61b68afa4442d48e327f2
 
 PODFILE CHECKSUM: 073dd568b0c49fcf58a7cd0d57966c5fc437b1c7
 

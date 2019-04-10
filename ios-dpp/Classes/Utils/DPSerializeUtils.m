@@ -32,9 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable NSData *)hashOfSerializedObject:(NSData *)data {
     NSData *sha256Twice = [[data dp_SHA256Digest] dp_SHA256Digest];
-    NSData *sha256Reversed = [sha256Twice dp_reverseData];
 
-    return sha256Reversed;
+    return sha256Twice;
 }
 
 + (nullable NSData *)hashOfObject:(NSObject *)object {
