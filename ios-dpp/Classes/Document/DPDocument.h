@@ -32,10 +32,10 @@ typedef NS_ENUM(NSUInteger, DPDocumentAction) {
 @property (readonly, copy, nonatomic) NSString *identifier;
 
 @property (readonly, copy, nonatomic) NSString *type;
-@property (copy, nonatomic) NSString *scope;
-@property (copy, nonatomic) NSString *scopeId;
+@property (readonly, copy, nonatomic) NSString *scope;
+@property (readonly, copy, nonatomic) NSString *scopeId;
 @property (readonly, assign, nonatomic) DPDocumentAction action;
-@property (strong, nonatomic) NSNumber *revision;
+@property (readonly, strong, nonatomic) NSNumber *revision;
 @property (readonly, copy, nonatomic) DPJSONObject *data;
 
 - (instancetype)initWithRawDocument:(DPJSONObject *)rawDocument

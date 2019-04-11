@@ -18,6 +18,7 @@
 #import "DPDocument.h"
 
 #import "DPErrors.h"
+#import "DPSerializeUtils.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,26 +46,31 @@ NS_ASSUME_NONNULL_BEGIN
         DPMutableJSONObject *mutableRawObject = [rawDocument mutableCopy];
 
         NSString *type = mutableRawObject[@"$type"];
+        NSParameterAssert(type);
         if (type) {
             _type = [type copy];
             [mutableRawObject removeObjectForKey:@"$type"];
         }
         NSString *scope = mutableRawObject[@"$scope"];
+        NSParameterAssert(scope);
         if (scope) {
             _scope = [scope copy];
             [mutableRawObject removeObjectForKey:@"$scope"];
         }
         NSString *scopeId = mutableRawObject[@"$scopeId"];
+        NSParameterAssert(scopeId);
         if (scopeId) {
             _scopeId = [scopeId copy];
             [mutableRawObject removeObjectForKey:@"$scopeId"];
         }
         NSNumber *action = mutableRawObject[@"$action"];
+        NSParameterAssert(action);
         if (action) {
             _action = action.unsignedIntegerValue;
             [mutableRawObject removeObjectForKey:@"$action"];
         }
         NSNumber *rev = mutableRawObject[@"$rev"];
+        NSParameterAssert(rev);
         if (rev) {
             _revision = rev;
             [mutableRawObject removeObjectForKey:@"$rev"];
@@ -79,8 +85,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)identifier {
     if (_identifier == nil) {
         NSString *identifierString = [self.scope stringByAppendingString:self.scopeId];
-        NSData *data = [identifierString dataUsingEncoding:NSUTF8StringEncoding];
-        _identifier = [self.base58DataEncoder base58WithData:data];
+        NSData *identifierStringData = [identifierString dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *identifierHashData = [DPSerializeUtils hashDataOfData:identifierStringData];
+        _identifier = [self.base58DataEncoder base58WithData:identifierHashData];
     }
     return _identifier;
 }
@@ -97,11 +104,6 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     _action = action;
-    [self resetSerializedValues];
-}
-
-- (void)setRevision:(NSNumber *)revision {
-    _revision = revision;
     [self resetSerializedValues];
 }
 
