@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (id<DPDocumentFactory>)documentFactory {
-    return self.documentFactory;
+    return self.documentFacade;
 }
 
 - (id<DPSTPacketFactory>)stPacketFactory {
