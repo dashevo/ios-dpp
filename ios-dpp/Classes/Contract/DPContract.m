@@ -54,7 +54,7 @@ static NSString *const DPCONTRACT_SCHEMA_ID = @"contract";
 }
 
 - (NSString *)identifier {
-    NSData *serializedData = [DPSerializeUtils hashOfSerializedObject:self.serialized];
+    NSData *serializedData = [DPSerializeUtils hashDataOfData:self.serialized];
     return [self.base58DataEncoder base58WithData:serializedData];
 }
 

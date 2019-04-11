@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSData *)serializedHash {
     if (_serializedHash == nil) {
-        _serializedHash = [DPSerializeUtils hashOfSerializedObject:self.serialized];
+        _serializedHash = [DPSerializeUtils hashDataOfData:self.serialized];
     }
     return _serializedHash;
 }

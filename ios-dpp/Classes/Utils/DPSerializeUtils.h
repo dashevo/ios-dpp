@@ -22,9 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DPSerializeUtils : NSObject
 
 + (nullable NSData *)serializeObject:(NSObject *)object;
-+ (nullable NSData *)hashOfSerializedObject:(NSData *)data;
-+ (nullable NSData *)hashOfObject:(NSObject *)object;
-+ (nullable NSString *)hashStringOfObject:(NSObject *)object;
++ (nullable NSData *)hashDataOfData:(NSData *)data;
++ (nullable NSString *)hashStringOfData:(NSData *)data;
++ (nullable NSData *)serializeAndHashObjectToData:(NSObject *)object;
++ (nullable NSString *)serializeAndHashObjectToString:(NSObject *)object;
 + (nullable id)decodeSerializedObject:(NSData *)data error:(NSError *_Nullable __autoreleasing *)error;
 
 @end

@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
         @"contracts" : contractsHashes,
     };
 
-    NSString *hash = [DPSerializeUtils hashStringOfObject:itemsHashesDictionary];
+    NSString *hash = [DPSerializeUtils serializeAndHashObjectToString:itemsHashesDictionary];
 
     return hash;
 }

@@ -81,7 +81,8 @@ static DPDocumentAction const DEFAULT_ACTION = DPDocumentAction_Create;
     }
 
     NSString *scopeString = [self.contract.identifier stringByAppendingString:self.userId];
-    NSString *scopeStringHash = [DPSerializeUtils hashStringOfObject:scopeString];
+    NSData *scopeStringData = [scopeString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *scopeStringHash = [DPSerializeUtils hashStringOfData:scopeStringData];
 
     DPMutableJSONObject *rawObject = [[DPMutableJSONObject alloc] init];
     rawObject[@"$type"] = type;

@@ -30,23 +30,34 @@ NS_ASSUME_NONNULL_BEGIN
     return [object ds_cborEncodedObject];
 }
 
-+ (nullable NSData *)hashOfSerializedObject:(NSData *)data {
++ (nullable NSData *)hashDataOfData:(NSData *)data {
     NSData *sha256Twice = [[data dp_SHA256Digest] dp_SHA256Digest];
 
     return sha256Twice;
 }
 
-+ (nullable NSData *)hashOfObject:(NSObject *)object {
++ (nullable NSString *)hashStringOfData:(NSData *)data {
+    NSData *dataHash = [self hashDataOfData:data];
+    if (!dataHash) {
+        return nil;
+    }
+
+    NSString *hashString = [dataHash ds_hexStringFromData];
+
+    return hashString;
+}
+
++ (nullable NSData *)serializeAndHashObjectToData:(NSObject *)object {
     NSData *data = [self serializeObject:object];
     if (!data) {
         return nil;
     }
 
-    return [self hashOfSerializedObject:data];
+    return [self hashDataOfData:data];
 }
 
-+ (nullable NSString *)hashStringOfObject:(NSObject *)object {
-    NSData *hash = [self hashOfObject:object];
++ (nullable NSString *)serializeAndHashObjectToString:(NSObject *)object {
+    NSData *hash = [self serializeAndHashObjectToData:object];
     if (!hash) {
         return nil;
     }
