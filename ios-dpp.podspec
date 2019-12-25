@@ -17,12 +17,12 @@ The iOS implementation of the Dash Platform Protocol
 
   s.source_files = 'ios-dpp/Classes/**/*'
   
-  s.resource_bundles = {
-    'ios-dpp' => ['ios-dpp/Assets/*.json']
-  }
+  # s.resource_bundles = {
+  #  'ios-dpp' => ['ios-dpp/Assets/**/*.json']
+  # }
 
   s.module_name = 'DPP'
 
-  s.dependency 'DSJSONSchemaValidation', '2.0.5'
-  s.dependency 'TinyCborObjc', '0.3.0'
+  # s.dependency 'DSJSONSchemaValidation', '2.0.5'
+  s.dependency 'TinyCborObjc', '0.4.2'
 end
